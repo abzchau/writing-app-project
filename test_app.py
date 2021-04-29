@@ -1,10 +1,7 @@
-def capitalize_string(s):
-    return s.capitalize()
+from crud import create_user
 
-def capitalize_string(s):
-    if not isinstance(s, str):
-        raise TypeError('Please provide a string')
-    return s.capitalize()
+def test_create_user(user):
+    return create_user(first_name='mae', last_name='wong', email='mae@wong.com', password='test1', favorite_writer='Lessing', favorite_animal='dogs')
 
 def test_capitalize_string():
-    assert capitalize_string() == 'Test'
+    assert test_create_user() == '<User user_id=2 first_name=mae last_name=wong>'

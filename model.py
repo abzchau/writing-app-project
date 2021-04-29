@@ -2,6 +2,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
+"""db object - represents our database"""
 db = SQLAlchemy()
 
 class User(db.Model):
