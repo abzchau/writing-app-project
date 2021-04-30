@@ -1,6 +1,7 @@
 """CRUD operations for the writing app"""
 
-from model import db, User, Group, Project, connect_to_db
+from datetime import datetime
+from model import db, User, Group, Project, Submission, UserGroup, Feedback, connect_to_db
 
 def create_user(first_name, last_name, email, password, favorite_writer, favorite_animal):
     """Create and return a new user"""
@@ -33,6 +34,29 @@ def create_project(project_name, genre):
     db.session.commit()
 
     return project
+
+
+def create_submission(meeting_time):
+    """Create and return a submission"""
+
+    submission = Submission(meeting_time=meeting_time)
+
+    db.session.add(submission)
+    db.session.commit()
+
+    return submission
+
+
+def create_feedback(text):
+    """Create and return feedback on a submission"""
+
+    feedback = Feedback(text=text)
+
+    db.session.add(feedback)
+    db.session.commit()
+
+    return feedback
+
 
 
 if __name__=='__main__':
