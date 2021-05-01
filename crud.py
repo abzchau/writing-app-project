@@ -3,10 +3,10 @@
 from datetime import datetime
 from model import db, User, Group, Project, Submission, UserGroup, Feedback, connect_to_db
 
-def create_user(first_name, last_name, email, password, favorite_writer, favorite_animal):
+def create_user(user_id, first_name, last_name, email, password, favorite_writer, favorite_animal):
     """Create and return a new user"""
 
-    user = User(first_name=first_name, last_name=last_name, email=email, password=password, favorite_writer=favorite_writer, favorite_animal=favorite_animal)
+    user = User(user_id=user_id, first_name=first_name, last_name=last_name, email=email, password=password, favorite_writer=favorite_writer, favorite_animal=favorite_animal)
 
     db.session.add(user)
     db.session.commit()
