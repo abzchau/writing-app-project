@@ -25,10 +25,10 @@ def create_group(group_name):
     return group
 
 
-def create_project(project_name, genre):
+def create_project(project_name, user_id, genre):
     """Create and return a new project"""
 
-    project = Project(project_name=project_name, genre=genre)
+    project = Project(project_name=project_name, user_id= user_id, genre=genre)
 
     db.session.add(project)
     db.session.commit()

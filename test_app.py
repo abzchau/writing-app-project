@@ -6,7 +6,7 @@ def test_create_user(user):
     user = create_user(first_name='mae', last_name='wong', email='mae@wong.com', password='test1', favorite_writer='Lessing', favorite_animal='dogs')
     return user
 
-def test_capitalize_string():
+def test_create_string():
     assert test_create_user(user) == '<User user_id=2 first_name=mae last_name=wong>'
 
 

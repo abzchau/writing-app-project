@@ -13,6 +13,32 @@ app = Flask(__name__)
 def homepage():
     return "Bah"
 
+
+@app.route('/login', methods=["GET"])
+def show_login():
+    return "Sign In"
+
+
+@app.route('/login', methods=["POST"])
+def login_user():
+    return "Use Form Data To Sign In User"
+
+
+@app.route('/signup')
+def show_sign_up():
+    return "Sign Up"
+
+
+@app.route('/signed_up')
+def show_signed_up_page():
+    return "You are signed up. Add a link here."
+
+
+@app.route('/about')
+def about_the_app():
+    return "About the app"
+
+
 """"Flask method which runs the app"""
 if __name__ == '__main__':
     app.run(debug = True)
