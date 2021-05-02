@@ -35,7 +35,8 @@ def show_sign_up():
 
 
 @app.route('/signup', methods=["POST"])
-def process_sign_up():
+def register_user():
+    "Create a new user"
     fname = request.form.get("fname")
     lname = request.form.get("lname")
     email = request.form.get("email")
