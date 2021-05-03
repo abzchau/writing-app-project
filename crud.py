@@ -3,15 +3,24 @@
 from datetime import datetime
 from model import db, User, Group, Project, Submission, UserGroup, Feedback, connect_to_db
 
-def create_user(user_id, first_name, last_name, email, password, favorite_writer, favorite_animal):
+def create_user(first_name, last_name, email, password, favorite_writer=None, favorite_animal=None):
     """Create and return a new user"""
 
-    user = User(user_id=user_id, first_name=first_name, last_name=last_name, email=email, password=password, favorite_writer=favorite_writer, favorite_animal=favorite_animal)
+    user = User(first_name=first_name, last_name=last_name, email=email, password=password, favorite_writer=favorite_writer, favorite_animal=favorite_animal)
 
     db.session.add(user)
     db.session.commit()
 
     return user
+
+
+def get_user_by_email(email):
+    """Get a user by email"""
+
+    user = User.query.filter_by(email=email).all()
+    return user
+
+
 
 def get_user_by_email(email):
     """Return a user by email"""

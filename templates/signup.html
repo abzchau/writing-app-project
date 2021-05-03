@@ -1,13 +1,10 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-<html>
-
-
-<body>
+{% block body %}
     
     <h1>Sign Up Form</h1>
     <hr>
-    <form action="/" method="POST"></form>
+    <form action="/signup" method="POST">
     <label for="first_name"><b>First Name</b></label>
     <p><input type="text" placeholder="Enter First Name" name="fname" required></p>
     <label for="last_name"><b>Last Name</b></label>
@@ -16,8 +13,6 @@
     <p><input type="text" placeholder="Enter Email" name="email" required></p>
     <label for="password"><b>Password</b></label>
     <p><input type="password" placeholder="Enter Password" name="password" required></p>
-    <label for="repeatPassword"><b>Repeat Password</b></label>
-    <p><input type="password" placeholder="Repeat Password" name="repeatPassword" required></p>
     <label for="fav_writer"><b>Favorite Writer</b></label>
     <p><input type="text" placeholder="Optional" name="fav_writer"></p>
     <label for="fav_animal"><b>Favorite Animal</b></label>
@@ -26,7 +21,5 @@
         <button type="submit">Sign Up</button>
     </div>
     </form>
-</body>
 
-
-</html>
+{% endblock %}

@@ -6,6 +6,8 @@ from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
 
+from flask import Flask
+
 
 """Creates an instance of the Flask class."""
 app = Flask(__name__)
@@ -21,12 +23,25 @@ def homepage():
 
 @app.route('/login', methods=["GET"])
 def show_login():
-    return "Sign In"
+    return render_template('/login.html')
 
 
 @app.route('/login', methods=["POST"])
 def process_login():
-    return "Use Form Data To Sign In User"
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = crud.get_user_by_email(email)
+
+    if not user or user.password != password:
+        flash("The email or password you entered is incorrect. Try again.")
+        return redirect("/login")
+    else:
+        session["user_email"] = user.email
+        flash(f"Welcome back, {user.email}!")
+        return render_template("/main.html")
+
 
 
 @app.route('/signup')
@@ -34,22 +49,25 @@ def show_sign_up():
     return render_template("signup.html")
 
 
-@app.route('/signup', methods=["POST"])
+@app.route('/signup', methods=["GET", "POST"])
 def register_user():
     "Create a new user"
     fname = request.form.get("fname")
     lname = request.form.get("lname")
     email = request.form.get("email")
     password = request.form.get("password")
-    repeatPassword = request.form.get("repeatPassword")
-    
-    print(fname, lname, email, password)
-    return render_template("signup.html")
+    favorite_writer = request.form.get("favorite_writer")
+    favorite_animal = request.form.get("favorite_animal")
+    user = crud.get_user_by_email(email)
 
+    if user:
+        flash('It looks like you already have an account. Try to log in with your email and password.')
+        return render_template('signup.html')
+    else:
+        crud.create_user(fname, lname, email, password, favorite_writer, favorite_animal)
+        flash("'We've created your account. Please log in.")
+        return render_template('/login.html')
 
-@app.route('/signed_up')
-def show_signed_up_page():
-    return "You are signed up. Add a link here."
 
 
 @app.route('/about')
@@ -60,4 +78,4 @@ def about_the_app():
 """"Flask method which runs the app"""
 if __name__ == '__main__':
     connect_to_db(app)
-    app.run(debug = True)
+    app.run(debug = True, host='0.0.0.0')

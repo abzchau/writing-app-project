@@ -10,12 +10,15 @@
 
 
     <body>
-        {% for msg in get_flashed_message() %}
-            <p class="flash-msg">
-                {{ msg }}
-            </p>
-        {% endfor %}
-        {% block body %}{% endblock %}
-        {% block after_body %}{% endblock %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block body %}{% endblock %}
     </body>    
 </html>
