@@ -17,15 +17,9 @@ def create_user(first_name, last_name, email, password, favorite_writer=None, fa
 def get_user_by_email(email):
     """Get a user by email"""
 
-    user = User.query.filter_by(email=email).all()
+    user = User.query.filter(User.email == email).first()
     return user
 
-
-
-def get_user_by_email(email):
-    """Return a user by email"""
-
-    return User.query.filter(User.email == email).first()
 
 
 def create_group(group_name):
@@ -39,10 +33,10 @@ def create_group(group_name):
     return group
 
 
-def create_project(project_name, user_id, genre):
+def create_project(project_name, genre=""):
     """Create and return a new project"""
 
-    project = Project(project_name=project_name, user_id= user_id, genre=genre)
+    project = Project(project_name=project_name, genre=genre)
 
     db.session.add(project)
     db.session.commit()

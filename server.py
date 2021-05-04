@@ -68,6 +68,27 @@ def register_user():
         flash("'We've created your account. Please log in.")
         return render_template('/login.html')
 
+@app.route('/main')
+def main():
+    return render_template("/main.html")
+
+@app.route('/main', methods=["POST"])
+def create_group():
+
+    group_name = request.form.get("group_name")
+    group = crud.create_group(group_name)
+    return render_template("/main.html")
+
+
+@app.route('/main', methods=["POST"])
+def create_project():
+
+    project_name = request.form.get("project_name")
+    genre = request.form.get("genre")
+    
+
+    project = crud.create_project(project_name)
+    return render_template("/main.html")
 
 
 @app.route('/about')

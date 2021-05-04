@@ -1,7 +1,32 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <p>Main Page</p>
+    
+
+
+    <h2>Groups</h2>
+
+    <hr>
+    <form action="/main" method="POST">
+        <label for="group_name"><b>Group Name</b></label>
+        <p><input type="text" placeholder="Enter Group Name" name="group_name" required></p>
+    <div>
+        <button type="submit">Create Group</button>
+    </div>
+    </form>
+
+
+    <h2>Projects</h2>
+    <hr>
+    <form action="/main" method="POST">
+        <label for="project_name"><b>Project Name</b></label>
+        <p><input type="text" placeholder="Enter Project Name" name="project_name" required></p>
+        <label for="genre"><b>Genre</b></label>
+        <p><input type="text" placeholder="Enter Genre" name="genre"></p>
+    <div>
+        <button type="submit">Create Project</button>
+    </div>
+    </form>
 
 
 {% endblock %}
