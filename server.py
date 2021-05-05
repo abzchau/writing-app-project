@@ -39,6 +39,7 @@ def process_login():
         return redirect("/login")
     else:
         session["user_email"] = user.email
+        session["user_id"] = user.user_id
         flash(f"Welcome back, {user.email}!")
         return render_template("/main.html")
 
@@ -72,23 +73,29 @@ def register_user():
 def main():
     return render_template("/main.html")
 
-@app.route('/main', methods=["POST"])
-def create_group():
+# @app.route('/main', methods=["POST"])
+# def create_group():
 
-    group_name = request.form.get("group_name")
-    group = crud.create_group(group_name)
-    return render_template("/main.html")
+#     group_name = request.form.get("group_name")
+#     group = crud.create_group(group_name)
+#     return render_template("/main.html")
 
 
 @app.route('/main', methods=["POST"])
 def create_project():
 
-    project_name = request.form.get("project_name")
-    genre = request.form.get("genre")
+    print('heya')
+
+    if 'user_id' in session:
+        print('user_id')
+        user_id = session["user_id"]
+        group_id = 1
+        project_name = request.form.get("project_name")
+        genre = request.form.get("genre")
     
 
-    project = crud.create_project(project_name)
-    return render_template("/main.html")
+        project = crud.create_project(project_name, user_id, group_id, genre)
+        return render_template("/main.html")
 
 
 @app.route('/about')

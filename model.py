@@ -19,7 +19,7 @@ class User(db.Model):
     favorite_writer = db.Column(db.String, nullable=True)
     favorite_animal = db.Column(db.String, nullable=True)
 
-    project = db.relationship('Project')
+    project = db.relationship('Project',)
     user_group = db.relationship('UserGroup')
     submission = db.relationship('Submission')
 
@@ -35,7 +35,7 @@ class Group(db.Model):
     group_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     group_name = db.Column(db.String)
 
-    project = db.relationship('Project')
+    projects = db.relationship('Project', back_populates='group')
     user_group = db.relationship('UserGroup')
 
     def __repr__(self):
@@ -54,7 +54,7 @@ class Project(db.Model):
     genre = db.Column(db.String, nullable=True)
 
     user = db.relationship('User')
-    group = db.relationship('Group')
+    group = db.relationship('Group', back_populates='projects')
     submission = db.relationship('Submission')
 
     def __repr__(self):

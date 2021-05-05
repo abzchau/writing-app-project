@@ -33,37 +33,37 @@ def create_group(group_name):
     return group
 
 
-def create_project(project_name, genre=""):
+def create_project(project_name, user_id, group_id, genre=""):
     """Create and return a new project"""
-
-    project = Project(project_name=project_name, genre=genre)
-
+    print('Attempting to create project...')
+    project = Project(project_name=project_name, user_id=user_id, group_id=1, genre=genre)
+    print(project)
     db.session.add(project)
     db.session.commit()
 
     return project
 
 
-def create_submission(meeting_time):
-    """Create and return a submission"""
+# def create_submission(meeting_time):
+#     """Create and return a submission"""
 
-    submission = Submission(meeting_time=meeting_time)
+#     submission = Submission(meeting_time=meeting_time)
 
-    db.session.add(submission)
-    db.session.commit()
+#     db.session.add(submission)
+#     db.session.commit()
 
-    return submission
+#     return submission
 
 
-def create_feedback(text):
-    """Create and return feedback on a submission"""
+# def create_feedback(text):
+#     """Create and return feedback on a submission"""
 
-    feedback = Feedback(text=text)
+#     feedback = Feedback(text=text)
 
-    db.session.add(feedback)
-    db.session.commit()
+#     db.session.add(feedback)
+#     db.session.commit()
 
-    return feedback
+#     return feedback
 
 
 
