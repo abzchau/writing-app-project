@@ -84,10 +84,7 @@ def main():
 @app.route('/main', methods=["POST"])
 def create_project():
 
-    print('heya')
-
     if 'user_id' in session:
-        print('user_id')
         user_id = session["user_id"]
         group_id = 1
         project_name = request.form.get("project_name")
@@ -95,7 +92,7 @@ def create_project():
     
 
         project = crud.create_project(project_name, user_id, group_id, genre)
-        return render_template("/main.html")
+        return render_template("/project.html", project_name=project_name, genre=genre)
 
 
 @app.route('/about')
