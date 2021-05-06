@@ -55,14 +55,13 @@ def create_project(project_name, user_id, group_id, genre=""):
     return project
 
 
-def create_members(user_id, group_id):
+def create_member(user_id, group_id):
     """Create and return a new User Group"""
     user_group = UserGroup(user_id=user_id, group_id=group_id)
-    print(user_group)
-    db.session.add(project)
+    db.session.add(user_group)
     db.session.commit()
 
-    return project
+    return user_group
 
 # def create_submission(meeting_time):
 #     """Create and return a submission"""
