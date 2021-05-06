@@ -73,15 +73,15 @@ def register_user():
 def main():
     return render_template("/main.html")
 
-# @app.route('/main', methods=["POST"])
-# def create_group():
-
-#     group_name = request.form.get("group_name")
-#     group = crud.create_group(group_name)
-#     return render_template("/main.html")
-
-
 @app.route('/main', methods=["POST"])
+def create_group():
+
+    group_name = request.form.get("group_name")
+    group = crud.create_group(group_name)
+    return render_template("/group.html", group_name=group_name)
+
+
+@app.route('/group', methods=["POST"])
 def create_project():
 
     if 'user_id' in session:
@@ -93,6 +93,21 @@ def create_project():
 
         project = crud.create_project(project_name, user_id, group_id, genre)
         return render_template("/project.html", project_name=project_name, genre=genre)
+
+
+@app.route('/group', methods=["POST"])
+def add_user_to_group():
+    
+    print('yo hey')
+
+    email = request.form.get("email")
+    print(email)
+    user = crud.get_user_by_email(email)
+    print(user)
+    user_group = crud.create_member(user.user_id, group_id)
+    flash("Added to your group.")
+        
+    return render_template("/group.html")
 
 
 @app.route('/about')

@@ -33,6 +33,17 @@ def create_group(group_name):
     return group
 
 
+def get_group_id(group_id):
+    """Return group id"""
+
+    group = Group(group_name=group_name)
+
+    db.session.add(group)
+    db.session.commit()
+
+    return group
+
+
 def create_project(project_name, user_id, group_id, genre=""):
     """Create and return a new project"""
     print('Attempting to create project...')
@@ -43,6 +54,15 @@ def create_project(project_name, user_id, group_id, genre=""):
 
     return project
 
+
+def create_members(user_id, group_id):
+    """Create and return a new User Group"""
+    user_group = UserGroup(user_id=user_id, group_id=group_id)
+    print(user_group)
+    db.session.add(project)
+    db.session.commit()
+
+    return project
 
 # def create_submission(meeting_time):
 #     """Create and return a submission"""

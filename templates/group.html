@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h3>{{group_name}}</h3>
+
+<form action="/group" method="POST">
+    <label for="email"><b>Enter an email to invite someone to this group:</b></label>
+    <p><input type="text" placeholder="email" name="email" required></p>
+    <div>
+        <button type="submit">Add member to the group</button>
+    </div>
+    </form>
+
+
+{% endblock %}
