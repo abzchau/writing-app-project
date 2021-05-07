@@ -3,8 +3,11 @@
 {% block body %}
     
 
-
+<div>
     <h2>Groups</h2>
+    <div id=group>
+        <!-- <ul id='group_name'><a href </ul> -->
+    </div>
 
     <hr>
     <form action="/main" method="POST">
@@ -14,8 +17,9 @@
         <button type="submit">Create Group</button>
     </div>
     </form>
+</div>
 
-
+<div>
     <h2>Projects</h2>
     <hr>
     <form action="/main" method="POST">
@@ -27,6 +31,6 @@
         <button type="submit">Create Project</button>
     </div>
     </form>
-
+</div>
 
 {% endblock %}

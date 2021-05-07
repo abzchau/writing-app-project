@@ -1,7 +1,7 @@
 """Server for writing app."""
 
 """Import flask module. An instance of this class will be our WSGI application."""
-from flask import Flask, render_template, request, redirect, session, flash, redirect
+from flask import Flask, render_template, request, redirect, session, flash, redirect, url_for
 from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
@@ -22,39 +22,30 @@ def homepage():
     return render_template("homepage.html")
 
 
-@app.route('/login', methods=["GET"])
-def show_login():
-    """View Log In page"""
-    return render_template('/login.html')
-
-
-@app.route('/login', methods=["POST"])
-def process_login():
+@app.route('/login', methods=["POST", 'GET'])
+def login():
     """Process log in information"""
-    email = request.form.get("email")
-    password = request.form.get("password")
 
-    user = crud.get_user_by_email(email)
+    if request.method == 'POST':
+        email = request.form.get("email")
+        password = request.form.get("password")
 
-    if not user or user.password != password:
-        flash("The email or password you entered is incorrect. Try again.")
-        return redirect("/login")
+        user = crud.get_user_by_email(email)
+
+        if not user or user.password != password:
+            flash("The email or password you entered is incorrect. Try again.")
+            return render_template("/login.html")
+        else:
+            session["user_email"] = user.email
+            session["user_id"] = user.user_id
+            flash(f"Welcome back, {user.email}!")
+            return redirect(url_for("main"))
     else:
-        session["user_email"] = user.email
-        session["user_id"] = user.user_id
-        flash(f"Welcome back, {user.email}!")
-        return render_template("/main.html")
-
-
-
-@app.route('/signup')
-def show_sign_up():
-    """View Sign Up page"""
-    return render_template("signup.html")
+        return render_template('/login.html')
 
 
 @app.route('/signup', methods=["GET", "POST"])
-def register_user():
+def signup():
     """Sign up a new user"""
     fname = request.form.get("fname")
     lname = request.form.get("lname")
@@ -63,26 +54,22 @@ def register_user():
     favorite_writer = request.form.get("favorite_writer")
     favorite_animal = request.form.get("favorite_animal")
     user = crud.get_user_by_email(email)
-
-    if user:
-        flash('It looks like you already have an account. Try to log in with your email and password.')
-        return render_template('signup.html')
+    if request.method == 'POST':
+        if user:
+            flash('It looks like you already have an account. Try to log in with your email and password.')
+            return render_template('signup.html')
+        else:
+            crud.create_user(fname, lname, email, password, favorite_writer, favorite_animal)
+            flash("'We've created your account. Please log in.")
+            return render_template('/login.html')
     else:
-        crud.create_user(fname, lname, email, password, favorite_writer, favorite_animal)
-        flash("'We've created your account. Please log in.")
-        return render_template('/login.html')
+        return render_template("signup.html")
 
 
-@app.route('/main')
+@app.route('/main', methods=["GET", "POST"])
 def main():
-    """View Logged In Main Page"""
-    return render_template("/main.html")
-
-
-@app.route('/main', methods=["POST"])
-def create_group():
     """Create a group"""
-
+    
     if request.method == 'POST':
         if "group_name" in request.form:
             group_name = request.form.get("group_name")
@@ -90,7 +77,7 @@ def create_group():
             session["group_id"] = group.group_id
             session["group_name"] = group.group_name
             flash('Group Created')
-            return render_template("/group.html", group_name=group_name)
+            return redirect(f"/group/{group_name}")
         
         if "project_name" in request.form:
                 user_id = session["user_id"]
@@ -101,7 +88,15 @@ def create_group():
 
                 project = crud.create_project(project_name, user_id, group_id, genre)
                 return render_template("/project.html", project_name=project_name, genre=genre)
+    else:
+        group_name = request.form.get("group_name")
+        return render_template("/main.html", group_name=group_name)
 
+
+@app.route('/group/<group_name>')
+def group_homepage(group_name):
+    group_name = session["group_name"]
+    return render_template('/group.html', group_name=group_name)
 
 @app.route('/group', methods=["POST"])
 def add_user_to_group():

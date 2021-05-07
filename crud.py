@@ -20,21 +20,21 @@ def get_user_by_email(email):
     user = User.query.filter(User.email == email).first()
     return user
 
+def get_all_users_of_a_group(group_id):
+    """Get all users of a group"""
 
+    users_by_group = UserGroup.query.filter_by(group_id=group_id).all()
+    return users_by_group
+
+
+def get_get_group_by_user(user_id):
+    """Get all groups by user"""
+
+    group_by_user = UserGroup.query.filter_by(group_id=group_id).all()
+    return group_by_user
 
 def create_group(group_name):
     """Create and return a new group"""
-
-    group = Group(group_name=group_name)
-
-    db.session.add(group)
-    db.session.commit()
-
-    return group
-
-
-def get_group_id(group_id):
-    """Return group id"""
 
     group = Group(group_name=group_name)
 
