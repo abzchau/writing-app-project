@@ -21,6 +21,13 @@ def get_user_by_id(user_id):
     return user
 
 
+def get_group_by_id(group_id):
+    """Get a user by email"""
+
+    group = Group.query.filter(Group.group_id == group_id).first()
+    return group
+
+
 def get_user_by_email(email):
     """Get a user by email"""
 
@@ -52,7 +59,7 @@ def create_project(project_name, user_id, group_id, genre=""):
 
 
 def create_association(group: Group, user: User):
-    """Create and return a new User Group"""
+    """Creates association when a user creates a group"""
     
     group.users.append(user) 
     

@@ -104,15 +104,23 @@ def group_homepage(group_name):
 
 @app.route('/group', methods=["POST"])
 def add_user_to_group():
-    """Add a user to a group"""
-
+    """Add another user to a group"""
     email = request.form.get("email")
     user = crud.get_user_by_email(email)
-    group_id = session["group_id"]
     group_name = session["group_name"]
-    user_group = crud.create_member(user.user, group_id)
-        
-    return render_template("/group.html", group_name=group_name)
+    print(session["group_name"])
+
+    if not user:
+        flash("The user does not exist. Please try again, or have the user sign up.")
+        return render_template("/group.html", group_name=group_name)
+    else:
+        email = request.form.get("email")
+        user = crud.get_user_by_email(email)
+        group_id = session["group_id"]
+        group = crud.get_group_by_id(group_id)
+        crud.create_association(group, user)
+            
+        return render_template("/group.html", group_name=group_name)
 
 
 @app.route('/about')
