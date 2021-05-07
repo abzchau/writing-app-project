@@ -6,6 +6,12 @@ from flask_sqlalchemy import SQLAlchemy
 """db object - represents our database"""
 db = SQLAlchemy()
 
+
+user_group_association = db.Table('user_group_association',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.user_id')),
+    db.Column('group_id', db.Integer, db.ForeignKey('groups.group_id'))
+)
+
 class User(db.Model):
     """A user."""
 
@@ -19,8 +25,9 @@ class User(db.Model):
     favorite_writer = db.Column(db.String, nullable=True)
     favorite_animal = db.Column(db.String, nullable=True)
 
+    groups = db.relationship('Group', secondary=user_group_association, back_populates='users')
     projects = db.relationship('Project', back_populates='user')
-    user_group = db.relationship('UserGroup', back_populates='user')
+    # user_group = db.relationship('UserGroup', back_populates='user')
     submission = db.relationship('Submission', back_populates='user')
     feedback = db.relationship('Feedback', back_populates='user')
 
@@ -35,9 +42,10 @@ class Group(db.Model):
 
     group_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     group_name = db.Column(db.String)
-
+    
+    users = db.relationship('User', secondary=user_group_association, back_populates="groups")
     projects = db.relationship('Project', back_populates='group')
-    user_group = db.relationship('UserGroup', back_populates='group')
+    # user_group = db.relationship('UserGroup', back_populates='group')
 
     def __repr__(self):
         return f'<Group group_id={self.group_id} group_name={self.group_name}>'
@@ -62,20 +70,23 @@ class Project(db.Model):
         return f'<Project project_id={self.project_id} project_name={self.project_name} user_id={self.user_id} group_id={self.group_id}>'
 
 
-class UserGroup(db.Model):
-    """A user-group association."""
 
-    __tablename__= 'users_groups'
 
-    user_group_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    group_id = db.Column(db.Integer, db.ForeignKey('groups.group_id'))
 
-    user = db.relationship('User', back_populates='user_group')
-    group = db.relationship('Group', back_populates='user_group')
+# class UserGroup(db.Model):
+#     """A user-group association."""
 
-    def __repr__(self):
-        return f'<UserGroup user_id={self.user_id} group_id={self.group_id} user_id={self.user_id}>'
+#     __tablename__= 'users_groups'
+
+#     user_group_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+#     group_id = db.Column(db.Integer, db.ForeignKey('groups.group_id'))
+
+#     user = db.relationship('User', back_populates='user_group')
+#     group = db.relationship('Group', back_populates='user_group')
+
+#     def __repr__(self):
+#         return f'<UserGroup user_id={self.user_id} group_id={self.group_id} user_id={self.user_id}>'
     
 
 class Submission(db.Model):

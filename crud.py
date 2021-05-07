@@ -1,7 +1,7 @@
 """CRUD operations for the writing app"""
 
 from datetime import datetime
-from model import db, User, Group, Project, Submission, UserGroup, Feedback, connect_to_db
+from model import db, User, Group, Project, Submission, Feedback, connect_to_db
 
 def create_user(first_name, last_name, email, password, favorite_writer=None, favorite_animal=None):
     """Create and return a new user"""
@@ -14,24 +14,20 @@ def create_user(first_name, last_name, email, password, favorite_writer=None, fa
     return user
 
 
+def get_user_by_id(user_id):
+    """Get a user by email"""
+
+    user = User.query.filter(User.user_id == user_id).first()
+    return user
+
+
 def get_user_by_email(email):
     """Get a user by email"""
 
     user = User.query.filter(User.email == email).first()
     return user
 
-def get_all_users_of_a_group(group_id):
-    """Get all users of a group"""
 
-    users_by_group = UserGroup.query.filter_by(group_id=group_id).all()
-    return users_by_group
-
-
-def get_get_group_by_user(user_id):
-    """Get all groups by user"""
-
-    group_by_user = UserGroup.query.filter_by(group_id=group_id).all()
-    return group_by_user
 
 def create_group(group_name):
     """Create and return a new group"""
@@ -55,13 +51,14 @@ def create_project(project_name, user_id, group_id, genre=""):
     return project
 
 
-def create_member(user_id, group_id):
+def create_association(group: Group, user: User):
     """Create and return a new User Group"""
-    user_group = UserGroup(user_id=user_id, group_id=group_id)
-    db.session.add(user_group)
+    
+    group.users.append(user) 
+    
     db.session.commit()
 
-    return user_group
+
 
 # def create_submission(meeting_time):
 #     """Create and return a submission"""
@@ -83,6 +80,20 @@ def create_member(user_id, group_id):
 #     db.session.commit()
 
 #     return feedback
+
+
+# def get_all_users_of_a_group(group_id):
+#     """Get all users of a group"""
+
+#     users_by_group = UserGroup.query.filter_by(group_id=group_id).all()
+#     return users_by_group
+
+
+# def get_get_group_by_user(user_id):
+#     """Get all groups by user"""
+
+#     group_by_user = UserGroup.query.filter_by(group_id=group_id).all()
+#     return group_by_user
 
 
 

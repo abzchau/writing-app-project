@@ -74,6 +74,10 @@ def main():
         if "group_name" in request.form:
             group_name = request.form.get("group_name")
             group = crud.create_group(group_name)
+            user_id = session["user_id"]
+            print(user_id)
+            user = crud.get_user_by_id(user_id)
+            crud.create_association(group, user)
             session["group_id"] = group.group_id
             session["group_name"] = group.group_name
             flash('Group Created')
@@ -106,7 +110,7 @@ def add_user_to_group():
     user = crud.get_user_by_email(email)
     group_id = session["group_id"]
     group_name = session["group_name"]
-    user_group = crud.create_member(user.user_id, group_id)
+    user_group = crud.create_member(user.user, group_id)
         
     return render_template("/group.html", group_name=group_name)
 
