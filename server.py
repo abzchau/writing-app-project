@@ -91,6 +91,7 @@ def main():
             project = crud.create_project(project_name, user_id, genre)
             session["project_name"] = project_name
             session["project_id"] = project.project_id
+            flash('Project Created')
             return redirect(f"/project/{project_name}")
     else:
         group_name = request.form.get("group_name")
@@ -106,6 +107,7 @@ def group_homepage(group_name):
 @app.route('/project/<project_name>')
 def project_homepage(project_name):
     project_name = session["project_name"]
+    print(project_name)
     return render_template('/project.html', project_name=project_name)
 
 @app.route('/group', methods=["POST"])
