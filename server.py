@@ -91,7 +91,7 @@ def main():
             project = crud.create_project(project_name, user_id, genre)
             session["project_name"] = project_name
             session["project_id"] = project.project_id
-            return render_template('/project.html', project_name=project_name, genre=genre)
+            return redirect(f"/project/{project_name}")
     else:
         group_name = request.form.get("group_name")
         return render_template("/main.html", group_name=group_name)
@@ -101,6 +101,12 @@ def main():
 def group_homepage(group_name):
     group_name = session["group_name"]
     return render_template('/group.html', group_name=group_name)
+
+
+@app.route('/project/<project_name>')
+def project_homepage(project_name):
+    project_name = session["project_name"]
+    return render_template('/project.html', project_name=project_name)
 
 @app.route('/group', methods=["POST"])
 def add_user_to_group():
@@ -133,7 +139,13 @@ def add_group_to_project():
     print(group_id)
     crud.add_group_to_project(group_id, project_id)
     return render_template('/project.html')
-    
+
+
+@app.route('/project_page')
+def project_page():
+    return render_template('project_page.html')
+
+
 
 @app.route('/about')
 def about_the_app():
