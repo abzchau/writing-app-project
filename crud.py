@@ -22,10 +22,17 @@ def get_user_by_id(user_id):
 
 
 def get_group_by_id(group_id):
-    """Get a user by email"""
+    """Get a group by group id"""
 
     group = Group.query.filter(Group.group_id == group_id).first()
     return group
+
+
+def get_group_id_by_name(group_name):
+    """Get a group id by group name"""
+
+    group = Group.query.filter_by(group_name=group_name).first()
+    return group.group_id
 
 
 def get_user_by_email(email):
@@ -33,7 +40,6 @@ def get_user_by_email(email):
 
     user = User.query.filter(User.email == email).first()
     return user
-
 
 
 def create_group(group_name):
@@ -47,11 +53,10 @@ def create_group(group_name):
     return group
 
 
-def create_project(project_name, user_id, group_id, genre=""):
+def create_project(project_name, user_id, genre=""):
     """Create and return a new project"""
     print('Attempting to create project...')
-    project = Project(project_name=project_name, user_id=user_id, group_id=1, genre=genre)
-    print(project)
+    project = Project(project_name=project_name, user_id=user_id, genre=genre)
     db.session.add(project)
     db.session.commit()
 
@@ -66,6 +71,25 @@ def create_association(group: Group, user: User):
     db.session.commit()
 
 
+
+def add_group_to_project(group_id, project_id):
+    """Get a user by email"""
+
+    project = Project.query.get(project_id)
+    project.group_id = group_id
+    db.session.commit()
+    return project
+
+
+# def add_group_to_project(group_id):
+#     """Create and return a new group"""
+
+#     group = Group(group_name=group_name)
+
+#     db.session.add(group)
+#     db.session.commit()
+
+#     return group
 
 # def create_submission(meeting_time):
 #     """Create and return a submission"""

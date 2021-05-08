@@ -68,7 +68,7 @@ def signup():
 
 @app.route('/main', methods=["GET", "POST"])
 def main():
-    """Create a group"""
+    """Create a group or project"""
     
     if request.method == 'POST':
         if "group_name" in request.form:
@@ -84,14 +84,14 @@ def main():
             return redirect(f"/group/{group_name}")
         
         if "project_name" in request.form:
-                user_id = session["user_id"]
-                group_id = 1
-                project_name = request.form.get("project_name")
-                genre = request.form.get("genre")
-            
-
-                project = crud.create_project(project_name, user_id, group_id, genre)
-                return render_template("/project.html", project_name=project_name, genre=genre)
+            user_id = session["user_id"]
+            group_id = 1
+            project_name = request.form.get("project_name")
+            genre = request.form.get("genre")
+            project = crud.create_project(project_name, user_id, genre)
+            session["project_name"] = project_name
+            session["project_id"] = project.project_id
+            return render_template('/project.html', project_name=project_name, genre=genre)
     else:
         group_name = request.form.get("group_name")
         return render_template("/main.html", group_name=group_name)
@@ -122,6 +122,18 @@ def add_user_to_group():
             
         return render_template("/group.html", group_name=group_name)
 
+
+@app.route('/project', methods=["POST"])
+def add_group_to_project():
+    project_id = session["project_id"] 
+    print(project_id)
+    group_name = request.form.get("group_name")
+    print(group_name)
+    group_id = crud.get_group_id_by_name(group_name)
+    print(group_id)
+    crud.add_group_to_project(group_id, project_id)
+    return render_template('/project.html')
+    
 
 @app.route('/about')
 def about_the_app():
