@@ -5,13 +5,19 @@
 
 <div>
     <h2>Groups</h2>
-    <div id=group>
-        <!-- <ul id='group_name'><a href </ul> -->
-    </div>
+    <ul>
+        {% for group in lst_of_groups_by_user_id %}
+          <li>
+            <a href="/group/{{ group.group_name }}">
+              {{ group.group_name }}
+            </a>
+          </li>
+        {% endfor %}
 
-    <hr>
+    </ul>
+
     <form action="/main" method="POST">
-        <label for="group_name"><b>Group Name</b></label>
+        <label for="group_name"><b>Create a new group:</b></label>
         <p><input type="text" placeholder="Enter Group Name" name="group_name" required></p>
     <div>
         <button type="submit">Create Group</button>
@@ -19,9 +25,10 @@
     </form>
 </div>
 
+<hr>
+
 <div>
     <h2>Projects</h2>
-    <hr>
     <form action="/main" method="POST">
         <label for="project_name"><b>Project Name</b></label>
         <p><input type="text" placeholder="Enter Project Name" name="project_name" required></p>
@@ -32,5 +39,7 @@
     </div>
     </form>
 </div>
+
+
 
 {% endblock %}

@@ -35,7 +35,7 @@ def create_group(group_name):
     db.session.add(group)
     db.session.commit()
     return group
-    
+
 
 def get_group_by_id(group_id):
     """Get a group by group id"""
@@ -100,6 +100,14 @@ def create_submission(project_id, text):
     db.session.add(submission)
     db.session.commit()
     return submission
+
+
+def get_all_groups_by_user(user_id):
+    """Get a list of all groups by User ID"""
+
+    user = User.query.get(user_id)
+
+    return user.groups
 
 
 # def save_project(project_id, submission_id, user_id, text):

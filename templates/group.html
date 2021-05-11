@@ -2,6 +2,15 @@
 
 {% block body %}
 
+<h3>
+    {% for group in lst_of_groups_by_user_id %}
+          {{ group.group_name }}
+    {% endfor %}
+
+</h3>
+
+
+
 <h3>{{group_name}}</h3>
 
 <form action="/group" method="POST">
@@ -17,8 +26,9 @@
 
 <h3>Go to meeting</h3>
     <div>
-        <button type="submit">Go to meeting</button>
+        <a href="/meeting_page" >
+            <input type="submit" value="Go to Meeting"/>
+        </a>
     </div>
-</form>
 
 {% endblock %}
