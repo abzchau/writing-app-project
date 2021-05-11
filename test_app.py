@@ -1,15 +1,17 @@
-from crud import create_user
-from model import connect_to_db
+from unittest import TestCase
+from server import app
 
-def test_create_user(user):
-    connect_to_db(app)
-    user = create_user(first_name='mae', last_name='wong', email='mae@wong.com', password='test1', favorite_writer='Lessing', favorite_animal='dogs')
-    return user
+class FlaskTests(TestCase):
 
+  def setUp(self):
 
-#test when user creates a group, the following tables should be updated with the corresponding group_id:
-#1. user_group
+      self.client = app.test_client()
+      app.config['TESTING'] = True
 
+  def test_homepage_route(self):
+      """Some non-database test..."""
 
-
+      result = self.client.get("/")
+      self.assertEqual(result.status_code, 200)
+      self.assertIn('<h1>Welcome to the Writing Meeting Place.</h1>', result.data)
 
