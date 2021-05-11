@@ -3,7 +3,7 @@
 from datetime import datetime
 from model import db, User, Group, Project, Submission, Feedback, connect_to_db
 
-def create_user(first_name, last_name, email, password, favorite_writer=None, favorite_animal=None):
+def create_user(first_name, last_name, email, password, favorite_writer="", favorite_animal=""):
     """Create and return a new user"""
 
     user = User(first_name=first_name, last_name=last_name, email=email, password=password, favorite_writer=favorite_writer, favorite_animal=favorite_animal)
@@ -15,11 +15,27 @@ def create_user(first_name, last_name, email, password, favorite_writer=None, fa
 
 
 def get_user_by_id(user_id):
-    """Get a user by email"""
+    """Get a user by id"""
 
     user = User.query.filter(User.user_id == user_id).first()
     return user
 
+
+def get_user_by_email(email):
+    """Get a user by email"""
+
+    user = User.query.filter(User.email == email).first()
+    return user
+
+
+def create_group(group_name):
+    """Create a group"""
+
+    group = Group(group_name=group_name)
+    db.session.add(group)
+    db.session.commit()
+    return group
+    
 
 def get_group_by_id(group_id):
     """Get a group by group id"""
@@ -35,13 +51,6 @@ def get_group_id_by_name(group_name):
     return group.group_id
 
 
-def get_user_by_email(email):
-    """Get a user by email"""
-
-    user = User.query.filter(User.email == email).first()
-    return user
-
-
 def create_group(group_name):
     """Create and return a new group"""
 
@@ -55,7 +64,7 @@ def create_group(group_name):
 
 def create_project(project_name, user_id, genre=""):
     """Create and return a new project"""
-    print('Attempting to create project...')
+
     project = Project(project_name=project_name, user_id=user_id, genre=genre)
     db.session.add(project)
     db.session.commit()
@@ -73,23 +82,33 @@ def create_association(group: Group, user: User):
 
 
 def add_group_to_project(group_id, project_id):
-    """Get a user by email"""
+    """Add group to a project"""
 
     project = Project.query.get(project_id)
+    print('this actually happened', project.group_id)
     project.group_id = group_id
     db.session.commit()
+    
     return project
 
 
-# def add_group_to_project(group_id):
-#     """Create and return a new group"""
+def create_submission(project_id, text):
+    """Creates a submission when a user saves a project"""
 
-#     group = Group(group_name=group_name)
+    project = Project.query.get(project_id)
+    submission = Submission(project_id=project_id, user_id=project.user_id, text=text)
+    db.session.add(submission)
+    db.session.commit()
+    return submission
 
-#     db.session.add(group)
-#     db.session.commit()
 
-#     return group
+# def save_project(project_id, submission_id, user_id, text):
+
+#     project = Project.query.get(project_id)
+#     project.user_id = user_id
+#     project.text = text
+
+
 
 # def create_submission(meeting_time):
 #     """Create and return a submission"""

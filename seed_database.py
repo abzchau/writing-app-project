@@ -33,5 +33,10 @@ os.system('createdb writing_app')
 model.connect_to_db(server.app)
 model.db.create_all()
 
-crud.create_user(first_name='Test', last_name='User', email='test@test.com', password='test', favorite_writer='Hemingway', favorite_animal='boars')
+crud.create_user(first_name='Test', last_name='User', email='test@test.com', password='test', favorite_writer='Hemingway', favorite_animal='monkeys')
+crud.create_user(first_name='Test1', last_name='User1', email='test1@test.com', password='test', favorite_writer='Bronte', favorite_animal='pigs')
+
+
+crud.create_group(group_name="Test")
+crud.create_group(group_name="Test1")
 

@@ -19,6 +19,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def homepage():
     """View Homepage"""
+
     return render_template("homepage.html")
 
 
@@ -47,6 +48,7 @@ def login():
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     """Sign up a new user"""
+
     fname = request.form.get("fname")
     lname = request.form.get("lname")
     email = request.form.get("email")
@@ -68,7 +70,7 @@ def signup():
 
 @app.route('/main', methods=["GET", "POST"])
 def main():
-    """Create a group or project"""
+    """Create a group or project on the main page"""
     
     if request.method == 'POST':
         if "group_name" in request.form:
@@ -91,6 +93,7 @@ def main():
             project = crud.create_project(project_name, user_id, genre)
             session["project_name"] = project_name
             session["project_id"] = project.project_id
+            session["genre"] = project.genre
             flash('Project Created')
             return redirect(f"/project/{project_name}")
     else:
@@ -99,20 +102,16 @@ def main():
 
 
 @app.route('/group/<group_name>')
-def group_homepage(group_name):
+def main_group(group_name):
+    "Redirects Here After Creating a Group"
     group_name = session["group_name"]
     return render_template('/group.html', group_name=group_name)
 
 
-@app.route('/project/<project_name>')
-def project_homepage(project_name):
-    project_name = session["project_name"]
-    print(project_name)
-    return render_template('/project.html', project_name=project_name)
-
 @app.route('/group', methods=["POST"])
 def add_user_to_group():
     """Add another user to a group"""
+    
     email = request.form.get("email")
     user = crud.get_user_by_email(email)
     group_name = session["group_name"]
@@ -131,20 +130,38 @@ def add_user_to_group():
         return render_template("/group.html", group_name=group_name)
 
 
+@app.route('/project/<project_name>')
+def project_main(project_name):
+    """View Project Main Page"""
+
+    project_name = session["project_name"]
+    genre = session["genre"]
+    return render_template('/project.html', project_name=project_name, genre=genre)
+
+
 @app.route('/project', methods=["POST"])
-def add_group_to_project():
-    project_id = session["project_id"] 
-    print(project_id)
+def associate_group_to_project():
+    "Associate a Group with a Project"
+
+    project_id = session["project_id"]
+    
+    genre = session["genre"]
+    project_name = session["project_name"] 
     group_name = request.form.get("group_name")
-    print(group_name)
     group_id = crud.get_group_id_by_name(group_name)
-    print(group_id)
+    print(locals())
     crud.add_group_to_project(group_id, project_id)
-    return render_template('/project.html')
+    return render_template('/project.html', project_name=project_name, genre=genre)
 
 
-@app.route('/project_page')
-def project_page():
+@app.route('/project_page', methods=["GET", "POST"])
+def project_page_main():
+    """View Main Project Page"""
+
+    text = request.form.get("text")
+    project_id = session["project_id"]
+    crud.create_submission(project_id, text)
+
     return render_template('project_page.html')
 
 
