@@ -9,18 +9,27 @@
 <form action="/project" method="POST">
     <label for="project"><b>Associate this project with a group</b></label>
     <p><input type="text" placeholder="group name" name="group_name" required></p>
+    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
     <div>
         <button type="submit">Add a group to the project</button>
     </div>
 </form>
 
 <h3>Linked to Group: </h3>
+    <ul>
+        <li>
+            <a href="/group/{{ group_name }}">
+            {{ group_name }}
+            </a>
+        </li>
 
+    </ul>
 
 <div>
-    <a href="/project_page" >
+    <form action="/project_page" method="POST">
+        <p><input type="hidden" value="{{project_name}}" name="project_name" required></p>
         <input type="submit" value="Edit Project"/>
-    </a>
+    </form>
 </div>
 
 {% endblock %}

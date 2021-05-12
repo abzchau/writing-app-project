@@ -39,9 +39,12 @@ crud.create_user(first_name='Test', last_name='User', email='test@test.com', pas
 crud.create_user(first_name='Test1', last_name='User1', email='test1@test.com', password='test', favorite_writer='Bronte', favorite_animal='pigs')
 crud.create_user(first_name='Mae', last_name='Wong', email='mae@wong.com', password='test', favorite_writer='Lessing', favorite_animal='dogs')
 
-#Creates groups
+#Creates groups 
 crud.create_group(group_name="Test")
 crud.create_group(group_name="Test1")
+
+#Creates association between user and group
+
 
 #Creates projects
 crud.create_project(project_name="Test", user_id=1, genre='YA')

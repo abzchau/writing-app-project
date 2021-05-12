@@ -26,6 +26,9 @@ def homepage():
 @app.route('/login', methods=["POST", 'GET'])
 def login():
     """Process log in information"""
+    
+    if request.method =="GET":
+        return render_template('/login.html')
 
     if request.method == 'POST':
         email = request.form.get("email")
@@ -41,13 +44,15 @@ def login():
             session["user_id"] = user.user_id
             flash(f"Welcome back, {user.email}!")
             return redirect(url_for("get_main"))
-    else:
-        return render_template('/login.html')
+
+        
 
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     """Sign up a new user"""
+    if request.method == 'GET':
+        return render_template("signup.html")
 
     fname = request.form.get("fname")
     lname = request.form.get("lname")
@@ -56,53 +61,46 @@ def signup():
     favorite_writer = request.form.get("favorite_writer")
     favorite_animal = request.form.get("favorite_animal")
     user = crud.get_user_by_email(email)
-    if request.method == 'POST':
-        if user:
-            flash('It looks like you already have an account. Try to log in with your email and password.')
-            return render_template('signup.html')
-        else:
-            crud.create_user(fname, lname, email, password, favorite_writer, favorite_animal)
-            flash("'We've created your account. Please log in.")
-            return render_template('/login.html')
+
+    if user:
+        flash('It looks like you already have an account. Try to log in with your email and password.')
+        return render_template('signup.html')
     else:
-        return render_template("signup.html")
+        crud.create_user(fname, lname, email, password, favorite_writer, favorite_animal)
+        flash("'We've created your account. Please log in.")
+        return render_template('/login.html')
+
 
 
 @app.route('/main', methods=["GET"])
 def get_main():
         """View the main page"""
         group_name = request.form.get("group_name")
+        project_name = request.form.get("project_name")
         user_id = session["user_id"]
         lst_of_groups_by_user_id = crud.get_all_groups_by_user(user_id)
-        return render_template("/main.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id)
+        lst_of_projects_by_user_id = crud.get_all_projects_by_user(user_id)
+        return render_template("/main.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id, project_name=project_name,lst_of_projects_by_user_id=lst_of_projects_by_user_id)
 
 
 @app.route('/main', methods=["POST"])
 def post_main():
     """Create a group or project on the main page"""
     
-
     if "group_name" in request.form:
         group_name = request.form.get("group_name")
         group = crud.create_group(group_name)
         user_id = session["user_id"]
-        print(user_id)
         user = crud.get_user_by_id(user_id)
         crud.create_association(group, user)
-        session["group_id"] = group.group_id
-        session["group_name"] = group.group_name
         flash('Group Created')
         return redirect(f"/group/{group_name}")
     
     if "project_name" in request.form:
         user_id = session["user_id"]
-        group_id = 1
         project_name = request.form.get("project_name")
         genre = request.form.get("genre")
         project = crud.create_project(project_name, user_id, genre)
-        session["project_name"] = project_name
-        session["project_id"] = project.project_id
-        session["genre"] = project.genre
         flash('Project Created')
         return redirect(f"/project/{project_name}")
 
@@ -110,7 +108,7 @@ def post_main():
 @app.route('/group/<group_name>')
 def main_group(group_name):
     "Redirects Here After Creating a Group"
-    group_name = session["group_name"]
+
     user_id = session["user_id"]
     lst_of_groups_by_user_id = crud.get_all_groups_by_user(user_id)
     return render_template('/group.html', group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id)
@@ -122,8 +120,8 @@ def add_user_to_group():
     
     email = request.form.get("email")
     user = crud.get_user_by_email(email)
-    group_name = session["group_name"]
-    print(session["group_name"])
+    group_name = request.form.get("group_name")
+    print("crap", group_name)
 
     if not user:
         flash("The user does not exist. Please try again, or have the user sign up.")
@@ -131,47 +129,45 @@ def add_user_to_group():
     else:
         email = request.form.get("email")
         user = crud.get_user_by_email(email)
-        group_id = session["group_id"]
+        group_id = crud.get_group_id_by_name(group_name)
         group = crud.get_group_by_id(group_id)
         crud.create_association(group, user)
+        lst_of_groups_by_user_id = crud.get_all_groups_by_user(user.user_id)
             
-        return render_template("/group.html", group_name=group_name)
+        return render_template("/group.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id)
 
 
 @app.route('/project/<project_name>')
 def project_main(project_name):
     """View Project Main Page"""
-
-    project_name = session["project_name"]
-    genre = session["genre"]
+    
+    project = crud.get_project_by_name(project_name)
+    genre = project.genre
+    
     return render_template('/project.html', project_name=project_name, genre=genre)
 
 
 @app.route('/project', methods=["POST"])
-def associate_group_to_project():
-    "Associate a Group with a Project"
+def associate_project_to_group():
+    "Associate a Project with a Group"
 
-    project_id = session["project_id"]
-    
-    genre = session["genre"]
-    project_name = session["project_name"] 
+    project_name = request.form.get("project_name")
+    project = crud.get_project_by_name(project_name)
     group_name = request.form.get("group_name")
     group_id = crud.get_group_id_by_name(group_name)
-    print(locals())
-    crud.add_group_to_project(group_id, project_id)
-    return render_template('/project.html', project_name=project_name, genre=genre)
+    crud.add_group_to_project(group_id, project.project_id)
+    return render_template('/project.html', project_name=project_name, genre=project.genre, group_name=group_name)
 
 
 @app.route('/project_page', methods=["GET", "POST"])
 def project_page_main():
-    """View Main Project Page"""
+    """View Main Project Page BY Clicking Edit Project Button"""
 
+    project_name = request.form.get("project_name")
     text = request.form.get("text")
-    project_id = session["project_id"]
-    crud.create_submission(project_id, text)
-
-    return render_template('project_page.html')
-
+    crud.create_submission(project_name, text)
+    return render_template('project_page.html', project_name=project_name)
+        
 
 
 @app.route('/meeting_page')

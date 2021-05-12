@@ -51,17 +51,6 @@ def get_group_id_by_name(group_name):
     return group.group_id
 
 
-def create_group(group_name):
-    """Create and return a new group"""
-
-    group = Group(group_name=group_name)
-
-    db.session.add(group)
-    db.session.commit()
-
-    return group
-
-
 def create_project(project_name, user_id, genre=""):
     """Create and return a new project"""
 
@@ -71,11 +60,19 @@ def create_project(project_name, user_id, genre=""):
 
     return project
 
+def get_project_by_name(project_name):
+    """Get a Project by project name"""
+
+    project = Project.query.filter_by(project_name=project_name).first()
+    return project
+
 
 def create_association(group: Group, user: User):
     """Creates association when a user creates a group"""
     
     group.users.append(user) 
+
+    db.session.add(group)
     
     db.session.commit()
 
@@ -92,10 +89,12 @@ def add_group_to_project(group_id, project_id):
     return project
 
 
-def create_submission(project_id, text):
+def create_submission(project_name, text):
     """Creates a submission when a user saves a project"""
 
-    project = Project.query.get(project_id)
+    project = get_project_by_name(project_name)
+    project_id = project.project_id
+    user_id = project.project_name
     submission = Submission(project_id=project_id, user_id=project.user_id, text=text)
     db.session.add(submission)
     db.session.commit()
@@ -108,6 +107,14 @@ def get_all_groups_by_user(user_id):
     user = User.query.get(user_id)
 
     return user.groups
+
+
+def get_all_projects_by_user(user_id):
+    """Get a list of all groups by User ID"""
+
+    user = User.query.get(user_id)
+
+    return user.projects
 
 
 # def save_project(project_id, submission_id, user_id, text):

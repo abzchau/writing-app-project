@@ -2,8 +2,7 @@
 
 {% block body %}
 
-<h1>Project Name</h1>
-<h3>Genre</h3>
+<h1>{{project_name}}</h1>
 
 
     <form action = "/project_page" method = "POST">
@@ -12,6 +11,7 @@
             </textarea>
         <br>
         <input type="submit" value="Save Project"/>
+        <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
     </form>
 
 {% endblock %}

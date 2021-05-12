@@ -29,8 +29,20 @@
 
 <div>
     <h2>Projects</h2>
+
+    <ul>
+        {% for project in lst_of_projects_by_user_id %}
+          <li>
+            <a href="/project/{{ project.project_name }}">
+              {{ project.project_name }}
+            </a>
+          </li>
+        {% endfor %}
+
+    </ul>
+
     <form action="/main" method="POST">
-        <label for="project_name"><b>Project Name</b></label>
+        <label for="project_name"><b>Create a new project:</b></label>
         <p><input type="text" placeholder="Enter Project Name" name="project_name" required></p>
         <label for="genre"><b>Genre</b></label>
         <p><input type="text" placeholder="Enter Genre" name="genre"></p>
