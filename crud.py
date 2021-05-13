@@ -51,6 +51,14 @@ def get_group_id_by_name(group_name):
     return group.group_id
 
 
+def get_group_name_by_project_name(project_name):
+    """"Get a group name by project name"""
+
+    project = get_project_by_name(project_name)
+    group = get_group_by_id(project.group_id)
+    return group.group_name
+
+
 def create_project(project_name, user_id, genre=""):
     """Create and return a new project"""
 
@@ -115,6 +123,14 @@ def get_all_projects_by_user(user_id):
     user = User.query.get(user_id)
 
     return user.projects
+
+
+def get_all_users_of_a_group(group_id):
+    """Get a list of all groups by User ID"""
+
+    group = Group.query.get(group_id)
+
+    return group.users
 
 
 # def save_project(project_id, submission_id, user_id, text):

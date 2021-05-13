@@ -106,12 +106,12 @@ def post_main():
 
 
 @app.route('/group/<group_name>')
-def main_group(group_name):
+def get_group(group_name):
     "Redirects Here After Creating a Group"
-
-    user_id = session["user_id"]
-    lst_of_groups_by_user_id = crud.get_all_groups_by_user(user_id)
-    return render_template('/group.html', group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id)
+    group_id = crud.get_group_id_by_name(group_name)
+    group = crud.get_group_by_id(group_id)
+    lst_of_users_by_group = group.users
+    return render_template('/group.html', group_name=group_name, lst_of_users_by_group=lst_of_users_by_group)
 
 
 @app.route('/group', methods=["POST"])
@@ -121,7 +121,6 @@ def add_user_to_group():
     email = request.form.get("email")
     user = crud.get_user_by_email(email)
     group_name = request.form.get("group_name")
-    print("crap", group_name)
 
     if not user:
         flash("The user does not exist. Please try again, or have the user sign up.")
@@ -137,18 +136,28 @@ def add_user_to_group():
         return render_template("/group.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id)
 
 
+@app.route('/meeting_page', methods=["GET", "POST"])
+def meeting_page():
+    """View the Group's Meeting Page"""
+
+    group_name = request.form.get("group_name")
+    print(group_name)
+    return render_template('/meeting_page.html', group_name=group_name)
+
+
 @app.route('/project/<project_name>')
-def project_main(project_name):
+def get_project(project_name):
     """View Project Main Page"""
     
     project = crud.get_project_by_name(project_name)
     genre = project.genre
+    group_name = crud.get_group_name_by_project_name(project_name)
     
-    return render_template('/project.html', project_name=project_name, genre=genre)
+    return render_template('/project.html', project_name=project_name, genre=genre, group_name=group_name)
 
 
 @app.route('/project', methods=["POST"])
-def associate_project_to_group():
+def post_project():
     "Associate a Project with a Group"
 
     project_name = request.form.get("project_name")
@@ -159,8 +168,14 @@ def associate_project_to_group():
     return render_template('/project.html', project_name=project_name, genre=project.genre, group_name=group_name)
 
 
-@app.route('/project_page', methods=["GET", "POST"])
-def project_page_main():
+@app.route('/project_page/<project_name>', methods=["GET"])
+def get_project_page():
+    """View Main Project Page"""
+    return render_template('project_page.html', project_name=project_name)
+
+
+@app.route('/project_page', methods=["POST"])
+def post_project_page():
     """View Main Project Page BY Clicking Edit Project Button"""
 
     project_name = request.form.get("project_name")
@@ -168,13 +183,6 @@ def project_page_main():
     crud.create_submission(project_name, text)
     return render_template('project_page.html', project_name=project_name)
         
-
-
-@app.route('/meeting_page')
-def main_meeting():
-    """View the Meeting Page"""
-
-    return render_template('/meeting_page.html')
 
 
 

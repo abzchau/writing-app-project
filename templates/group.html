@@ -15,13 +15,31 @@
 </form>
 
 <h3>Members</h3>
-<p>Not yet implemented.</p>
+    <ul>
+        {% for user in lst_of_users_by_group %}
+        <li>
+            {{ user.first_name + " " + user.last_name }}
+            </a>
+        </li>
+        {% endfor %}
 
-<h3>Go to meeting</h3>
+    </ul>
+
+
+<!-- <h3>Go to meeting</h3>
     <div>
         <a href="/meeting_page" >
             <input type="submit" value="Go to Meeting"/>
         </a>
+    </div> -->
+
+
+    <div>
+        <form action="/meeting_page" method="POST">
+            <p><input type="hidden" value="{{group_name}}" name="group_name" required></p>
+            <input type="submit" value="Go to meeting"/>
+        </form>
     </div>
+
 
 {% endblock %}
