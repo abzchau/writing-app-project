@@ -35,18 +35,28 @@ model.db.create_all()
 
 
 #Creates test users
-crud.create_user(first_name='Test', last_name='User', email='test@test.com', password='test', favorite_writer='Hemingway', favorite_animal='monkeys')
-crud.create_user(first_name='Test1', last_name='User1', email='test1@test.com', password='test', favorite_writer='Bronte', favorite_animal='pigs')
+crud.create_user(first_name='Test1', last_name='User', email='test1@test.com', password='test', favorite_writer='Hemingway', favorite_animal='monkeys')
+crud.create_user(first_name='Test2', last_name='User1', email='test2@test.com', password='test', favorite_writer='Bronte', favorite_animal='pigs')
 crud.create_user(first_name='Mae', last_name='Wong', email='mae@wong.com', password='test', favorite_writer='Lessing', favorite_animal='dogs')
 
 #Creates groups 
-crud.create_group(group_name="Test")
-crud.create_group(group_name="Test1")
+crud.create_group(group_name="Group1")
+crud.create_group(group_name="Group2")
 
 #Creates association between user and group
+group1 = crud.get_group_by_id(1)
+user1 = crud.get_user_by_id(1)
+crud.create_association(group=group1, user=user1)
 
+group2 = crud.get_group_by_id(2)
+user2 = crud.get_user_by_id(2)
+crud.create_association(group=group2, user=user2)
 
 #Creates projects
-crud.create_project(project_name="Test", user_id=1, genre='YA')
-crud.create_project(project_name="Test2", user_id=2, genre='Romance')
+crud.create_project(project_name="Project1", user_id=1, genre='YA')
+crud.create_project(project_name="Project2", user_id=2, genre='Romance')
+
+#Associates a group to a project
+crud.add_group_to_project(group_id=1, project_id=1)
+crud.add_group_to_project(group_id=2, project_id=2)
 
