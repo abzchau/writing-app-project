@@ -4,13 +4,18 @@
 
 <h1>{{project_name}}</h1>
 
-
     <form action = "/project_page" method = "POST">
         <br>
             <textarea rows = "30" cols = "80" name = "text">
             </textarea>
         <br>
         <input type="submit" value="Save Project"/>
+        <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+    </form>
+
+    <form action = "/submit_project" method = "POST">
+
+        <input type="submit" value="Submit Project"/>
         <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
     </form>
 

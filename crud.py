@@ -133,6 +133,21 @@ def get_all_users_of_a_group(group_id):
     return group.users
 
 
+def change_project_visibility(project_name):
+    """Change Project Visibility to Public"""
+
+    project = Project.query.filter_by(project_name=project_name).first()
+    project.public = True
+    db.session.add(project)
+    db.session.commit()
+
+
+# def get_text_for_meeting_page(group_name):
+
+#     group = Group.query.filter_by(group_name=group_name).first()
+    
+
+
 # def save_project(project_id, submission_id, user_id, text):
 
 #     project = Project.query.get(project_id)

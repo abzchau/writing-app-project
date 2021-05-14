@@ -141,8 +141,10 @@ def meeting_page():
     """View the Group's Meeting Page"""
 
     group_name = request.form.get("group_name")
-    print(group_name)
-    return render_template('/meeting_page.html', group_name=group_name)
+    group_id = crud.get_group_id_by_name(group_name)
+    group = crud.get_group_by_id(group_id)
+    lst_of_users_by_group = group.users
+    return render_template('/meeting_page.html', group_name=group_name, lst_of_users_by_group=lst_of_users_by_group)
 
 
 @app.route('/project/<project_name>')
@@ -151,7 +153,11 @@ def get_project(project_name):
     
     project = crud.get_project_by_name(project_name)
     genre = project.genre
-    group_name = crud.get_group_name_by_project_name(project_name)
+
+    if project.group_id == None:
+        group_name = ''
+    else:
+        group_name = crud.get_group_name_by_project_name(project_name)
     
     return render_template('/project.html', project_name=project_name, genre=genre, group_name=group_name)
 
@@ -184,7 +190,21 @@ def post_project_page():
     return render_template('project_page.html', project_name=project_name)
         
 
+@app.route('/submit_project', methods=["POST"])
+def submit_project__on_project_page():
+    """Submit a Project to the Group"""
 
+    project_name = request.form.get("project_name")
+    crud.change_project_visibility(project_name)
+    return render_template('project_page.html', project_name=project_name) 
+
+
+# @app.route('/meeting_page')
+# def show_text_on_meeting_page():
+#     "Project Text Appears On Meeting Page"
+
+#     group_name = request.form.get("group_name")
+#     project_name = request.form.get("project_name")
 
 @app.route('/about')
 def about_the_app():
