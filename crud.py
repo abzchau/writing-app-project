@@ -142,10 +142,28 @@ def change_project_visibility(project_name):
     db.session.commit()
 
 
-# def get_text_for_meeting_page(group_name):
 
-#     group = Group.query.filter_by(group_name=group_name).first()
+def get_text_for_meeting_page(group_id):
+    """Get Text From Submission By Group ID"""
+
+    list_of_projects = db.session.query(Project).filter(Project.group_id == group_id).all()
     
+    for project in list_of_projects:
+        final_result = {}
+        if project.public == True:
+            submission = db.session.query(Submission).filter(Submission.project_id == project.project_id).order_by(Submission.submission_id.desc()).first()
+            final_result[submission.user_id] = submission.text
+    return final_result
+
+
+
+    
+# def get_submission_by_project_id(project_id):
+#     """Get a submission by project id"""
+
+#     submission = Submission.query.filter_by(project_id=project_id).first()
+#     return submission.text
+
 
 
 # def save_project(project_id, submission_id, user_id, text):

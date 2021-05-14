@@ -199,13 +199,6 @@ def submit_project__on_project_page():
     return render_template('project_page.html', project_name=project_name) 
 
 
-# @app.route('/meeting_page')
-# def show_text_on_meeting_page():
-#     "Project Text Appears On Meeting Page"
-
-#     group_name = request.form.get("group_name")
-#     project_name = request.form.get("project_name")
-
 @app.route('/about')
 def about_the_app():
     return "About the app"
