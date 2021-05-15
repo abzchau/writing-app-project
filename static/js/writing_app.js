@@ -8,7 +8,8 @@ function handleResponse(res) {
 
 function alertFuction(txt) {
   let name = document.getElementById('writer-id').value;
-  url = `/api/writer/${name}`;
+  const groupName = document.querySelector('#group_name').innerHTML 
+  url = `/api/${groupName}/${name}`;
   console.log(url)
   $.get(url, handleResponse);
 }

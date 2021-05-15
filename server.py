@@ -147,6 +147,7 @@ def meeting_page():
     """View the Group's Meeting Page"""
 
     if 'user_id' in session:
+        print('yoyomomo', 'user_id')
         group_name = request.form.get("group_name")
         group_id = crud.get_group_id_by_name(group_name)
         group = crud.get_group_by_id(group_id)
@@ -225,14 +226,13 @@ def submit_project__on_project_page():
     return get_text_for_project_page(project_name)
 
 
-@app.route('/api/writer/<name>')
-def get_writer(name):
+@app.route('/api/<group>/<name>')
+def get_writer(group, name):
     """Returns Text For Given User"""
-
-    dict_of_users = crud.get_text_for_meeting_page(2)
+    group_id = crud.get_group_id_by_name(group)
+    dict_of_users = crud.get_text_for_meeting_page(group_id)
     user = crud.get_user_by_name(name)
     full_name= user.first_name + " " + user.last_name
-    print(full_name)
     if full_name in dict_of_users:
         return dict_of_users.get(full_name)
     else:
