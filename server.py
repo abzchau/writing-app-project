@@ -92,6 +92,7 @@ def post_main():
     if "group_name" in request.form:
         group_name = request.form.get("group_name")
         group = crud.create_group(group_name)
+        session["group_id"] = group.group_id
         user_id = session["user_id"]
         user = crud.get_user_by_id(user_id)
         crud.create_association(group, user)
@@ -204,13 +205,16 @@ def post_project_page():
     project_name = request.form.get("project_name")
     text = request.form.get("text")
     crud.create_submission(project_name, text)
+    return get_text_for_project_page(project_name)
 
     #Returns Text From Submission
+
+def get_text_for_project_page(project_name):
     project = crud.get_project_by_name(project_name)
     show_text = crud.get_text_for_project_page(project.project_id)
 
     return render_template('project_page.html', project_name=project_name, show_text=show_text)
-        
+
 
 @app.route('/submit_project', methods=["POST"])
 def submit_project__on_project_page():
@@ -218,7 +222,7 @@ def submit_project__on_project_page():
 
     project_name = request.form.get("project_name")
     crud.change_project_visibility(project_name)
-    return render_template('project_page.html', project_name=project_name) 
+    return get_text_for_project_page(project_name)
 
 
 @app.route('/api/writer/<name>')
