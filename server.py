@@ -128,7 +128,7 @@ def add_user_to_group():
 
     if not user:
         flash("The user does not exist. Please try again, or have the user sign up.")
-        return render_template("/group.html", group_name=group_name)
+        return redirect(f"/group/{group_name}")
     else:
         email = request.form.get("email")
         user = crud.get_user_by_email(email)
@@ -136,8 +136,9 @@ def add_user_to_group():
         group = crud.get_group_by_id(group_id)
         crud.create_association(group, user)
         lst_of_groups_by_user_id = crud.get_all_groups_by_user(user.user_id)
+        lst_of_users_by_group = group.users
             
-        return render_template("/group.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id)
+        return render_template("/group.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id, lst_of_users_by_group=lst_of_users_by_group)
 
 
 @app.route('/meeting_page', methods=["GET", "POST"])
