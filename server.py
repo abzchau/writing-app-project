@@ -184,14 +184,32 @@ def post_project():
     return render_template('/project.html', project_name=project_name, genre=project.genre, group_name=group_name)
 
 
+
+# @app.route('/project_page', methods=["GET"])
+# def post_project_page():
+#     """View Project Page BY Clicking Edit Project Button"""
+
+#     #Returns Text From Submission
+#     project = crud.get_project_by_name(project_name)
+#     show_text = crud.get_text_for_project_page(project.project_id)
+
+#     return render_template('project_page.html', project_name=project_name, show_text=show_text)
+
+
 @app.route('/project_page', methods=["POST"])
 def post_project_page():
-    """View Main Project Page BY Clicking Edit Project Button"""
+    """View Project Page BY Clicking Edit Project Button"""
 
+    #Creates A Submission
     project_name = request.form.get("project_name")
     text = request.form.get("text")
     crud.create_submission(project_name, text)
-    return render_template('project_page.html', project_name=project_name)
+
+    #Returns Text From Submission
+    project = crud.get_project_by_name(project_name)
+    show_text = crud.get_text_for_project_page(project.project_id)
+
+    return render_template('project_page.html', project_name=project_name, show_text=show_text)
         
 
 @app.route('/submit_project', methods=["POST"])

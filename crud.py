@@ -152,8 +152,18 @@ def change_project_visibility(project_name):
 
 
 
+def get_text_for_project_page(project_id):
+    """Get Text From Submission By Project ID For The Meeting Page"""
+
+    submission = db.session.query(Submission).filter(Submission.project_id == project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
+    
+    if not submission:
+        return ''
+    else:
+        return submission.text
+
 def get_text_for_meeting_page(group_id):
-    """Get Text From Submission By Group ID"""
+    """Get Text From Submission By Group ID For The Meeting Page"""
 
     list_of_projects = db.session.query(Project).filter(Project.group_id == group_id).all()
     
