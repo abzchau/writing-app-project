@@ -2,14 +2,35 @@
 
 {% block body %}
 
-<h3>{{group_name}}'s Meeting Place</h3>
+<!-- <section id = "group_name"> -->
+<h3 id = "group_name">{{group_name}}</h3>
+<h3>{{dict_of_users}}</h3>
 
-    <br>
-        <textarea rows = "30" cols = "80" name = "text">
+    <form id="get-text">
+        {% for user in dict_of_users %}
+        <textarea id ="text" rows = "30" cols = "80" name = "text">
+            {{dict_of_users[user]}}
         </textarea>
-    <br>
+        {% endfor %}
+    </form>
 
-<h3>Members</h3>
+    <section id="select-writer">
+        <h3>Select a writer to review</h3>
+  
+        <form id="get-writer">
+          <select id="writer-id" name="writer_id">
+            <option value="">Choose a writer</option>
+            {% for user in lst_of_users_by_group %}
+              <option value="{{ user.first_name + " " + user.last_name }}">{{ user.first_name + " " + user.last_name }}</option>
+            {% endfor %}
+          </select>
+          <p><input type="hidden" value="{{ group_name }}" name="group_name" required></p>
+        </form>
+      </section>   
+
+<!-- </section> -->
+
+<!-- <h3>Members</h3>
     <ul>
         {% for user in lst_of_users_by_group %}
         <li>
@@ -18,8 +39,25 @@
         </li>
         {% endfor %}
 
-    </ul>
+    </ul> -->
 
+
+    <!-- <section id="select-writer">
+        <h3>Select a writer to review</h3>
+  
+        <form id="get-writer">
+          <label for="writer-id">
+          </label>
+          <select id="writer-id" name="writer_id">
+            <option value="">Choose a writer</option>
+            {% for user in lst_of_users_by_group %}
+              <option value="{{ user.first_name + " " + user.last_name }}">{{ user.first_name + " " + user.last_name }}</option>
+            {% endfor %}
+          </select>
+          <input type="submit" value="review work">
+          <p><input type="hidden" value="{{ group_name }}" name="group_name" required></p>
+        </form>
+      </section>     -->
 
 
 

@@ -21,6 +21,15 @@ def get_user_by_id(user_id):
     return user
 
 
+def get_user_by_name(user_name):
+    """Get a user by id"""
+    name = user_name.split()
+    first_name = name[0]
+    last_name = name[1]
+    user = User.query.filter(User.first_name == first_name, User.last_name == last_name).first()
+    return user
+
+
 def get_user_by_email(email):
     """Get a user by email"""
 
@@ -148,11 +157,14 @@ def get_text_for_meeting_page(group_id):
 
     list_of_projects = db.session.query(Project).filter(Project.group_id == group_id).all()
     
+    final_result = {}
+    
     for project in list_of_projects:
-        final_result = {}
         if project.public == True:
             submission = db.session.query(Submission).filter(Submission.project_id == project.project_id).order_by(Submission.submission_id.desc()).first()
-            final_result[submission.user_id] = submission.text
+            user = get_user_by_id(submission.user_id)
+            name = user.first_name + ' ' + user.last_name
+            final_result[name] = submission.text
     return final_result
 
 

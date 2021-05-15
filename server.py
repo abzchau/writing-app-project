@@ -144,7 +144,10 @@ def meeting_page():
     group_id = crud.get_group_id_by_name(group_name)
     group = crud.get_group_by_id(group_id)
     lst_of_users_by_group = group.users
-    return render_template('/meeting_page.html', group_name=group_name, lst_of_users_by_group=lst_of_users_by_group)
+
+    #This section is to retrieve the text
+    dict_of_users = crud.get_text_for_meeting_page(group_id)
+    return render_template('/meeting_page.html', group_name=group_name, lst_of_users_by_group=lst_of_users_by_group, dict_of_users=dict_of_users)
 
 
 @app.route('/project/<project_name>')
@@ -198,6 +201,18 @@ def submit_project__on_project_page():
     crud.change_project_visibility(project_name)
     return render_template('project_page.html', project_name=project_name) 
 
+
+@app.route('/api/writer/<name>')
+def get_writer(name):
+    print('Does this run...')
+    dict_of_users = crud.get_text_for_meeting_page(2)
+    user = crud.get_user_by_name(name)
+    full_name= user.first_name + " " + user.last_name
+    print(full_name)
+    if full_name in dict_of_users:
+        return dict_of_users.get(full_name)
+    else:
+        return "user did not submit a project"
 
 @app.route('/about')
 def about_the_app():
