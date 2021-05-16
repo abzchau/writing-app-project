@@ -178,60 +178,12 @@ def get_text_for_meeting_page(group_id):
     return final_result
 
 
-
-    
-# def get_submission_by_project_id(project_id):
-#     """Get a submission by project id"""
-
-#     submission = Submission.query.filter_by(project_id=project_id).first()
-#     return submission.text
-
-
-
-# def save_project(project_id, submission_id, user_id, text):
-
-#     project = Project.query.get(project_id)
-#     project.user_id = user_id
-#     project.text = text
-
-
-
-# def create_submission(meeting_time):
-#     """Create and return a submission"""
-
-#     submission = Submission(meeting_time=meeting_time)
-
-#     db.session.add(submission)
-#     db.session.commit()
-
-#     return submission
-
-
-# def create_feedback(text):
-#     """Create and return feedback on a submission"""
-
-#     feedback = Feedback(text=text)
-
-#     db.session.add(feedback)
-#     db.session.commit()
-
-#     return feedback
-
-
-# def get_all_users_of_a_group(group_id):
-#     """Get all users of a group"""
-
-#     users_by_group = UserGroup.query.filter_by(group_id=group_id).all()
-#     return users_by_group
-
-
-# def get_get_group_by_user(user_id):
-#     """Get all groups by user"""
-
-#     group_by_user = UserGroup.query.filter_by(group_id=group_id).all()
-#     return group_by_user
-
-
+def create_feedback(user_id, project_name, text):
+    project = get_project_by_name(project_name)
+    submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
+    feedback = Feedback(user_id=project.user_id, submission_id=submission.submission_id, text=text)
+    db.session.add(feedback)
+    db.session.commit()
 
 if __name__=='__main__':
     from server import app

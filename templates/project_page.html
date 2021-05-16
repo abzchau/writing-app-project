@@ -4,20 +4,36 @@
 
 <h1>{{project_name}}</h1>
 
-    <form action = "/project_page" method = "POST">
-        <br>
-            <textarea rows = "30" cols = "80" name = "text">
-                {{show_text}}
-            </textarea>
-        <br>
-        <input type="submit" value="Save Project"/>
-        <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-    </form>
+<form action = "/project_page" method = "POST">
+    <br>
+        <textarea rows = "30" cols = "80" name = "text">
+            {{show_text}}
+        </textarea>
+    <br>
+    <input type="submit" value="Save Project"/>
+    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+</form>
 
-    <form action = "/submit_project" method = "POST">
+<form action = "/submit_project" method = "POST">
 
-        <input type="submit" value="Submit Project"/>
-        <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-    </form>
+    <input type="submit" value="Submit Project"/>
+    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+</form>
+
+
+<button id="myBtn"> Get Feedback</button>
+
+<div id="myModal" class= "modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>What specific feedback do you want for your project?</p>
+        <div class= "modal body"></div>
+            <form action = "/feedback" id = "modal" method="POST">
+                <textarea rows = "30" cols = "80" name = "text"></textarea>
+                <input type="submit" value="Get Feedback"/>
+                <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+            </form>
+    </div>
+</div>
 
 {% endblock %}

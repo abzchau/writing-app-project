@@ -1,5 +1,7 @@
 console.log('Belsize Park');
 
+//Gets User Name And Display User Text
+
 let form = document.querySelector('#writer-id');
 
 function handleResponse(res) {
@@ -16,52 +18,3 @@ function alertFuction(txt) {
 
 form.addEventListener('click', alertFuction);
 
-
-// const form = document.querySelector('#get-writer');
-
-// function handleResponse(res) {
-//   document.querySelector('#get-text').innerHTML = res.fname;
-// }
-
-// function alertFuction(txt) {
-//   txt.preventDefault();
-//   let name = document.getElementById('writer-id').value;
-    //  const groupName = document.querySelector('#group_name').innerHTML
-//   url = `/api/writer/${groupName}/${name}`;
-//   $.get(url, handleResponse);
-// }
-
-// form.addEventListener('submit', alertFuction);
-
-// function handleResponse(res) {
-//     document.querySelector('#get-text').innerHTML = 'boo'
-// }
-
-// function callHandleResponse(txt) {
-//     alert('dodo')
-//     // txt.preventDefault();
-//     // let name = document.getElementById('writer-id').value;
-//     // const groupName = document.querySelector('#group_name').innerHTML 
-//     // url = `/api/writer/${groupName}/${name}`;
-//     // $.get(url, handleResponse);
-// }
-
-// form.addEventListener('click', callHandleResponse);
-
-// const groupName = document.querySelector('#group_name').innerHTML 
-
-// const form = document.querySelector('#get-writer');
-
-// function handleResponse(res) {
-//   document.querySelector('#get-text').innerHTML = res.fname;
-// }
-
-// function alertFuction(txt) {
-//   txt.preventDefault();
-//   let name = document.getElementById('writer-id').value;
-    //  const groupName = document.querySelector('#group_name').innerHTML
-//   url = `/api/writer/${groupName}/${name}`;
-//   $.get(url, handleResponse);
-// }
-
-// form.addEventListener('submit', alertFuction);

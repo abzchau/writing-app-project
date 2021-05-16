@@ -187,17 +187,6 @@ def post_project():
 
 
 
-# @app.route('/project_page', methods=["GET"])
-# def post_project_page():
-#     """View Project Page BY Clicking Edit Project Button"""
-
-#     #Returns Text From Submission
-#     project = crud.get_project_by_name(project_name)
-#     show_text = crud.get_text_for_project_page(project.project_id)
-
-#     return render_template('project_page.html', project_name=project_name, show_text=show_text)
-
-
 @app.route('/project_page', methods=["POST"])
 def post_project_page():
     """View Project Page BY Clicking Edit Project Button"""
@@ -238,6 +227,13 @@ def get_writer(group, name):
     else:
         return "user did not submit a project"
 
+@app.route('/feedback', methods=["POST"])
+def get_feedback():
+    user_id = session["user_id"]
+    project_name = request.form.get("project_name")
+    text = request.form.get("text")
+    crud.create_feedback(user_id, project_name, text)
+    return get_text_for_project_page(project_name)
 
 @app.route('/about')
 def about_the_app():
