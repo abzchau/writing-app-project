@@ -233,10 +233,11 @@ def get_writer(group, name):
 
 
 @app.route('/api/<group>/<name>/feedback')
-def give_me_feedback(group, name):
+def solicit_feedback(group, name):
+    """Solicit Feedback On Meeting Page"""
 
     group_id = crud.get_group_id_by_name(group)
-    dict_project_feedback = crud.give_me_feedback_for_meeting_page(group_id)
+    dict_project_feedback = crud.solicit_feedback_for_meeting_page(group_id)
 
     user = crud.get_user_by_name(name)
     full_name= user.first_name + " " + user.last_name

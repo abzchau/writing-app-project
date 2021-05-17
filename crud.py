@@ -195,7 +195,7 @@ def create_project_feedback(project_name, text):
     db.session.commit()
 
 
-def give_me_feedback_for_meeting_page(group_id):
+def solicit_feedback_for_meeting_page(group_id):
     """Get Project Feedback From Submission By Group ID For The Meeting Page"""
     
     list_of_projects = db.session.query(Project).filter(Project.group_id == group_id).all()
@@ -211,8 +211,9 @@ def give_me_feedback_for_meeting_page(group_id):
     return final_result
 
 
-# def create_feedback(user_id, project_name, text):
-#     """Creates Feedback For A Project"""
+
+# def provide_feedback(user_id, project_name, text):
+#     """Provide Feedback For A Project On The Meeting Page"""
 
 #     project = get_project_by_name(project_name)
 #     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
