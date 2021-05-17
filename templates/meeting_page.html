@@ -2,7 +2,6 @@
 
 {% block body %}
 
-<!-- <section id = "group_name"> -->
 <h3 id = "group_name">{{group_name}}</h3>
 
 <section id="select-writer">
@@ -27,11 +26,10 @@
 
  <div>
   <h3> Soliciting Feedback On:</h3>
-    <form id="get-feedback">
-      <p><input type="hidden" value="{{group_name}}" name="group_name" required> </p>
-    </form>
-      <form id="give_feedback">
-        <textarea id ="feedback" rows = "15" cols = "40" name = "feedback">
+
+      <form id="solicit_feedback">
+        <p><input type="hidden" value="{{group_name}}" name="group_name" required> </p>
+        <textarea id ="solicit" rows = "15" cols = "40" name = "solicit-feedback">
         </textarea>
       </form>
   </div>

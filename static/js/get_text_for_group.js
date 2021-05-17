@@ -18,10 +18,10 @@ function getText(txt) {
 
 
 
-//For Feedback
+//Solicit Feedback
 
 function handleFeedbackResponse(res_feedback) {
-  document.querySelector('#feedback').innerHTML = res_feedback;
+  document.querySelector('#solicit').innerHTML = res_feedback;
 }
 
 function getFeedback(feedback_txt) {
@@ -37,5 +37,5 @@ form.addEventListener('click', getFeedback);
 form.addEventListener('click', getText);
 
 
-//Gets Project Feedback and Display Feedback Wanted By The Project Owner
+
 

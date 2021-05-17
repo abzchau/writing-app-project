@@ -246,23 +246,6 @@ def give_me_feedback(group, name):
         return "user did not submit a project"
 
 
-# @app.route('/feedback', methods=["POST"])
-# def request_feedback_on_project_page():
-#     """Creates A Request For Feedback For a Submission"""
-
-#     user_id = session["user_id"]
-#     project_name = request.form.get("project_name")
-#     text = request.form.get("text")
-#     crud.create_feedback(user_id, project_name, text)
-#     return get_text_for_project_page(project_name)
-
-
-# @app.route('/<group>/feedback')
-# def get_feedback_for_group_page(feedback):
-#     """Returns Feedback For Group Page"""
-
-#     return crud.get_feedback_for_group_page(group)
-
 
 @app.route('/about')
 def about_the_app():
