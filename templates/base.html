@@ -10,8 +10,6 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
         <link rel="icon" href="data:,">
-        <link rel="stylesheet" href="static/css/homepage.css">
-        
         {% block head %}{% endblock %}
     </head>
 
@@ -27,7 +25,8 @@
         {% endif %}
       {% endwith %}
       {% block body %}{% endblock %}
-      <script src="/static/js/writing_app.js"></script>
+      <script src="/static/js/get_text_for_group.js"></script>
+      <script src="/static/js/get_feedback_for_group.js"></script>
       <script src="/static/js/modal.js"></script>
     </body>    
 </html>

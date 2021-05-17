@@ -8,7 +8,7 @@ function handleResponse(res) {
   document.querySelector('#get-text').innerHTML = res;
 }
 
-function alertFuction(txt) {
+function alertFunction(txt) {
   let name = document.getElementById('writer-id').value;
   const groupName = document.querySelector('#group_name').innerHTML 
   url = `/api/${groupName}/${name}`;
@@ -16,5 +16,5 @@ function alertFuction(txt) {
   $.get(url, handleResponse);
 }
 
-form.addEventListener('click', alertFuction);
+form.addEventListener('click', alertFunction);
 

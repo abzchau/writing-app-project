@@ -211,13 +211,17 @@ def submit_project__on_project_page():
     """Submit a Project to the Group"""
 
     project_name = request.form.get("project_name")
+    print('bah', project_name)
+    text = request.form.get("text")
     crud.change_project_visibility(project_name)
+    crud.create_project_feedback(project_name, text)
     return get_text_for_project_page(project_name)
 
 
 @app.route('/api/<group>/<name>')
 def get_writer(group, name):
     """Returns Text For Given User"""
+
     group_id = crud.get_group_id_by_name(group)
     dict_of_users = crud.get_text_for_meeting_page(group_id)
     user = crud.get_user_by_name(name)
@@ -227,13 +231,24 @@ def get_writer(group, name):
     else:
         return "user did not submit a project"
 
-@app.route('/feedback', methods=["POST"])
-def get_feedback():
-    user_id = session["user_id"]
-    project_name = request.form.get("project_name")
-    text = request.form.get("text")
-    crud.create_feedback(user_id, project_name, text)
-    return get_text_for_project_page(project_name)
+
+# @app.route('/feedback', methods=["POST"])
+# def request_feedback_on_project_page():
+#     """Creates A Request For Feedback For a Submission"""
+
+#     user_id = session["user_id"]
+#     project_name = request.form.get("project_name")
+#     text = request.form.get("text")
+#     crud.create_feedback(user_id, project_name, text)
+#     return get_text_for_project_page(project_name)
+
+
+# @app.route('/<group>/feedback')
+# def get_feedback_for_group_page(feedback):
+#     """Returns Feedback For Group Page"""
+
+#     return crud.get_feedback_for_group_page(group)
+
 
 @app.route('/about')
 def about_the_app():
