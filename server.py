@@ -232,6 +232,20 @@ def get_writer(group, name):
         return "user did not submit a project"
 
 
+@app.route('/api/<group>/<name>/feedback')
+def give_me_feedback(group, name):
+
+    group_id = crud.get_group_id_by_name(group)
+    dict_project_feedback = crud.give_me_feedback_for_meeting_page(group_id)
+
+    user = crud.get_user_by_name(name)
+    full_name= user.first_name + " " + user.last_name
+    if full_name in dict_project_feedback:
+        return dict_project_feedback.get(full_name)
+    else:
+        return "user did not submit a project"
+
+
 # @app.route('/feedback', methods=["POST"])
 # def request_feedback_on_project_page():
 #     """Creates A Request For Feedback For a Submission"""

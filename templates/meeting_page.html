@@ -24,15 +24,17 @@
       </textarea>
   </form>
 
+
  <div>
-  <h3> Provide Feedback:</h3>
-    <form action="/provide_feedback" id="get-feedback" method="POST">
+  <h3> Soliciting Feedback On:</h3>
+    <form id="get-feedback">
       <p><input type="hidden" value="{{group_name}}" name="group_name" required> </p>
-      <textarea id ="feedback" rows = "15" cols = "40" name = "feedback">
-      </textarea>
-      <input type="submit" value="Give Feedback"/>
     </form>
-   </div>
+      <form id="give_feedback">
+        <textarea id ="feedback" rows = "15" cols = "40" name = "feedback">
+        </textarea>
+      </form>
+  </div>
 
 
 

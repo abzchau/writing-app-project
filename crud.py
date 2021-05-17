@@ -84,8 +84,8 @@ def get_project_by_name(project_name):
     return project
 
 
-def get_project_by_group_name(group_id):
-    """Get a Project by project name"""
+def get_project_by_group_id(group_id):
+    """Get a Project by Group ID"""
 
     project = Project.query.filter_by(group_id=group_id).first()
     
@@ -195,10 +195,24 @@ def create_project_feedback(project_name, text):
     db.session.commit()
 
 
+def give_me_feedback_for_meeting_page(group_id):
+    """Get Project Feedback From Submission By Group ID For The Meeting Page"""
+    
+    list_of_projects = db.session.query(Project).filter(Project.group_id == group_id).all()
+    
+    final_result = {}
+    
+    for project in list_of_projects:
+        if project.public == True:
+            submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
+            user = get_user_by_id(submission.user_id)
+            name = user.first_name + ' ' + user.last_name
+            final_result[name] = submission.project_feedback
+    return final_result
 
 
 # def create_feedback(user_id, project_name, text):
-#     """Creates Feedback On Project Page"""
+#     """Creates Feedback For A Project"""
 
 #     project = get_project_by_name(project_name)
 #     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
@@ -215,6 +229,15 @@ def create_project_feedback(project_name, text):
 #     submission = db.session.query(Submission).filter(Submission.project_id == project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
 #     feedback = Feedback.query.filter(Feedback.submission_id == submission.submission_id).first() 
 #     return feedback.text
+
+# def get_project_feedback(group_id):
+#     """Get Project Feedback"""
+
+#     project = get_project_by_group_id(group_id)
+#     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
+#     return submission.project_feedback
+
+
 
 if __name__=='__main__':
     from server import app
