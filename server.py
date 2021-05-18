@@ -202,8 +202,9 @@ def post_project_page():
 def get_text_for_project_page(project_name):
     project = crud.get_project_by_name(project_name)
     show_text = crud.get_text_for_project_page(project.project_id)
+    dict_of_reviewers = crud.get_reviewer_feedback(project_name)
 
-    return render_template('project_page.html', project_name=project_name, show_text=show_text)
+    return render_template('project_page.html', project_name=project_name, show_text=show_text, dict_of_reviewers=dict_of_reviewers)
 
 
 @app.route('/submit_project', methods=["POST"])
@@ -246,7 +247,15 @@ def solicit_feedback(group, name):
     else:
         return "user did not submit a project"
 
-
+@app.route('/api/project/<project>/<name>')
+def get_reviewer(project, name):
+    """Returns Text For Reviewer's Feedback"""
+    
+    project_name = project
+    dict_of_reviewers = crud.get_reviewer_feedback(project_name)
+    if name in dict_of_reviewers:
+        return dict_of_reviewers.get(name)
+    
 
 @app.route('/about')
 def about_the_app():

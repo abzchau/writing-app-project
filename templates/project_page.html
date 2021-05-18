@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="static/css/homepage.css">
     
 </head>
-<h1>{{project_name}}</h1>
+<h3 id = "project_name">{{project_name}}</h3>
 
 <form action = "/project_page" method = "POST">
     <br>
@@ -26,16 +26,33 @@
             <p>What specific feedback do you want for your project?</p>
             <div class= "modal body"></div>
                 <form action = "/feedback" id = "modal" method="POST">
-                    <textarea rows = "30" cols = "80" name = "text"></textarea>
-                    <input type="submit" value="Get Feedback"/>
+                    <textarea rows = "30" placeholder="I want general feedback about the piece. Also tell me if you hate the protagonist." cols = "80" name = "text"></textarea>
+                    <input type="submit"  value="Get Feedback"/>
                     <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
                 </form>
         </div>
     </div>
     <button id="myBtn"> Submit Project</button>
-    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+    <p><input type="hidden" value="{{ project_name }}"  name="project_name" required></p>
 </form>
 
 
+<div>
+    <h3> Review feedback from:</h3>
+  
+        <form id="reviewer_feedback">
+            <select id="reviewer-id" name="reviewer_id">
+            <option value="">Choose a reviewer</option>
+            {% for reviewer in dict_of_reviewers %}
+            <option value="{{ reviewer }}">{{reviewer}}</option>
+            {% endfor %}
+            </select>
+          <p><input type="hidden" value="{{project_name}}" name="project_name" required> </p>
+          <textarea id ="review" rows = "15" cols = "40" name = "review-feedback">
+          </textarea>
+        </form>
+</div>
+
+<script src="/static/js/get_reviewer_feedback.js"></script>
 <script src="/static/js/modal.js"></script>
 {% endblock %}

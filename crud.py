@@ -212,17 +212,32 @@ def solicit_feedback_for_meeting_page(group_id):
 
 
 
-# def provide_feedback(user_id, project_name, text):
-#     """Provide Feedback For A Project On The Meeting Page"""
+def provide_feedback(user_id, project_name, text):
+    """Provide Feedback For A Project On The Meeting Page; User_ID is the person providing feedback (the reviewer), not the one receiving it."""
 
-#     project = get_project_by_name(project_name)
-#     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
-#     if submission:
-#         feedback = Feedback(user_id=project.user_id, submission_id=submission.submission_id, text=text)
-#         db.session.add(feedback)
-#         db.session.commit()
-#     else:
-#         pass
+    project = get_project_by_name(project_name)
+    submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
+    if submission:
+        feedback = Feedback(user_id=user_id, submission_id=submission.submission_id, text=text)
+        db.session.add(feedback)
+        db.session.commit()
+    else:
+        return "Sorry, we couldn't find that project."
+
+
+def get_reviewer_feedback(project_name):
+
+    project = get_project_by_name(project_name)
+    submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
+    list_of_reviewer_feedback = db.session.query(Feedback).filter(Feedback.submission_id == submission.submission_id).all()
+    feedback = Feedback.query.filter(Feedback.submission_id == submission.submission_id).all()
+    final_result = {}
+    for reviewer_feedback in list_of_reviewer_feedback:
+            user = get_user_by_id(reviewer_feedback.user_id)
+            name = user.first_name + ' ' + user.last_name
+            final_result[name] = reviewer_feedback.text
+    return final_result
+        
 
 # def get_feedback_for_group_page(group_name):
 #     """Returns Feedback Text For The Meeting Page"""
