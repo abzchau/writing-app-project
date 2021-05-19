@@ -125,22 +125,29 @@ def add_user_to_group():
     """Add another user to a group"""
     
     email = request.form.get("email")
-    user = crud.get_user_by_email(email)
+    remove_email = request.form.get("remove_user_email")
+    add_user = request.form.get("add_user")
+    remove_user = request.form.get("remove_user")
     group_name = request.form.get("group_name")
+    
+    
+    group_id = crud.get_group_id_by_name(group_name)
+    group = crud.get_group_by_id(group_id)
 
-    if not user:
-        flash("The user does not exist. Please try again, or have the user sign up.")
-        return redirect(f"/group/{group_name}")
-    else:
-        email = request.form.get("email")
+    if add_user:
         user = crud.get_user_by_email(email)
-        group_id = crud.get_group_id_by_name(group_name)
-        group = crud.get_group_by_id(group_id)
         crud.create_association(group, user)
-        lst_of_groups_by_user_id = crud.get_all_groups_by_user(user.user_id)
-        lst_of_users_by_group = group.users
-            
-        return render_template("/group.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id, lst_of_users_by_group=lst_of_users_by_group)
+    elif remove_user:
+        user = crud.get_user_by_email(remove_email)
+        crud.delete_association(user.user_id, group_id)
+        flash(f'{remove_email} has been removed from the {group_name}.')
+    else:
+        flash("The user does not exist. Please try again, or have the user sign up.")
+        return redirect(f"/group/{group_name}")    
+    
+    lst_of_groups_by_user_id = crud.get_all_groups_by_user(user.user_id)
+    lst_of_users_by_group = group.users        
+    return render_template("/group.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id, lst_of_users_by_group=lst_of_users_by_group)
 
 
 @app.route('/meeting_page', methods=["GET", "POST"])

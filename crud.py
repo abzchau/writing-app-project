@@ -69,6 +69,24 @@ def get_group_name_by_project_name(project_name):
     return group.group_name
 
 
+
+def delete_association(user_id, group_id):
+    """Deletes An Association Between A User And A Group"""
+    
+    user = get_user_by_id(user_id)
+ 
+    final_group = []
+
+    for group in user.groups:
+        if group.group_id == group_id:
+            final_group.append(group)
+            user.groups.remove(final_group[0])
+            db.session.add(user)
+            db.session.commit()
+
+    
+
+
 def create_project(project_name, user_id, genre=""):
     """Create and return a new project"""
 

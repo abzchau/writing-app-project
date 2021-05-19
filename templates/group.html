@@ -9,8 +9,21 @@
     <label for="email"><b>Enter an email to invite someone to this group:</b></label>
     <p><input type="text" placeholder="email" name="email" required></p>
     <p><input type="hidden" value="{{ group_name }}" name="group_name" required></p>
+    <p><input type="hidden" value="add_user" name="add_user" required></p>
     <div>
         <button type="submit">Add member to the group</button>
+    </div>
+</form>
+
+
+<br>
+<form action="/group" method="POST">
+    <label for="email"><b>Enter an email to remove someone from this group:</b></label>
+    <p><input type="text" placeholder="email" name="remove_user_email" required></p>
+    <p><input type="hidden" value="{{ group_name }}" name="group_name" required></p>
+    <p><input type="hidden"  value="remove_user" name="remove_user" required></p>
+    <div>
+        <button type="submit">Remove member from the group</button>
     </div>
 </form>
 
