@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from model import db, User, Group, Project, Submission, Feedback, connect_to_db
+from spellchecker import SpellChecker
 
 def create_user(first_name, last_name, email, password, favorite_writer="", favorite_animal=""):
     """Create and return a new user"""
@@ -239,19 +240,6 @@ def get_reviewer_feedback(project_name):
     return final_result
         
 
-# def get_feedback_for_group_page(group_name):
-#     """Returns Feedback Text For The Meeting Page"""
-#     project = get_project_by_group_name(group_name)
-#     submission = db.session.query(Submission).filter(Submission.project_id == project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
-#     feedback = Feedback.query.filter(Feedback.submission_id == submission.submission_id).first() 
-#     return feedback.text
-
-# def get_project_feedback(group_id):
-#     """Get Project Feedback"""
-
-#     project = get_project_by_group_id(group_id)
-#     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
-#     return submission.project_feedback
 
 
 

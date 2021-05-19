@@ -19,6 +19,12 @@
 </form>
 
 
+    <button id="mySpellBtn"> Spell Check Project</button>
+    <p id="spellcheck"></p>  
+    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+
+
+
 <form action = "/submit_project" method = "POST">
     <div id="myModal" class= "modal">
         <div class="modal-content">
@@ -30,8 +36,8 @@
                     <input type="submit"  value="Get Feedback"/>
                     <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
                 </form>
+            </div>
         </div>
-    </div>
     <button id="myBtn"> Submit Project</button>
     <p><input type="hidden" value="{{ project_name }}"  name="project_name" required></p>
 </form>
@@ -55,4 +61,5 @@
 
 <script src="/static/js/get_reviewer_feedback.js"></script>
 <script src="/static/js/modal.js"></script>
+<script src="/static/js/spellcheck.js"></script>
 {% endblock %}

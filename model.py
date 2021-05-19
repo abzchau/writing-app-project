@@ -72,25 +72,6 @@ class Project(db.Model):
         return f'<Project project_id={self.project_id} project_name={self.project_name} user_id={self.user_id} group_id={self.group_id} genre={self.genre}>'
 
 
-
-
-
-# class UserGroup(db.Model):
-#     """A user-group association."""
-
-#     __tablename__= 'users_groups'
-
-#     user_group_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-#     group_id = db.Column(db.Integer, db.ForeignKey('groups.group_id'))
-
-#     user = db.relationship('User', back_populates='user_group')
-#     group = db.relationship('Group', back_populates='user_group')
-
-#     def __repr__(self):
-#         return f'<UserGroup user_id={self.user_id} group_id={self.group_id} user_id={self.user_id}>'
-    
-
 class Submission(db.Model):
     """A submission."""
 
