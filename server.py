@@ -287,12 +287,16 @@ def get_text_for_spellchecking(text):
     for word in misspelled:
         misspelled_word_list.append(spell.correction(word))
     return misspelled_word_list
-
     
 
 @app.route('/about')
 def about_the_app():
     return "About the app"
+
+
+@app.route('/deleteme')
+def delete():
+    return render_template('deleteme.html')
 
 
 """"Flask method which runs the app"""
