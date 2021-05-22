@@ -43,7 +43,7 @@ def login():
             session["user_email"] = user.email
             session["user_id"] = user.user_id
             flash(f"Welcome back, {user.email}!")
-            return redirect(url_for("get_main"))
+            return redirect(url_for("view_main"))
 
         
 
