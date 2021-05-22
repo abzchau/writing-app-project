@@ -2,7 +2,6 @@
 
 from datetime import datetime
 from model import db, User, Group, Project, Submission, Feedback, connect_to_db
-from spellchecker import SpellChecker
 
 def create_user(first_name, last_name, email, password, favorite_writer="", favorite_animal=""):
     """Create and return a new user"""

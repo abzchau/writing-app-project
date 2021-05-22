@@ -27,7 +27,6 @@ class User(db.Model):
 
     groups = db.relationship('Group', secondary=user_group_association, back_populates='users')
     projects = db.relationship('Project', back_populates='user')
-    # user_group = db.relationship('UserGroup', back_populates='user')
     submission = db.relationship('Submission', back_populates='user')
     feedback = db.relationship('Feedback', back_populates='user')
 
@@ -41,11 +40,10 @@ class Group(db.Model):
     __tablename__= 'groups'
 
     group_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    group_name = db.Column(db.String)
+    group_name = db.Column(db.String, unique=True)
     
     users = db.relationship('User', secondary=user_group_association, back_populates="groups")
     projects = db.relationship('Project', back_populates='group')
-    # user_group = db.relationship('UserGroup', back_populates='group')
 
     def __repr__(self):
         return f'<Group group_id={self.group_id} group_name={self.group_name}>'
@@ -57,7 +55,7 @@ class Project(db.Model):
     __tablename__= 'projects'
 
     project_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    project_name = db.Column(db.String)
+    project_name = db.Column(db.String, unique=True)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.group_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     genre = db.Column(db.String, nullable=True)
@@ -67,6 +65,8 @@ class Project(db.Model):
     user = db.relationship('User', back_populates='projects')
     group = db.relationship('Group', back_populates='projects')
     submission = db.relationship('Submission', back_populates='projects')
+    character = db.relationship('Character', back_populates='projects')
+    setting = db.relationship('Setting', back_populates='projects')
 
     def __repr__(self):
         return f'<Project project_id={self.project_id} project_name={self.project_name} user_id={self.user_id} group_id={self.group_id} genre={self.genre}>'
@@ -107,6 +107,38 @@ class Feedback(db.Model):
 
     def __repr__(self):
         return f'<Feedback feedback_id={self.feedback_id} user_id={self.user_id} submission_id={self.submission_id} text={self.text}>'
+
+
+class Character(db.Model):
+    """Character"""
+
+    __tablename__= 'character'
+
+    character_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
+    name = db.Column(db.String)
+    role = db.Column(db.String)
+    desc = db.Column(db.String)
+
+    projects = db.relationship('Project', back_populates='character')
+
+    def __repr__(self):
+        return f'<Character character_id={self.character_id} project_id={self.project_id} name={self.name_id} role={self.role} name={self.name_id} desc={self.desc}>'
+
+
+class Setting(db.Model):
+    """Setting"""
+
+    __tablename__= "setting"
+
+    setting_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
+    setting_url = db.Column(db.String)
+
+    projects = db.relationship('Project', back_populates='setting')
+
+    def __repr__(self):
+        return f'<Setting setting_id={self.setting_id} project_id={self.project_id} setting_url={self.setting_url}>'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///writing_app', echo=True):

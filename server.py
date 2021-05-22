@@ -5,7 +5,6 @@ from flask import Flask, render_template, request, redirect, session, flash, red
 from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
-from spellchecker import SpellChecker
 
 from flask import Flask
 
@@ -264,29 +263,6 @@ def get_reviewer(project, name):
     if name in dict_of_reviewers:
         return dict_of_reviewers.get(name)
 
-
-@app.route('/api/project/<project>/spellcheck')
-def spellcheck(project):
-    print('whendid...')
-    project = crud.get_project_by_name(project)
-    text = crud.get_text_for_project_page(project.project_id)
-    misspelled_word_list = get_text_for_spellchecking(text)
-
-    return misspelled_word_list[0]
-
-
-def get_text_for_spellchecking(text):
-    """Return A List Of Misspelled Words"""
-
-    spell = SpellChecker()
-
-    list_text = text.split()
-    misspelled = spell.unknown(list_text)
-    misspelled_word_list = []
-
-    for word in misspelled:
-        misspelled_word_list.append(spell.correction(word))
-    return misspelled_word_list
     
 
 @app.route('/about')
