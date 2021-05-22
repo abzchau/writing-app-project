@@ -37,6 +37,11 @@ def get_user_by_email(email):
     return user
 
 
+def does_user_email_exist(email):
+
+    return db.session.query(User).filter_by(email=email).first() is not None
+
+
 def create_group(group_name):
     """Create a group"""
 
@@ -256,15 +261,19 @@ def get_reviewer_feedback(project_name):
 
     project = get_project_by_name(project_name)
     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
-    list_of_reviewer_feedback = db.session.query(Feedback).filter(Feedback.submission_id == submission.submission_id).all()
-    feedback = Feedback.query.filter(Feedback.submission_id == submission.submission_id).all()
-    final_result = {}
-    for reviewer_feedback in list_of_reviewer_feedback:
+    
+    
+    if submission:
+        list_of_reviewer_feedback = db.session.query(Feedback).filter(Feedback.submission_id == submission.submission_id).all()
+        feedback = Feedback.query.filter(Feedback.submission_id == submission.submission_id).all()
+        final_result = {}
+        for reviewer_feedback in list_of_reviewer_feedback:
             user = get_user_by_id(reviewer_feedback.user_id)
             name = user.first_name + ' ' + user.last_name
             final_result[name] = reviewer_feedback.text
-    return final_result
-        
+        return final_result
+    else:
+        return ""    
 
 
 

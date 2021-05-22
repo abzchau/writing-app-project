@@ -45,8 +45,7 @@ def login():
             flash(f"Welcome back, {user.email}!")
             return redirect(url_for("view_main"))
 
-        
-
+    
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
@@ -142,15 +141,27 @@ def add_user_to_group():
     group = crud.get_group_by_id(group_id)
 
     if add_user:
-        user = crud.get_user_by_email(email)
-        crud.create_association(group, user)
+        print(add_user, 'crap')
+        if crud.does_user_email_exist(email):
+            print('crap', crud.does_user_email_exist(add_user))
+            user = crud.get_user_by_email(email)
+            crud.create_association(group, user)
+        else:
+            flash("The user does not exist. Please try again, or have the user sign up.")
+            return redirect(f"/group/{group_name}") 
     elif remove_user:
-        user = crud.get_user_by_email(remove_email)
-        crud.delete_association(user.user_id, group_id)
-        flash(f'{remove_email} has been removed from the {group_name}.')
-    else:
-        flash("The user does not exist. Please try again, or have the user sign up.")
-        return redirect(f"/group/{group_name}")    
+        print(remove_user, 'crap')
+        if crud.does_user_email_exist(remove_email):
+            print('crap', crud.does_user_email_exist(remove_user))
+            user = crud.get_user_by_email(remove_email)
+            crud.delete_association(user.user_id, group_id)
+            flash(f'{remove_email} has been removed from the {group_name}.')
+        else:
+            flash("The user does not exist. Please try again, or have the user sign up.")
+            return redirect(f"/group/{group_name}") 
+    # else:
+    #     flash("The user does not exist. Please try again, or have the user sign up.")
+    #     return redirect(f"/group/{group_name}")    
     
     lst_of_groups_by_user_id = crud.get_all_groups_by_user(user.user_id)
     lst_of_users_by_group = group.users        
@@ -208,7 +219,9 @@ def post_project_page():
 
     #Creates A Submission
     project_name = request.form.get("project_name")
+    print(project_name)
     text = request.form.get("text")
+    print(text)
     crud.create_submission(project_name, text)
     return get_text_for_project_page(project_name)
 
@@ -216,6 +229,7 @@ def post_project_page():
 
 def get_text_for_project_page(project_name):
     project = crud.get_project_by_name(project_name)
+    print("yoyoma", project)
     show_text = crud.get_text_for_project_page(project.project_id)
     dict_of_reviewers = crud.get_reviewer_feedback(project_name)
 
