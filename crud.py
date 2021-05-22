@@ -68,6 +68,10 @@ def get_group_name_by_project_name(project_name):
     return group.group_name
 
 
+def does_group_name_exist(group_name):
+
+    return db.session.query(Group).filter_by(group_name=group_name).first() is not None
+
 
 def delete_association(user_id, group_id):
     """Deletes An Association Between A User And A Group"""
@@ -100,6 +104,11 @@ def get_project_by_name(project_name):
 
     project = Project.query.filter_by(project_name=project_name).first()
     return project
+
+
+def does_project_name_exist(project_name):
+
+    return db.session.query(Project).filter_by(project_name=project_name).first() is not None
 
 
 def get_project_by_group_id(group_id):

@@ -73,7 +73,7 @@ def signup():
 
 
 @app.route('/main', methods=["GET"])
-def get_main():
+def view_main():
         """View the main page"""
 
         if 'user_id' in session:
@@ -90,22 +90,30 @@ def post_main():
     """Create a group or project on the main page"""
     
     if "group_name" in request.form:
-        group_name = request.form.get("group_name")
-        group = crud.create_group(group_name)
-        session["group_id"] = group.group_id
-        user_id = session["user_id"]
-        user = crud.get_user_by_id(user_id)
-        crud.create_association(group, user)
-        flash('Group Created')
-        return redirect(f"/group/{group_name}")
+        if crud.does_group_name_exist(request.form.get("group_name")):
+            flash('A Group with that name already exists. Please choose another Group name.')
+            return view_main()
+        else:
+            group_name = request.form.get("group_name")
+            group = crud.create_group(group_name)
+            session["group_id"] = group.group_id
+            user_id = session["user_id"]
+            user = crud.get_user_by_id(user_id)
+            crud.create_association(group, user)
+            flash('Group Created')
+            return redirect(f"/group/{group_name}")
     
     if "project_name" in request.form:
-        user_id = session["user_id"]
-        project_name = request.form.get("project_name")
-        genre = request.form.get("genre")
-        project = crud.create_project(project_name, user_id, genre)
-        flash('Project Created')
-        return redirect(f"/project/{project_name}")
+        if crud.does_project_name_exist(request.form.get("project_name")):
+            flash('A Project with that name already exists. Please choose another Project name.')
+            return view_main()
+        else:    
+            user_id = session["user_id"]
+            project_name = request.form.get("project_name")
+            genre = request.form.get("genre")
+            project = crud.create_project(project_name, user_id, genre)
+            flash('Project Created')
+            return redirect(f"/project/{project_name}")
 
 
 @app.route('/group/<group_name>')
