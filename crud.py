@@ -192,7 +192,7 @@ def change_project_visibility(project_name):
 
 
 def get_text_for_project_page(project_id):
-    """Get Text From Submission By Project ID For The Meeting Page"""
+    """Get Text From Submission By Project ID For The Project Page"""
 
     submission = db.session.query(Submission).filter(Submission.project_id == project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
     
@@ -218,7 +218,7 @@ def get_text_for_meeting_page(group_id):
 
 
 def create_project_feedback(project_name, text):
-    """Updates Project Feedback On A Submission"""
+    """Updates Solicited Project Feedback On A Submission"""
 
     project = get_project_by_name(project_name)
     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
@@ -244,13 +244,14 @@ def solicit_feedback_for_meeting_page(group_id):
 
 
 
-def provide_feedback(user_id, project_name, text):
+def provide_feedback(user_id, group_name, feedback_text):
     """Provide Feedback For A Project On The Meeting Page; User_ID is the person providing feedback (the reviewer), not the one receiving it."""
 
-    project = get_project_by_name(project_name)
+    group_id = get_group_id_by_name(group_name)
+    project = get_project_by_group_id(group_id)
     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
     if submission:
-        feedback = Feedback(user_id=user_id, submission_id=submission.submission_id, text=text)
+        feedback = Feedback(user_id=user_id, submission_id=submission.submission_id, text=feedback_text)
         db.session.add(feedback)
         db.session.commit()
     else:

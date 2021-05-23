@@ -14,6 +14,7 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
+#HOMEPAGE / LOG IN / SIGN UP PAGES / About Us
 
 """The decorator tells Flask what URL should trigger our function. For example, when the homepage is opened in the browser, the output of this function will be rendered"""
 @app.route('/')
@@ -45,8 +46,7 @@ def login():
             flash(f"Welcome back, {user.email}!")
             return redirect(url_for("view_main"))
 
-    
-
+  
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     """Sign up a new user"""
@@ -70,6 +70,11 @@ def signup():
         return render_template('/login.html')
 
 
+@app.route('/about')
+def about_the_app():
+    return "About the app"
+
+#Main Page Where User Can View And Create Groups And Projects
 
 @app.route('/main', methods=["GET"])
 def view_main():
@@ -115,6 +120,8 @@ def post_main():
             return redirect(f"/project/{project_name}")
 
 
+#Group Page Where User Can Add Members And View Meeting Page 
+
 @app.route('/group/<group_name>')
 def get_group(group_name):
     "Redirects Here After Creating a Group"
@@ -128,7 +135,7 @@ def get_group(group_name):
 
 @app.route('/group', methods=["POST"])
 def add_user_to_group():
-    """Add another user to a group"""
+    """Add a user to a group"""
     
     email = request.form.get("email")
     remove_email = request.form.get("remove_user_email")
@@ -141,48 +148,78 @@ def add_user_to_group():
     group = crud.get_group_by_id(group_id)
 
     if add_user:
-        print(add_user, 'crap')
         if crud.does_user_email_exist(email):
-            print('crap', crud.does_user_email_exist(add_user))
             user = crud.get_user_by_email(email)
             crud.create_association(group, user)
         else:
             flash("The user does not exist. Please try again, or have the user sign up.")
             return redirect(f"/group/{group_name}") 
     elif remove_user:
-        print(remove_user, 'crap')
         if crud.does_user_email_exist(remove_email):
-            print('crap', crud.does_user_email_exist(remove_user))
             user = crud.get_user_by_email(remove_email)
             crud.delete_association(user.user_id, group_id)
             flash(f'{remove_email} has been removed from the {group_name}.')
         else:
             flash("The user does not exist. Please try again, or have the user sign up.")
             return redirect(f"/group/{group_name}") 
-    # else:
-    #     flash("The user does not exist. Please try again, or have the user sign up.")
-    #     return redirect(f"/group/{group_name}")    
     
     lst_of_groups_by_user_id = crud.get_all_groups_by_user(user.user_id)
     lst_of_users_by_group = group.users        
     return render_template("/group.html", group_name=group_name, lst_of_groups_by_user_id=lst_of_groups_by_user_id, lst_of_users_by_group=lst_of_users_by_group)
 
 
+
+#Meeting Page Where All Users of A Group Meets And Users Can View Feedback Wanted And Provide Feedback 
+
 @app.route('/meeting_page', methods=["GET", "POST"])
 def meeting_page():
-    """View the Group's Meeting Page"""
+    """View the Group's Meeting Page; Users Can Provide Feedback Which Will Be Viewable On The Project Page"""
 
     if 'user_id' in session:
-        print('yoyomomo', 'user_id')
+        user_id = session['user_id']
         group_name = request.form.get("group_name")
         group_id = crud.get_group_id_by_name(group_name)
         group = crud.get_group_by_id(group_id)
         lst_of_users_by_group = group.users
 
+        #This section gets the feedback from the form and creates a Feedback which will be viewable on the Project Page.
+        feedback_text = request.form.get("provide-feedback")
+        crud.provide_feedback(user_id, group_name, feedback_text)
+
         #This section is to retrieve the text
         dict_of_users = crud.get_text_for_meeting_page(group_id)
         return render_template('/meeting_page.html', group_name=group_name, lst_of_users_by_group=lst_of_users_by_group, dict_of_users=dict_of_users)
 
+
+@app.route('/api/<group>/<name>')
+def get_writer(group, name):
+    """Returns Text On Meeting Page For Given User"""
+
+    group_id = crud.get_group_id_by_name(group)
+    dict_of_users = crud.get_text_for_meeting_page(group_id)
+    user = crud.get_user_by_name(name)
+    full_name= user.first_name + " " + user.last_name
+    if full_name in dict_of_users:
+        return dict_of_users.get(full_name)
+    else:
+        return "user did not submit a project"
+
+@app.route('/api/<group>/<name>/feedback')
+def solicit_feedback(group, name):
+    """Solicit Feedback On Meeting Page; The User Enters Feedback Wanted On the Project Page"""
+
+    group_id = crud.get_group_id_by_name(group)
+    dict_project_feedback = crud.solicit_feedback_for_meeting_page(group_id)
+
+    user = crud.get_user_by_name(name)
+    full_name= user.first_name + " " + user.last_name
+    if full_name in dict_project_feedback:
+        return dict_project_feedback.get(full_name)
+    else:
+        return "user did not submit a project"
+
+
+#Project Page Where Users Can View And Create Projects And Associate Projects With Groups And Edit Projects
 
 @app.route('/project/<project_name>')
 def get_project(project_name):
@@ -219,77 +256,45 @@ def post_project_page():
 
     #Creates A Submission
     project_name = request.form.get("project_name")
-    print(project_name)
     text = request.form.get("text")
-    print(text)
     crud.create_submission(project_name, text)
     return get_text_for_project_page(project_name)
 
     #Returns Text From Submission
 
 def get_text_for_project_page(project_name):
+    """"""
+
     project = crud.get_project_by_name(project_name)
-    print("yoyoma", project)
     show_text = crud.get_text_for_project_page(project.project_id)
     dict_of_reviewers = crud.get_reviewer_feedback(project_name)
 
     return render_template('project_page.html', project_name=project_name, show_text=show_text, dict_of_reviewers=dict_of_reviewers)
 
 
+#Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project
+
 @app.route('/submit_project', methods=["POST"])
 def submit_project__on_project_page():
     """Submit a Project to the Group"""
 
     project_name = request.form.get("project_name")
-    print('bah', project_name)
     text = request.form.get("text")
     crud.change_project_visibility(project_name)
     crud.create_project_feedback(project_name, text)
     return get_text_for_project_page(project_name)
 
 
-@app.route('/api/<group>/<name>')
-def get_writer(group, name):
-    """Returns Text For Given User"""
-
-    group_id = crud.get_group_id_by_name(group)
-    dict_of_users = crud.get_text_for_meeting_page(group_id)
-    user = crud.get_user_by_name(name)
-    full_name= user.first_name + " " + user.last_name
-    if full_name in dict_of_users:
-        return dict_of_users.get(full_name)
-    else:
-        return "user did not submit a project"
-
-
-@app.route('/api/<group>/<name>/feedback')
-def solicit_feedback(group, name):
-    """Solicit Feedback On Meeting Page"""
-
-    group_id = crud.get_group_id_by_name(group)
-    dict_project_feedback = crud.solicit_feedback_for_meeting_page(group_id)
-
-    user = crud.get_user_by_name(name)
-    full_name= user.first_name + " " + user.last_name
-    if full_name in dict_project_feedback:
-        return dict_project_feedback.get(full_name)
-    else:
-        return "user did not submit a project"
-
 @app.route('/api/project/<project>/<name>')
 def get_reviewer(project, name):
-    """Returns Text For Reviewer's Feedback"""
+    """Returns Text For Reviewer's Feedback On Project Page"""
 
     project_name = project
     dict_of_reviewers = crud.get_reviewer_feedback(project_name)
     if name in dict_of_reviewers:
         return dict_of_reviewers.get(name)
 
-    
 
-@app.route('/about')
-def about_the_app():
-    return "About the app"
 
 
 @app.route('/deleteme')
