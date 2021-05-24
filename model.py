@@ -119,6 +119,11 @@ class Character(db.Model):
     name = db.Column(db.String)
     role = db.Column(db.String)
     desc = db.Column(db.String)
+    age = db.Column(db.Integer)
+    physical_appearance = db.Column(db.String)
+    motivation = db.Column(db.String)
+    fondest_memory = db.Column(db.String)
+    song = db.Column(db.String) 
 
     projects = db.relationship('Project', back_populates='character')
 
@@ -134,6 +139,8 @@ class Setting(db.Model):
     setting_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
     setting_url = db.Column(db.String)
+    name = db.Column(db.String)
+    desc = db.Column(db.String)
 
     projects = db.relationship('Project', back_populates='setting')
 
