@@ -271,6 +271,11 @@ def get_text_for_project_page(project_name):
 
     return render_template('project_page.html', project_name=project_name, show_text=show_text, dict_of_reviewers=dict_of_reviewers)
 
+@app.route('/create_character', methods=["POST"])
+def create_character():
+
+    project_name = request.form.get("project_name")
+    return get_text_for_project_page(project_name)
 
 #Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project
 

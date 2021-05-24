@@ -2,6 +2,9 @@
 
 {% block body %}
 
+<head>
+    <link rel="stylesheet" href="/static/css/character_modal.css">
+</head>
 
 <h1>{{project_name}}</h1>
 <h3>{{genre}}</h3>
@@ -32,7 +35,29 @@
     </form>
 </div>
 
+<form action = "/create_character" method = "POST">
+<div id="modalChar" class= "modalChar">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Create a character</p>
+        <div class= "modal body"></div>
+            <form action = "/project" id = "modal" method="POST">
+                <label for="character_name">Name:</label>
+                <input type="text" id="name" name ="name">
+                <label for="role"> Role:</label>
+                <input type="text" id="role" name="role">
+                <label for="desc">Description:</label>
+                <input type="text" id="desc" name="desc">
+                <!-- <textarea rows = "30" cols = "80" name = "character"></textarea> -->
+                <input type="submit"  value="character"/>
+                <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+            </form>
+        </div>
+    </div>
+<button id="myCharBtn"> Create Character</button>
+<p><input type="hidden" value="{{ project_name }}"  name="project_name" required></p>
+</form>
 
-
+<script src="/static/js/character_modal.js"></script>
 
 {% endblock %}
