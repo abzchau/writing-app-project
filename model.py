@@ -128,7 +128,7 @@ class Character(db.Model):
     projects = db.relationship('Project', back_populates='character')
 
     def __repr__(self):
-        return f'<Character character_id={self.character_id} project_id={self.project_id} name={self.name_id} role={self.role} name={self.name_id} desc={self.desc}>'
+        return f'<Character character_id={self.character_id} project_id={self.project_id} name={self.name} role={self.role} age={self.age} desc={self.desc}>'
 
 
 class Setting(db.Model):

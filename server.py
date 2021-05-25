@@ -275,6 +275,18 @@ def get_text_for_project_page(project_name):
 def create_character():
 
     project_name = request.form.get("project_name")
+
+    name = request.form.get("name")
+    role = request.form.get("role")
+    age = request.form.get("age")
+    physical_appearance = request.form.get("appearance")
+    motivation = request.form.get("motivation")
+    fondest_memory = request.form.get("memory")
+    song = request.form.get("song")
+    desc = request.form.get("desc")
+    character = crud.create_character(project_name, name, role, desc, age, physical_appearance, motivation, fondest_memory, song)
+
+
     return get_text_for_project_page(project_name)
 
 #Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project

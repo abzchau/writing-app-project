@@ -1,7 +1,7 @@
 """CRUD operations for the writing app"""
 
 from datetime import datetime
-from model import db, User, Group, Project, Submission, Feedback, connect_to_db
+from model import db, User, Group, Project, Submission, Feedback, Character, Setting, connect_to_db
 
 def create_user(first_name, last_name, email, password, favorite_writer="", favorite_animal=""):
     """Create and return a new user"""
@@ -276,8 +276,13 @@ def get_reviewer_feedback(project_name):
     else:
         return ""    
 
+def create_character(project_name, name, role, desc, age, physical_appearance, motivation, fondest_memory, song):
 
+    project = get_project_by_name(project_name)
+    character = Character(project_id=project.project_id, role=role, age=age, name=name, physical_appearance=physical_appearance, motivation=motivation, fondest_memory=fondest_memory, song=song, desc=desc)
 
+    db.session.add(character)
+    db.session.commit()
 
 if __name__=='__main__':
     from server import app
