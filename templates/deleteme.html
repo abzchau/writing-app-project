@@ -1,18 +1,20 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-<html>
-    <head>
+{% block body %}
 
 <body>
+<form class = "example" action="/deleteme" method="POST" >
+    <input type="text" placeholder="Search" name="search" id="search">
+    <input type="submit" value="search" id="mySearchBtn"></button>
     <div class="container">
         <div class = "card">
             <img src="" />
         </div>
     </div>
-
+</form>
 <p>peep</p>
 
 <script src="/static/js/delete.js"></script>
 
 </body>    
-</html>
+{% endblock %}

@@ -312,11 +312,17 @@ def get_reviewer(project, name):
         return dict_of_reviewers.get(name)
 
 
+@app.route('/deleteme', methods=["GET"])
+def view_delete():
+    result = request.form.get("search")
 
 
-@app.route('/deleteme')
-def delete():
-    return render_template('deleteme.html')
+    return render_template('deleteme.html', result=result)
+
+@app.route('/api/deleteme/<search>')
+def delete(search):
+
+    return search
 
 
 """"Flask method which runs the app"""
