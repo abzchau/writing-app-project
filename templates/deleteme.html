@@ -2,19 +2,32 @@
 
 {% block body %}
 
+<head>
+    <link rel="stylesheet" href="/static/css/photo.css">
+</head>
+
 <body>
-<form class = "example" action="/deleteme" method="POST" >
+<form class = "example">
     <input type="text" placeholder="Search" name="search" id="search">
-    <input type="submit" value="search" id="mySearchBtn"></button>
-    <div class="container">
-        <div class = "card">
-            <img src="" />
-        </div>
-    </div>
+    <input type="button" value="search" id="mySearchBtn"></button>
+    <div id="modalSearch" class="modalSearch">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Select a photo</p>
+            <div class= "modal body"></div>
+                <div class="container">
+                    <div class = "card">
+                        <img src="" />
+                    </div>
+                </div>
 </form>
+        </div>
+        
+    </div>
 <p>peep</p>
 
 <script src="/static/js/delete.js"></script>
+<script src="/static/js/photo_modal.js"></script>
 
 </body>    
 {% endblock %}
