@@ -1,24 +1,24 @@
-console.log("I'm a Modal, yo")
+console.log("I'm a Setting, yo")
 
-//Modal Behavior
+//Modal Behavior For Create Setting On Project Page
 
-const modal = document.getElementById("modalSearch");
+const modalPhoto = document.getElementById("modalSearch");
 
-const btn = document.getElementById("mySearchBtn");
+const btnPhoto = document.getElementById("mySearchBtn");
 
-const span = document.getElementsByClassName("close")[0];
+const spanPhoto = document.getElementsByClassName("close-photo")[0];
 
-btn.onclick = function(event) {
-    modal.style.display = "block";
+btnPhoto.onclick = function(event) {
+    modalPhoto.style.display = "block";
 }
 
-span.onclick = function() {
-    modal.style.display = "none";
+spanPhoto.onclick = function() {
+    modalPhoto.style.display = "none";
 }
 
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == modalPhoto) {
+        modalPhoto.style.display = "none";
     }
 }
 

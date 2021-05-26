@@ -249,6 +249,25 @@ def post_project():
     return render_template('/project.html', project_name=project_name, genre=project.genre, group_name=group_name)
 
 
+@app.route('/create_character', methods=["POST"])
+def create_character():
+
+    project_name = request.form.get("project_name")
+
+    name = request.form.get("name")
+    role = request.form.get("role")
+    age = request.form.get("age")
+    physical_appearance = request.form.get("appearance")
+    motivation = request.form.get("motivation")
+    fondest_memory = request.form.get("memory")
+    song = request.form.get("song")
+    desc = request.form.get("desc")
+    character = crud.create_character(project_name, name, role, desc, age, physical_appearance, motivation, fondest_memory, song)
+
+
+    return get_text_for_project_page(project_name)
+
+#Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project
 
 @app.route('/project_page', methods=["POST"])
 def post_project_page():
@@ -271,26 +290,6 @@ def get_text_for_project_page(project_name):
 
     return render_template('project_page.html', project_name=project_name, show_text=show_text, dict_of_reviewers=dict_of_reviewers)
 
-@app.route('/create_character', methods=["POST"])
-def create_character():
-
-    project_name = request.form.get("project_name")
-
-    name = request.form.get("name")
-    role = request.form.get("role")
-    age = request.form.get("age")
-    physical_appearance = request.form.get("appearance")
-    motivation = request.form.get("motivation")
-    fondest_memory = request.form.get("memory")
-    song = request.form.get("song")
-    desc = request.form.get("desc")
-    character = crud.create_character(project_name, name, role, desc, age, physical_appearance, motivation, fondest_memory, song)
-
-
-    return get_text_for_project_page(project_name)
-
-#Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project
-
 @app.route('/submit_project', methods=["POST"])
 def submit_project__on_project_page():
     """Submit a Project to the Group"""
@@ -310,19 +309,6 @@ def get_reviewer(project, name):
     dict_of_reviewers = crud.get_reviewer_feedback(project_name)
     if name in dict_of_reviewers:
         return dict_of_reviewers.get(name)
-
-
-@app.route('/deleteme', methods=["GET"])
-def view_delete():
-    result = request.form.get("search")
-
-
-    return render_template('deleteme.html', result=result)
-
-@app.route('/api/deleteme/<search>')
-def delete(search):
-
-    return search
 
 
 """"Flask method which runs the app"""

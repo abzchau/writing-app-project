@@ -1,24 +1,24 @@
-console.log("I'm a Modal, yo")
+console.log("I'm a Character, yo")
 
-//Modal Behavior
+//Modal Behavior For Create Character On Project Page
 
-const modal = document.getElementById("modalChar");
+const modalCharacter = document.getElementById("modalChar");
 
 const btn = document.getElementById("myCharBtn");
 
-const span = document.getElementsByClassName("close")[0];
+const span = document.getElementsByClassName("close-char")[0];
 
 btn.onclick = function(event) {
-    modal.style.display = "block";
+    modalCharacter.style.display = "block";
 }
 
 span.onclick = function() {
-    modal.style.display = "none";
+    modalCharacter.style.display = "none";
 }
 
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == modalCharacter) {
+        modalCharacter.style.display = "none";
     }
 }
 

@@ -1,6 +1,6 @@
 console.log("I'm a Modal, yo")
 
-//Modal Behavior
+//Modal Behavior For Submit Project Page
 
 const modal = document.getElementById("myModal");
 
@@ -9,7 +9,6 @@ const btn = document.getElementById("myBtn");
 const span = document.getElementsByClassName("close")[0];
 
 btn.onclick = function(event) {
-    console.log('yoyoyoyo')
     modal.style.display = "block";
 }
 

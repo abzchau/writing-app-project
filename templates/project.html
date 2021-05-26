@@ -4,6 +4,7 @@
 
 <head>
     <link rel="stylesheet" href="/static/css/character_modal.css">
+    <link rel="stylesheet" href="/static/css/photo.css">
 </head>
 
 <h1>{{project_name}}</h1>
@@ -37,11 +38,11 @@
 
 <form action = "/create_character" method = "POST">
 <div id="modalChar" class= "modalChar">
-    <div class="modal-content">
-        <span class="close">&times;</span>
+    <div class="modal-content-char">
+        <span class="close-char">&times;</span>
         <p>Create a character</p>
         <div class= "modal body"></div>
-            <form action = "/project" id = "modal" method="POST">
+            <form action = "/project" id = "modalChar" method="POST">
                 <label for="character_name">Name:</label>
                 <input type="text" id="name" name ="name">
                 <label for="age">Age:</label>
@@ -67,6 +68,29 @@
 <p><input type="hidden" value="{{ project_name }}"  name="project_name" required></p>
 </form>
 
+
+<form class = "example">
+    <input type="text" placeholder="Search" name="search" id="search">
+    <input type="button" value="Add Setting" id="mySearchBtn"></button>
+    <div id="modalSearch" class="modalSearch">
+        <div class="modal-content-photo">
+            <span class="close-photo">&times;</span>
+            <p>Select a photo</p>
+            <div class= "modal body"></div>
+                <div class="container">
+                    <div class = "card">
+                        <img src="" />
+                    </div>
+                </div>
+</form>
+        </div>
+        
+    </div>
+
+
 <script src="/static/js/character_modal.js"></script>
+<script src="/static/js/get_photo.js"></script>
+<script src="/static/js/photo_modal.js"></script>
+
 
 {% endblock %}
