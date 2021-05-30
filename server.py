@@ -267,6 +267,20 @@ def create_character():
 
     return get_text_for_project_page(project_name)
 
+@app.route('/api/<name>/<desc>/<photoNum>/<photoReplacedFinal>/<projectName>')
+def create_setting(name, desc, photoNum, photoReplacedFinal, projectName):
+
+    project_name = projectName
+
+    #Process photo by rebuilding the image url received from the server
+
+    photo = 'https://images.pexels.com/photos/'
+    photo_replace_ampersand =  photoReplacedFinal.replace('replace', '&')
+    photo_replace_question_mark =  photo_replace_ampersand.replace('question', '?')
+    final_photo = photo + photoNum + '/' + photo_replace_question_mark
+    setting = crud.create_setting(name, desc, final_photo, projectName)
+    return get_text_for_project_page(project_name)
+
 #Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project
 
 @app.route('/project_page', methods=["POST"])

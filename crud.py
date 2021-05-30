@@ -259,6 +259,7 @@ def provide_feedback(user_id, group_name, feedback_text):
 
 
 def get_reviewer_feedback(project_name):
+    """Gets User Feedback For Project Specific Page"""
 
     project = get_project_by_name(project_name)
     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
@@ -277,11 +278,19 @@ def get_reviewer_feedback(project_name):
         return ""    
 
 def create_character(project_name, name, role, desc, age, physical_appearance, motivation, fondest_memory, song):
+    """"Creates a Character"""
 
     project = get_project_by_name(project_name)
     character = Character(project_id=project.project_id, role=role, age=age, name=name, physical_appearance=physical_appearance, motivation=motivation, fondest_memory=fondest_memory, song=song, desc=desc)
 
     db.session.add(character)
+    db.session.commit()
+
+def create_setting(name, desc, imageCall, projectName):
+
+    project = get_project_by_name(projectName)
+    setting = Setting(project_id=project.project_id, name= name, desc=desc, setting_url=imageCall)
+    db.session.add(setting)
     db.session.commit()
 
 if __name__=='__main__':

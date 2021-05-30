@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/css/photo.css">
 </head>
 
-<h1>{{project_name}}</h1>
+<h1 id="project_name">{{project_name}}</h1>
 <h3>{{genre}}</h3>
 
 <form action="/project" method="POST">
@@ -69,22 +69,29 @@
 </form>
 
 
-<form class = "example">
+<form class="example">
+    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
     <input type="text" placeholder="Search" name="search" id="search">
     <input type="button" value="Add Setting" id="mySearchBtn"></button>
     <div id="modalSearch" class="modalSearch">
         <div class="modal-content-photo">
             <span class="close-photo">&times;</span>
-            <p>Select a photo</p>
-            <div class= "modal body"></div>
+            <p>Create a postcard:</p>
+            <form id="modalChar" >
+                <label for="name_photo">Name:</label>
+                <input type="text" id="name_photo" name="name_photo">
+                <label for="desc_photo">Description:</label>
+                <input type="text" id="desc_photo" name="desc_photo">
+                <p>Select a photo</p>
+                <div class="modal body"></div>
                 <div class="container">
-                    <div class = "card">
+                    <div class="card">
                         <img src="" />
                     </div>
                 </div>
-</form>
+            </form>
+            <button id="mySubmitPhotoBtn"> Save </button>
         </div>
-        
     </div>
 
 
