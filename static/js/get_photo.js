@@ -1,5 +1,7 @@
 console.log('doo')
 
+//Gets the form data from the modal, calls the api url, which then calls the create function to create a postcard
+
 btnSubmitPhoto = document.getElementById('mySubmitPhotoBtn')
 
 function getData(getDataRes) {
@@ -22,10 +24,7 @@ function dataResponse() {
     
 }
 
-
 btnSubmitPhoto.addEventListener('click', getData);
-
-
 
 
 // Creates div elements with search term image results

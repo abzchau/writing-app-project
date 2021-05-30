@@ -66,7 +66,7 @@ class Project(db.Model):
     group = db.relationship('Group', back_populates='projects')
     submission = db.relationship('Submission', back_populates='projects')
     character = db.relationship('Character', back_populates='projects')
-    setting = db.relationship('Setting', back_populates='projects')
+    postcard = db.relationship('Postcard', back_populates='projects')
 
     def __repr__(self):
         return f'<Project project_id={self.project_id} project_name={self.project_name} user_id={self.user_id} group_id={self.group_id} genre={self.genre}>'
@@ -81,7 +81,7 @@ class Submission(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
     meeting_time = db.Column(db.DateTime)
-    project_feedback = db.Column(db.String)
+    project_submission_solicit = db.Column(db.String)
     text = db.Column(db.String)
 
     user = db.relationship('User', back_populates='submission')
@@ -89,11 +89,11 @@ class Submission(db.Model):
     feedback = db.relationship('Feedback', back_populates='submission')
 
     def __repr__(self):
-        return f'<Submission submission_id={self.submission_id} user_id={self.user_id} meeting_time={self.meeting_time} project_id={self.project_id} text={self.text} project_feedback={self.project_feedback}>'
+        return f'<Submission submission_id={self.submission_id} user_id={self.user_id} meeting_time={self.meeting_time} project_id={self.project_id} text={self.text} project_submission_solicit={self.project_submission_solicit}>'
 
 
 class Feedback(db.Model):
-    """Feedback."""
+    """Feedback"""
 
     __tablename__= 'feedback'
 
@@ -131,21 +131,21 @@ class Character(db.Model):
         return f'<Character character_id={self.character_id} project_id={self.project_id} name={self.name} role={self.role} age={self.age} desc={self.desc}>'
 
 
-class Setting(db.Model):
-    """Setting"""
+class Postcard(db.Model):
+    """Postcard"""
 
-    __tablename__= "setting"
+    __tablename__= "postcard"
 
-    setting_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    postcard_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
-    setting_url = db.Column(db.String)
+    postcard_url = db.Column(db.String)
     name = db.Column(db.String)
     desc = db.Column(db.String)
 
-    projects = db.relationship('Project', back_populates='setting')
+    projects = db.relationship('Project', back_populates='postcard')
 
     def __repr__(self):
-        return f'<Setting setting_id={self.setting_id} project_id={self.project_id} setting_url={self.setting_url}>'
+        return f'<Postcard postcard_id={self.postcard_id} project_id={self.project_id} postcard_url={self.postcard_url}>'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///writing_app', echo=True):

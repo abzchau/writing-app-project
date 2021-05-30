@@ -268,7 +268,8 @@ def create_character():
     return get_text_for_project_page(project_name)
 
 @app.route('/api/<name>/<desc>/<photoNum>/<photoReplacedFinal>/<projectName>')
-def create_setting(name, desc, photoNum, photoReplacedFinal, projectName):
+def create_postcard(name, desc, photoNum, photoReplacedFinal, projectName):
+    """Create a postcard on the project page for it to appear on the project specific page"""
 
     project_name = projectName
 
@@ -278,7 +279,7 @@ def create_setting(name, desc, photoNum, photoReplacedFinal, projectName):
     photo_replace_ampersand =  photoReplacedFinal.replace('replace', '&')
     photo_replace_question_mark =  photo_replace_ampersand.replace('question', '?')
     final_photo = photo + photoNum + '/' + photo_replace_question_mark
-    setting = crud.create_setting(name, desc, final_photo, projectName)
+    postcard = crud.create_postcard(name, desc, final_photo, projectName)
     return get_text_for_project_page(project_name)
 
 #Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project
@@ -311,7 +312,7 @@ def submit_project__on_project_page():
     project_name = request.form.get("project_name")
     text = request.form.get("text")
     crud.change_project_visibility(project_name)
-    crud.create_project_feedback(project_name, text)
+    crud.create_project_submission_solicit(project_name, text)
     return get_text_for_project_page(project_name)
 
 

@@ -1,7 +1,7 @@
 """CRUD operations for the writing app"""
 
 from datetime import datetime
-from model import db, User, Group, Project, Submission, Feedback, Character, Setting, connect_to_db
+from model import db, User, Group, Project, Submission, Feedback, Character, Postcard, connect_to_db
 
 def create_user(first_name, last_name, email, password, favorite_writer="", favorite_animal=""):
     """Create and return a new user"""
@@ -217,12 +217,12 @@ def get_text_for_meeting_page(group_id):
     return final_result
 
 
-def create_project_feedback(project_name, text):
-    """Updates Solicited Project Feedback On A Submission"""
+def create_project_submission_solicit(project_name, text):
+    """Updates A Submission For Project Solicitation"""
 
     project = get_project_by_name(project_name)
     submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
-    submission.project_feedback = text
+    submission.project_submission_solicit = text
     db.session.add(submission)
     db.session.commit()
 
@@ -239,7 +239,7 @@ def solicit_feedback_for_meeting_page(group_id):
             submission = db.session.query(Submission).filter(Submission.project_id == project.project_id, Submission.text != None).order_by(Submission.submission_id.desc()).first()
             user = get_user_by_id(submission.user_id)
             name = user.first_name + ' ' + user.last_name
-            final_result[name] = submission.project_feedback
+            final_result[name] = submission.project_submission_solicit
     return final_result
 
 
@@ -286,11 +286,12 @@ def create_character(project_name, name, role, desc, age, physical_appearance, m
     db.session.add(character)
     db.session.commit()
 
-def create_setting(name, desc, imageCall, projectName):
+def create_postcard(name, desc, final_photo, projectName):
+    """Creates a postcard"""
 
     project = get_project_by_name(projectName)
-    setting = Setting(project_id=project.project_id, name= name, desc=desc, setting_url=imageCall)
-    db.session.add(setting)
+    postcard = Postcard(project_id=project.project_id, name= name, desc=desc, postcard_url=final_photo)
+    db.session.add(postcard)
     db.session.commit()
 
 if __name__=='__main__':
