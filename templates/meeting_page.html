@@ -46,6 +46,17 @@
         </form>
     </div>
 
+  <div>
+    <h3> Provide feedback:</h3>
+  
+        <form action = "/meeting_page" method = "POST">
+          <p><input type="hidden" value="{{group_name}}" name="group_name" required> </p>
+          <textarea id ="feedback" rows = "15" cols = "40" name = "provide-feedback">
+          </textarea>
+          <button id="myFeedbackBtn"> Provide Feedback</button>
+        </form>
+    </div>    
+
 
 <script src="/static/js/get_text_for_group.js"></script>
 {% endblock %}

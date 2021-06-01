@@ -74,6 +74,14 @@ def signup():
 def about_the_app():
     return "About the app"
 
+
+@app.route('/logout')
+def logout_user():
+    """Log out the user"""
+
+    session.clear()
+    return redirect('/')
+
 #Main Page Where User Can View And Create Groups And Projects
 
 @app.route('/main', methods=["GET"])
@@ -267,19 +275,17 @@ def create_character():
 
     return get_text_for_project_page(project_name)
 
-@app.route('/api/<name>/<desc>/<photoNum>/<photoReplacedFinal>/<projectName>')
-def create_postcard(name, desc, photoNum, photoReplacedFinal, projectName):
+@app.route('/api/create_postcard', methods=["POST"])
+def create_postcard():
     """Create a postcard on the project page for it to appear on the project specific page"""
 
-    project_name = projectName
 
-    #Process photo by rebuilding the image url received from the server
+    name = request.form.get("name")
+    desc = request.form.get("desc")
+    final_photo = request.form.get("photoReplacedFinal")
+    project_name = request.form.get("projectName")
 
-    photo = 'https://images.pexels.com/photos/'
-    photo_replace_ampersand =  photoReplacedFinal.replace('replace', '&')
-    photo_replace_question_mark =  photo_replace_ampersand.replace('question', '?')
-    final_photo = photo + photoNum + '/' + photo_replace_question_mark
-    postcard = crud.create_postcard(name, desc, final_photo, projectName)
+    postcard = crud.create_postcard(name, desc, final_photo, project_name)
     return get_text_for_project_page(project_name)
 
 #Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project

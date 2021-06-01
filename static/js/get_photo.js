@@ -1,26 +1,23 @@
 console.log('doo')
 
-//Gets the form data from the modal, calls the api url, which then calls the create function to create a postcard
+//Gets the form data from the modal, posts the pogo to the api url, which then calls the create_postcard function to create a postcard in the Postcard database
 
 btnSubmitPhoto = document.getElementById('mySubmitPhotoBtn')
 
 function getData(getDataRes) {
     getDataRes.preventDefault();
-    let photo = window.selected.slice(40);
-    const photoReplaced = photo.replaceAll('&', 'replace')
-    const photoReplacedFinal = photoReplaced.replaceAll('?', 'question')
-    let photoNum = window.selected.slice(33, 40);
+
     let name = document.getElementById('name_photo').value; 
     let desc = document.getElementById('desc_photo').value;
     const projectName = document.querySelector("h1").innerHTML; 
-    const imageCall = window.selected
-    console.log(photoReplacedFinal)
-    url = `/api/${name}/${desc}/${photoNum}/${photoReplacedFinal}/${projectName}`;
-    $.get(url, dataResponse);
+
+    formInput = {'name': name, 'desc': desc, 'photoReplacedFinal': window.selected, 'projectName': projectName}
+    url = `/api/create_postcard`;
+    $.post(url, formInput, dataResponse);
 }
 
 function dataResponse() {
-        alert('created');
+        alert('Postcard created!');
     
 }
 
