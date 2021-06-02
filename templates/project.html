@@ -5,95 +5,104 @@
 <head>
     <link rel="stylesheet" href="/static/css/character_modal.css">
     <link rel="stylesheet" href="/static/css/photo.css">
+    <link rel="stylesheet" href="/static/css/project.css">
 </head>
 
-<h1 id="project_name">{{project_name}}</h1>
-<h3>{{genre}}</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2 id="project_name">{{project_name}}</h2>
+            <h4>{{genre}}</h4>
 
-<form action="/project" method="POST">
-    <label for="project"><b>Associate this project with a group</b></label>
-    <p><input type="text" placeholder="group name" name="group_name" required></p>
-    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-    <div>
-        <button type="submit">Add a group to the project</button>
-    </div>
-</form>
-
-<h3>Linked to Group: </h3>
-    <ul>
-        <li>
-            <a href="/group/{{ group_name }}">
-            {{ group_name }}
-            </a>
-        </li>
-
-    </ul>
-
-<div>
-    <form action="/project_page" method="POST">
-        <p><input type="hidden" value="{{project_name}}" name="project_name" required></p>
-        <input type="submit" value="Edit Project"/>
-    </form>
-</div>
-
-<form action = "/create_character" method = "POST">
-<div id="modalChar" class= "modalChar">
-    <div class="modal-content-char">
-        <span class="close-char">&times;</span>
-        <p>Create a character</p>
-        <div class= "modal body"></div>
-            <form action = "/project" id = "modalChar" method="POST">
-                <label for="character_name">Name:</label>
-                <input type="text" id="name" name ="name">
-                <label for="age">Age:</label>
-                <input type="int" id = "age" name = "age">
-                <label for="role"> Role:</label>
-                <input type="text" id="role" name="role">
-                <label for="appearance">Physical Appearance:</label>
-                <input type="text" id="appearance" name="appearance">
-                <label for="motivation">What is their motivation:</label>
-                <input type="text" id="motivation" name="motivation">
-                <label for="memory">What is their fondest memory:</label>
-                <input type="text" id="memory" name="memory">
-                <label for="song">A song that reminds you of this character:</label>
-                <input type="text" id="song" name="song">
-                <label for="desc">Description:</label>
-                <input type="text" id="desc" name="desc">
-                <input type="submit"  value="Create Character"/>
+            <form action="/project" method="POST">
+                <label for="project"><h4 class="create">Associate this project with a group</h4></label>
+                <p><input type="text" class="form-control" placeholder="group name" name="group_name" required></p>
                 <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-            </form>
-        </div>
-    </div>
-<button id="myCharBtn"> Create Character</button>
-<p><input type="hidden" value="{{ project_name }}"  name="project_name" required></p>
-</form>
-
-
-<form class="example">
-    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-    <input type="text" placeholder="Search" name="search" id="search">
-    <input type="button" value="Add Setting" id="mySearchBtn"></button>
-    <div id="modalSearch" class="modalSearch">
-        <div class="modal-content-photo">
-            <span class="close-photo">&times;</span>
-            <p>Create a postcard:</p>
-            <form id="modalChar" >
-                <label for="name_photo">Name:</label>
-                <input type="text" id="name_photo" name="name_photo">
-                <label for="desc_photo">Description:</label>
-                <input type="text" id="desc_photo" name="desc_photo">
-                <p>Select a photo</p>
-                <div class="modal body"></div>
-                <div class="container">
-                    <div class="card">
-                        <img src="" />
-                    </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Add a group to the project</button>
                 </div>
             </form>
-            <button id="mySubmitPhotoBtn"> Save </button>
+
+            <h4 class="create">Linked to Group: </h4>
+            <ul class="list-group">
+                <li class="list-inline-item">
+                    <a href="/group/{{ group_name }}">
+                        {{ group_name }}
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="col-sm-6">
+            <h2>Create A World</h2>
+            <form action="/create_character" method="POST">
+                <div id="modalChar" class="modalChar">
+                    <div class="modal-content-char">
+                        <span class="close-char">&times;</span>
+                        <p>Create a character</p>
+                        <div class="modal body"></div>
+                        <form action="/project" id="modalChar" method="POST">
+                            <label for="character_name">Name:</label>
+                            <input type="text" id="name" name="name">
+                            <label for="age">Age:</label>
+                            <input type="int" id="age" name="age">
+                            <label for="role"> Role:</label>
+                            <input type="text" id="role" name="role">
+                            <label for="appearance">Physical Appearance:</label>
+                            <input type="text" id="appearance" name="appearance">
+                            <label for="motivation">What is their motivation:</label>
+                            <input type="text" id="motivation" name="motivation">
+                            <label for="memory">What is their fondest memory:</label>
+                            <input type="text" id="memory" name="memory">
+                            <label for="song">A song that reminds you of this character:</label>
+                            <input type="text" id="song" name="song">
+                            <label for="desc">Description:</label>
+                            <input type="text" id="desc" name="desc">
+                            <input type="submit" value="Create Character" />
+                            <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+                        </form>
+                    </div>
+                </div>
+                <button id="myCharBtn" class="btn btn-primary"> Create Character</button>
+                <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+            </form>
+
+
+            <form class="example">
+                <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+                <input type="text" class="form-control"  placeholder="Search" name="search" id="search">
+                <input type="button" class="btn btn-primary" value="Create Postcard" id="mySearchBtn"></button>
+                <div id="modalSearch" class="modalSearch">
+                    <div class="modal-content-photo">
+                        <span class="close-photo">&times;</span>
+                        <p>Create a postcard:</p>
+                        <form id="modalChar">
+                            <label for="name_photo">Name:</label>
+                            <input type="text" id="name_photo" name="name_photo">
+                            <label for="desc_photo">Description:</label>
+                            <input type="text" id="desc_photo" name="desc_photo">
+                            <p>Select a photo</p>
+                            <div class="modal body"></div>
+                            <div class="container">
+                                <div class="card">
+                                    <img src="" />
+                                </div>
+                            </div>
+                        </form>
+                        <button id="mySubmitPhotoBtn" class="btn btn-primary"> Save </button>
+                    </div>
+                </div>
+
+                <div>
+                    <form action="/project_page" method="POST">
+                        <p><input type="hidden" value="{{project_name}}" name="project_name" required></p>
+                        <input type="submit" class="btn btn-primary" value="Edit Project" />
+                    </form>
+                </div>
         </div>
     </div>
-
+</div>
 
 <script src="/static/js/character_modal.js"></script>
 <script src="/static/js/get_photo.js"></script>

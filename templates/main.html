@@ -1,57 +1,66 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    
 
-<div>
-    <h2>Groups</h2>
-    <ul>
+<head>
+  <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Groups</h2>
+      <ul class="list-group">
         {% for group in lst_of_groups_by_user_id %}
-          <li>
-            <a href="/group/{{ group.group_name }}">
-              {{ group.group_name }}
-            </a>
-          </li>
+        <li class="list-inline-item">
+          <a href="/group/{{ group.group_name }}">
+            {{ group.group_name }}
+          </a>
+        </li>
         {% endfor %}
 
-    </ul>
+      </ul>
 
-    <form action="/main" method="POST">
-        <label for="group_name"><b>Create a new group:</b></label>
-        <p><input type="text" placeholder="Enter Group Name" name="group_name" required></p>
-    <div>
-        <button type="submit">Create Group</button>
+      <form action="/main" method="POST">
+        <label for="group_name">
+          <h4 class="create">Create a new group:</h4>
+        </label>
+        <p><input type="text" class="form-control" placeholder="Enter Group Name" name="group_name" required></p>
+        <div>
+          <button type="submit" class="btn btn-primary">Create Group</button>
+        </div>
+      </form>
     </div>
-    </form>
-</div>
 
-<hr>
 
-<div>
-    <h2>Projects</h2>
 
-    <ul>
+    <div class="col-sm-6">
+      <h2>Projects</h2>
+
+      <ul class="list-group">
         {% for project in lst_of_projects_by_user_id %}
-          <li>
-            <a href="/project/{{ project.project_name }}">
-              {{ project.project_name }}
-            </a>
-          </li>
+        <li class="list-inline-item">
+          <a href="/project/{{ project.project_name }}">
+            {{ project.project_name }}
+          </a>
+        </li>
         {% endfor %}
 
-    </ul>
+      </ul>
 
-    <form action="/main" method="POST">
-        <label for="project_name"><b>Create a new project:</b></label>
-        <p><input type="text" placeholder="Enter Project Name" name="project_name" required></p>
+      <form action="/main" method="POST">
+        <label for="project_name">
+          <h4 class="create">Create a new project:</h4>
+        </label>
+        <p><input type="text" class="form-control" placeholder="Enter Project Name" name="project_name" required></p>
         <label for="genre"><b>Genre</b></label>
-        <p><input type="text" placeholder="Enter Genre" name="genre"></p>
-    <div>
-        <button type="submit">Create Project</button>
+        <p><input type="text" class="form-control" placeholder="Enter Genre" name="genre"></p>
+        <div>
+          <button type="submit" class="btn btn-primary">Create Project</button>
+        </div>
+      </form>
     </div>
-    </form>
+  </div>
 </div>
-
-
 
 {% endblock %}

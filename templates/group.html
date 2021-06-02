@@ -2,50 +2,62 @@
 
 {% block body %}
 
+<head>
+    <link rel="stylesheet" href="/static/css/group.css">
+</head>
 
-<h3>{{group_name}}</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>{{group_name}}</h3>
+            <form action="/group" method="POST">
+                <label for="email" class="create"><h6>Enter an email to invite someone to this group:</h6></label>
+                <p><input type="text" class="form-control" placeholder="email" name="email" required></p>
+                <p><input type="hidden" value="{{ group_name }}" name="group_name" required></p>
+                <p><input type="hidden" value="add_user" name="add_user" required></p>
+                <div>
+                    <button type="submit" class="btn btn-primary">Add member to the group</button>
+                </div>
+            </form>
 
-<form action="/group" method="POST">
-    <label for="email"><b>Enter an email to invite someone to this group:</b></label>
-    <p><input type="text" placeholder="email" name="email" required></p>
-    <p><input type="hidden" value="{{ group_name }}" name="group_name" required></p>
-    <p><input type="hidden" value="add_user" name="add_user" required></p>
-    <div>
-        <button type="submit">Add member to the group</button>
+
+
+            <form action="/group" method="POST">
+                <label for="email" class="create"><h6>Enter an email to remove someone from this group:</h6></label>
+                <p><input type="text" class="form-control" placeholder="email" name="remove_user_email" required></p>
+                <p><input type="hidden" value="{{ group_name }}" name="group_name" required></p>
+                <p><input type="hidden" value="remove_user" name="remove_user" required></p>
+                <div>
+                    <button type="submit" class="btn btn-primary">Remove member from the group</button>
+                </div>
+            </form>
+        </div>
+
+
+
+
+
+        <div class="col-sm-6">
+            <h3>Members</h3>
+            <ul>
+                {% for user in lst_of_users_by_group %}
+                <li>
+                    {{ user.first_name + " " + user.last_name }}
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+
+
+            <div>
+                <form action="/meeting_page" method="POST">
+                    <p><input type="hidden" value="{{group_name}}" name="group_name" required></p>
+                    <input type="submit" class="btn btn-primary" value="Go to meeting" />
+                </form>
+            </div>
+        </div>
     </div>
-</form>
-
-
-<br>
-<form action="/group" method="POST">
-    <label for="email"><b>Enter an email to remove someone from this group:</b></label>
-    <p><input type="text" placeholder="email" name="remove_user_email" required></p>
-    <p><input type="hidden" value="{{ group_name }}" name="group_name" required></p>
-    <p><input type="hidden"  value="remove_user" name="remove_user" required></p>
-    <div>
-        <button type="submit">Remove member from the group</button>
-    </div>
-</form>
-
-
-<h3>Members</h3>
-    <ul>
-        {% for user in lst_of_users_by_group %}
-        <li>
-            {{ user.first_name + " " + user.last_name }}
-            </a>
-        </li>
-        {% endfor %}
-
-    </ul>
-
-
-    <div>
-        <form action="/meeting_page" method="POST">
-            <p><input type="hidden" value="{{group_name}}" name="group_name" required></p>
-            <input type="submit" value="Go to meeting"/>
-        </form>
-    </div>
-
+</div>
 
 {% endblock %}

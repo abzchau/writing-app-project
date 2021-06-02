@@ -1,0 +1,26 @@
+.container {
+    margin: 50px auto;
+    font-family: Arial;
+    padding: 50px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .form-control {
+    padding: 10px;
+  }
+
+  .create {
+    padding: 10px;
+    height: 10;
+}
