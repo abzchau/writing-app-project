@@ -12,11 +12,10 @@
       <h3 id="group_name">{{group_name}}</h3>
 
       <section id="select-writer" >
-        <h3 class="title" >Select a writer to review </h3>
-        <div class= "w-25 p-3">
+        <div class= "w-50 p-3">
         <form id="get-writer">
           <select id="writer-id" name="writer_id" class="form-select" aria-label="Default select example">
-            <option class="h-25 d-inline-block" selected="">Choose a writer</option>
+            <option class="h-25 d-inline-block" selected="">Select a writer to review</option>
             {% for user in lst_of_users_by_group %}
             <option value="{{ user.first_name + " " + user.last_name }}">{{ user.first_name + " " + user.last_name }}
             </option>
@@ -29,7 +28,7 @@
     
   <div id = "wrapper">
       <form id="get-text">
-        <textarea id="text" rows="30" cols="80" name="text" >
+        <textarea readonly id="text" rows="30" cols="80" name="text" >
             </textarea>
             <br>
       </form>
@@ -38,29 +37,29 @@
 
     <div class="col-4">
       <div class="row">
-        <h3 class="four_column"> This writer wants the following feedback:</h3>
+        <h3> This writer wants the following feedback:</h3>
 
         <form id="solicit_feedback">
           <p><input type="hidden" value="{{group_name}}" name="group_name" required> </p>
-          <textarea id="solicit" rows="15" cols="40" name="solicit-feedback">
+          <textarea readonly id="solicit" rows="15" cols="55" name="solicit-feedback" class="feedback">
           </textarea>
         </form>
 
 
 
         <div class="col-4">
-          <h3 class="four_column"> Provide feedback:</h3>
-
+           <div class="row">
+          <h3> Provide feedback:</h3>
           <form action="/meeting_page" method="POST">
             <p><input type="hidden" value="{{group_name}}" name="group_name" required> </p>
-            <textarea id="feedback" rows="15" cols="40" name="provide-feedback">
+            <textarea id="feedback" rows="15" cols="55" name="provide-feedback" class="feedback">
             </textarea>
-            <button id="myFeedbackBtn"> Provide Feedback</button>
+            <button id="myFeedbackBtn" class="btn btn-primary"> Provide Feedback</button>
           </form>
         </div>
       </div>
     </div>
-
+  </div>
     <script src="/static/js/get_text_for_group.js"></script>
     <script src="/static/js/meeting_page.js"></script>
     {% endblock %}
