@@ -43,10 +43,16 @@
     background-color: rgb(161, 161, 56)
 }
 
-h3 {
+#reviewer {
     font-size: 22px;
+    padding: 50px;
+    top: 50px;
 }
 
 .form-select {
     overflow-y: scroll;
+}
+
+#project_name {
+    font-size: 22px;
 }

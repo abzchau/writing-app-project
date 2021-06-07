@@ -294,6 +294,17 @@ def create_postcard(name, desc, final_photo, projectName):
     db.session.add(postcard)
     db.session.commit()
 
+
+def get_character(project_id):
+    """Get all characters by project id"""
+
+    characters = Characters.query.filter(Character.project_id == project_id).all()
+
+def get_image(project_id):
+    """Get all images by project id"""
+
+    images = Postcard.query.filter(Postcard.project_id == project_id).all()
+
 if __name__=='__main__':
     from server import app
     connect_to_db(app)

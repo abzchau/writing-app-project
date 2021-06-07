@@ -9,7 +9,7 @@ function getData(getDataRes) {
 
     let name = document.getElementById('name_photo').value; 
     let desc = document.getElementById('desc_photo').value;
-    const projectName = document.querySelector("h1").innerHTML; 
+    const projectName = document.querySelector("#project_name").innerHTML; 
 
     formInput = {'name': name, 'desc': desc, 'photoReplacedFinal': window.selected, 'projectName': projectName}
     url = `/api/create_postcard`;
@@ -25,7 +25,7 @@ btnSubmitPhoto.addEventListener('click', getData);
 
 
 // Creates div elements with search term image results
-const container = document.querySelector(".container");
+const container = document.querySelector(".container-image");
 let cardTag = '';
 window.selected = '' ;
 
