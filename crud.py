@@ -266,7 +266,7 @@ def get_reviewer_feedback(project_name):
     
     
     if submission:
-        list_of_reviewer_feedback = db.session.query(Feedback).filter(Feedback.submission_id == submission.submission_id).all()
+        list_of_reviewer_feedback = db.session.query(Feedback).filter(Feedback.submission_id == submission.submission_id, Feedback.text != None).all()
         feedback = Feedback.query.filter(Feedback.submission_id == submission.submission_id).all()
         final_result = {}
         for reviewer_feedback in list_of_reviewer_feedback:

@@ -191,12 +191,16 @@ def meeting_page():
         lst_of_users_by_group = group.users
 
         #This section gets the feedback from the form and creates a Feedback which will be viewable on the Project Page.
+        
+    if request.method == 'POST':    
         feedback_text = request.form.get("provide-feedback")
         crud.provide_feedback(user_id, group_name, feedback_text)
 
         #This section is to retrieve the text
         dict_of_users = crud.get_text_for_meeting_page(group_id)
         return render_template('/meeting_page.html', group_name=group_name, lst_of_users_by_group=lst_of_users_by_group, dict_of_users=dict_of_users)
+
+
 
 
 @app.route('/api/<group>/<name>')
