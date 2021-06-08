@@ -150,7 +150,7 @@ class Postcard(db.Model):
         return f'<Postcard postcard_id={self.postcard_id} project_id={self.project_id} postcard_url={self.postcard_url}>'
 
 
-class StoryArc(db.model):
+class StoryArc(db.Model):
     """Story Arc"""
 
     __tablename__="storyarc"
