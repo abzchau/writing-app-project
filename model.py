@@ -67,6 +67,8 @@ class Project(db.Model):
     submission = db.relationship('Submission', back_populates='projects')
     character = db.relationship('Character', back_populates='projects')
     postcard = db.relationship('Postcard', back_populates='projects')
+    storyarc = db.relationship('StoryArc', back_populates='projects')
+
 
     def __repr__(self):
         return f'<Project project_id={self.project_id} project_name={self.project_name} user_id={self.user_id} group_id={self.group_id} genre={self.genre}>'
@@ -140,12 +142,41 @@ class Postcard(db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
     postcard_url = db.Column(db.String)
     name = db.Column(db.String)
-    desc = db.Column(db.String)
+    desc = db.Column(db.Integer)
 
     projects = db.relationship('Project', back_populates='postcard')
 
     def __repr__(self):
         return f'<Postcard postcard_id={self.postcard_id} project_id={self.project_id} postcard_url={self.postcard_url}>'
+
+
+class StoryArc(db.model):
+    """Story Arc"""
+
+    __tablename__="storyarc"
+
+    storyarc_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
+    storyarc_name = db.Column(db.String)
+    plot_point1 = db.Column(db.String)
+    plot_point1_value = db.Column(db.Integer)
+    plot_point2 = db.Column(db.String)
+    plot_point2_value = db.Column(db.Integer)
+    plot_point3 = db.Column(db.String)
+    plot_point3_value = db.Column(db.Integer)
+    plot_point4 = db.Column(db.String)
+    plot_point4_value = db.Column(db.Integer)
+    plot_point5 = db.Column(db.String)
+    plot_point5_value = db.Column(db.Integer)
+    plot_point6 = db.Column(db.String)
+    plot_point6_value = db.Column(db.Integer)
+
+    projects = db.relationship('Project', back_populates='storyarc')
+
+    def __repr__(self):
+        return f'<StoryArc storyarc_id={self.postcard_id} project_id={self.project_id}>'
+
+
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///writing_app', echo=True):
