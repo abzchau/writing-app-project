@@ -313,7 +313,10 @@ def get_text_for_project_page(project_name):
     show_text = crud.get_text_for_project_page(project.project_id)
     dict_of_reviewers = crud.get_reviewer_feedback(project_name)
 
-    return render_template('project_page.html', project_name=project_name, show_text=show_text, dict_of_reviewers=dict_of_reviewers)
+    #Gets card list for selector
+    card_info = crud.get_all_cards(project_name)
+
+    return render_template('project_page.html', project_name=project_name, show_text=show_text, dict_of_reviewers=dict_of_reviewers, card_info=card_info)
 
 @app.route('/submit_project', methods=["POST"])
 def submit_project__on_project_page():
@@ -334,6 +337,15 @@ def get_reviewer(project, name):
     dict_of_reviewers = crud.get_reviewer_feedback(project_name)
     if name in dict_of_reviewers:
         return dict_of_reviewers.get(name)
+
+
+@app.route('/api/project/<projectName>/<cardName>')
+def get_card(projectName, cardName):
+    """Returns Card Information On Project Page"""
+    
+    print(projectName, cardName, 'heeeeeeey')
+    get_card = crud.get_single_card(projectName, cardName)
+    return get_card
 
 
 """"Flask method which runs the app"""

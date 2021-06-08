@@ -295,15 +295,39 @@ def create_postcard(name, desc, final_photo, projectName):
     db.session.commit()
 
 
-def get_character(project_id):
-    """Get all characters by project id"""
+def get_all_cards(project_name):
+    """Get all character and image cards by project id"""
 
-    characters = Characters.query.filter(Character.project_id == project_id).all()
+    card_list = []
+    project = get_project_by_name(project_name)
+    characters = Character.query.filter(Character.project_id == project.project_id).all()
+    images = Postcard.query.filter(Postcard.project_id == project.project_id).all()
 
-def get_image(project_id):
-    """Get all images by project id"""
+    for character in characters:
+        if characters == []:
+            pass
+        else:
+            card_list.append(character)
+    
+    for image in images:
+        if images == []:
+            pass
+        else:
+            card_list.append(image)
 
-    images = Postcard.query.filter(Postcard.project_id == project_id).all()
+    return card_list
+
+def get_single_card(project_name, card_name):
+
+    card_name = card_name.lower()
+    project = get_project_by_name(project_name)
+    character_card = Character.query.filter(Character.project_id == project.project_id, Character.name == card_name).first()
+    image_card = Postcard.query.filter(Postcard.project_id == project.project_id, Postcard.name).first()
+
+    if character_card == []:
+        return image_card
+    elif image_card == []:
+        return character_card
 
 if __name__=='__main__':
     from server import app

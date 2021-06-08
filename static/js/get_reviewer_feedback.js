@@ -4,8 +4,8 @@ console.log("shadwell")
 
 let formFeedback = document.querySelector('#reviewer-id');
 
-function handleReviewerResponse(res_reviewerFeedback) {
-    document.querySelector('#review').innerHTML = res_reviewerFeedback;
+function handleReviewerResponse(resReviewerFeedback) {
+    document.querySelector('#review').innerHTML = resReviewerFeedback;
 }
 
 function getReviewer(txtReviewer) {

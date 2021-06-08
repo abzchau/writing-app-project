@@ -51,27 +51,29 @@
     <div class="row">
     <div class="card">
         <form id="card">
-            <select id="card" name="card">
-                <option value=""> Choose a card</option>
-                
+            <select id="selector_card" name="selector_card">
+                <option class="card_selector"> Choose a card</option>
+                {% for card in card_info %}
+                <option value="{{card.name}}"> {{card.name}}</option>
+                {% endfor %}
             </select>
         </form>
-      <img src="https://images.pexels.com/photos/3117432/pexels-photo-3117432.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280>">
+        
+      <img src=>
 
       <!-- A div with card__details class to hold the details in the card  -->
       <div class="card__details">
 
         <!-- Span with tag class for the tag -->
-        <span class="tag">Nature</span>
 
-        <span class="tag">Lake</span>
+        <!-- <span class="tag" id="name"></span>
+
+        <span class="tag" id="desc"></span> -->
 
         <!-- A div with name class for the name of the card -->
-        <div class="name">Lago di Braies</div>
+        <p class="card_name"></p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur sodales morbi dignissim sed diam
-          pharetra
-          vitae ipsum odio.</p>
+        <p class="card_desc"></p>
 
         <button>Read more</button>
         </form>
