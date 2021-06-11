@@ -1,6 +1,6 @@
 console.log('doo')
 
-//Gets the form data from the modal, posts the pogo to the api url, which then calls the create_postcard function to create a postcard in the Postcard database
+//Gets the form data from the modal, posts the pogo to the api url, which then calls the create_index function to create a index in the Index database
 
 btnSubmitPhoto = document.getElementById('mySubmitPhotoBtn')
 
@@ -12,12 +12,12 @@ function getData(getDataRes) {
     const projectName = document.querySelector("#project_name").innerHTML; 
 
     formInput = {'name': name, 'desc': desc, 'photoReplacedFinal': window.selected, 'projectName': projectName}
-    url = `/api/create_postcard`;
+    url = `/api/create_index`;
     $.post(url, formInput, dataResponse);
 }
 
 function dataResponse() {
-        alert('Postcard created!');
+        alert('Index Card created!');
     
 }
 

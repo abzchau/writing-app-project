@@ -279,9 +279,9 @@ def create_character():
 
     return get_text_for_project_page(project_name)
 
-@app.route('/api/create_postcard', methods=["POST"])
-def create_postcard():
-    """Create a postcard on the project page for it to appear on the project specific page"""
+@app.route('/api/create_index', methods=["POST"])
+def create_index():
+    """Create a index on the project page for it to appear on the project specific page"""
 
 
     name = request.form.get("name")
@@ -289,7 +289,7 @@ def create_postcard():
     final_photo = request.form.get("photoReplacedFinal")
     project_name = request.form.get("projectName")
 
-    postcard = crud.create_postcard(name, desc, final_photo, project_name)
+    index = crud.create_index(name, desc, final_photo, project_name)
     return get_text_for_project_page(project_name)
 
 #Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project

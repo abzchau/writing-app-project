@@ -66,7 +66,7 @@ class Project(db.Model):
     group = db.relationship('Group', back_populates='projects')
     submission = db.relationship('Submission', back_populates='projects')
     character = db.relationship('Character', back_populates='projects')
-    postcard = db.relationship('Postcard', back_populates='projects')
+    index = db.relationship('Index', back_populates='projects')
     storyarc = db.relationship('StoryArc', back_populates='projects')
 
 
@@ -121,6 +121,7 @@ class Character(db.Model):
     name = db.Column(db.String)
     role = db.Column(db.String)
     desc = db.Column(db.String)
+    card_type = db.Column(db.String, default="character")
     age = db.Column(db.Integer)
     physical_appearance = db.Column(db.String)
     motivation = db.Column(db.String)
@@ -133,21 +134,22 @@ class Character(db.Model):
         return f'<Character character_id={self.character_id} project_id={self.project_id} name={self.name} role={self.role} age={self.age} desc={self.desc}>'
 
 
-class Postcard(db.Model):
-    """Postcard"""
+class Index(db.Model):
+    """Index Card"""
 
-    __tablename__= "postcard"
+    __tablename__= "index"
 
-    postcard_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    index_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
-    postcard_url = db.Column(db.String)
+    index_url = db.Column(db.String)
     name = db.Column(db.String)
-    desc = db.Column(db.Integer)
+    desc = db.Column(db.String)
+    card_type = db.Column(db.String, default="index")
 
-    projects = db.relationship('Project', back_populates='postcard')
+    projects = db.relationship('Project', back_populates='index')
 
     def __repr__(self):
-        return f'<Postcard postcard_id={self.postcard_id} project_id={self.project_id} postcard_url={self.postcard_url}>'
+        return f'<Index index_id={self.index_id} project_id={self.index_id} index_url={self.index_url}>'
 
 
 class StoryArc(db.Model):
@@ -174,7 +176,7 @@ class StoryArc(db.Model):
     projects = db.relationship('Project', back_populates='storyarc')
 
     def __repr__(self):
-        return f'<StoryArc storyarc_id={self.postcard_id} project_id={self.project_id}>'
+        return f'<StoryArc storyarc_id={self.storyarc} project_id={self.project_id}>'
 
 
 

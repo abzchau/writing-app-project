@@ -1,7 +1,7 @@
 """CRUD operations for the writing app"""
 
 from datetime import datetime
-from model import db, User, Group, Project, Submission, Feedback, Character, Postcard, connect_to_db
+from model import db, User, Group, Project, Submission, Feedback, Character, Index, connect_to_db
 
 def create_user(first_name, last_name, email, password, favorite_writer="", favorite_animal=""):
     """Create and return a new user"""
@@ -286,12 +286,12 @@ def create_character(project_name, name, role, desc, age, physical_appearance, m
     db.session.add(character)
     db.session.commit()
 
-def create_postcard(name, desc, final_photo, projectName):
-    """Creates a postcard"""
+def create_index(name, desc, final_photo, projectName):
+    """Creates a Index Card"""
 
     project = get_project_by_name(projectName)
-    postcard = Postcard(project_id=project.project_id, name= name, desc=desc, postcard_url=final_photo)
-    db.session.add(postcard)
+    index = Index(project_id=project.project_id, name= name, desc=desc, index_url=final_photo)
+    db.session.add(index)
     db.session.commit()
 
 
@@ -301,7 +301,7 @@ def get_all_cards(project_name):
     card_list = []
     project = get_project_by_name(project_name)
     characters = Character.query.filter(Character.project_id == project.project_id).all()
-    images = Postcard.query.filter(Postcard.project_id == project.project_id).all()
+    images = Index.query.filter(Index.project_id == project.project_id).all()
 
     for character in characters:
         if characters == []:
@@ -322,9 +322,9 @@ def get_single_card(projectName, cardName):
     # card_name = cardName.lower()
     project = get_project_by_name(projectName)
     # character_card = Character.query.filter(Character.project_id == project.project_id, Character.name == card_name).first()
-    image_card = Postcard.query.filter(Postcard.project_id == project.project_id, Postcard.name == cardName).first()
+    image_card = Index.query.filter(Index.project_id == project.project_id, Index.name == cardName).first()
 
-    dict_of_card = {'card_name': image_card.name, 'image_url': image_card.postcard_url, 'desc': image_card.desc}
+    dict_of_card = {'card_name': image_card.name, 'image_url': image_card.index_url, 'desc': image_card.desc}
 
     return dict_of_card
 
