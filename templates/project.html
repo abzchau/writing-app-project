@@ -40,7 +40,7 @@
                 <div id="modalChar" class="modalChar">
                     <div class="modal-content-char">
                         <span class="close-char">&times;</span>
-                        <p>Create a character</p>
+                        <p id="character">Character</p>
                         <div class="modal body"></div>
                         <form action="/project" id="modalChar" method="POST">
                             <label for="character_name">Name:</label>
@@ -64,7 +64,7 @@
                         </form>
                     </div>
                 </div>
-                <button id="myCharBtn" class="btn btn-primary"> Create Character</button>
+                <button id="myCharBtn" class="btn btn-primary" > Create Character</button>
                 <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
             </form>
 
@@ -76,7 +76,7 @@
                 <div id="modalSearch" class="modalSearch">
                     <div class="modal-content-photo">
                         <span class="close-photo">&times;</span>
-                        <p>Create an index card:</p>
+                        <p id="index">Index Card</p>
                         <form id="modalChar">
                             <label for="name_photo">Name:</label>
                             <input type="text" id="name_photo" name="name_photo">

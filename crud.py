@@ -301,7 +301,7 @@ def get_all_cards(project_name):
     card_list = []
     project = get_project_by_name(project_name)
     characters = Character.query.filter(Character.project_id == project.project_id).all()
-    images = Index.query.filter(Index.project_id == project.project_id).all()
+    indexes = Index.query.filter(Index.project_id == project.project_id).all()
 
     for character in characters:
         if characters == []:
@@ -309,29 +309,30 @@ def get_all_cards(project_name):
         else:
             card_list.append(character)
     
-    for image in images:
-        if images == []:
+    for index in indexes:
+        if indexes == []:
             pass
         else:
-            card_list.append(image)
+            card_list.append(index)
 
     return card_list
 
-def get_single_card(projectName, cardName):
+def get_single_card(projectName, card_type, cardName):
 
-    # card_name = cardName.lower()
     project = get_project_by_name(projectName)
-    # character_card = Character.query.filter(Character.project_id == project.project_id, Character.name == card_name).first()
-    image_card = Index.query.filter(Index.project_id == project.project_id, Index.name == cardName).first()
 
-    dict_of_card = {'card_name': image_card.name, 'image_url': image_card.index_url, 'desc': image_card.desc}
+    if card_type == "index":
+        image_card = Index.query.filter(Index.project_id == project.project_id, Index.name == cardName).first()
+        dict_of_card = {'card_type': card_type, 'card_name': image_card.name, 'image_url': image_card.index_url, 'desc': image_card.desc}
+        return dict_of_card
 
-    return dict_of_card
+    if card_type == "character":
+        character_card = Character.query.filter(Character.project_id == project.project_id, Character.name == cardName).first()
+        dict_of_card = {'card_type': card_type, 'card_name': character_card.name, 'role': character_card.role, 'desc': character_card.desc}
+        return dict_of_card
+    
 
-    # if character_card == []:
-    #     return image_card
-    # elif image_card == []:
-    #     return character_card
+
 
 if __name__=='__main__':
     from server import app

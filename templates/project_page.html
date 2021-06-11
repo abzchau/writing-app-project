@@ -54,9 +54,12 @@
                         <select id="selector_card" name="selector_card">
                             <option class="card_selector"> Choose a card</option>
                             {% for card in card_info %}
-                            <option value="{{card.name}}"> {{card.name}}</option>
+                            <option id ="{{ card.card_type }}" value="{{card.name}}"> {{card.name}}</option>
+                            <!-- <input type="hidden" id="card_type" value="{{ card.card_type }}" name="card_type" required> -->
                             {% endfor %}
+                            
                         </select>
+                        
                     </form>
 
 
@@ -75,6 +78,7 @@
 
                         <img id='card_image' src="" />
 
+                        <p id="card_role"></p>
                         <p id="card_desc"></p>
 
                         <button>Read more</button>

@@ -339,12 +339,12 @@ def get_reviewer(project, name):
         return dict_of_reviewers.get(name)
 
 
-@app.route('/api/project/card/<projectName>/<cardName>')
-def get_cards(projectName, cardName):
+@app.route('/api/project/card/<projectName>/<card_type>/<cardName>')
+def get_cards(projectName, card_type, cardName):
     """Returns Card Information On Project Page"""
 
     print(projectName, cardName, 'heeeeeeey')
-    get_card = crud.get_single_card(projectName, cardName)
+    get_card = crud.get_single_card(projectName, card_type, cardName)
     print('heidi', get_card)
 
     return get_card
