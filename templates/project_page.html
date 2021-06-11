@@ -24,7 +24,7 @@
             </form>
 
 
-            <form action="/submit_project" method="POST">
+            <form id="submit_project" action="/submit_project" method="POST">
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
@@ -46,66 +46,66 @@
 
 
 
-    <!-- A div with card class for the card  -->
-<div class="col-4">
-    <div class="row">
-    <div class="card">
-        <form id="card">
-            <select id="selector_card" name="selector_card">
-                <option class="card_selector"> Choose a card</option>
-                {% for card in card_info %}
-                <option value="{{card.name}}"> {{card.name}}</option>
-                {% endfor %}
-            </select>
-        </form>
-        
-      <img src=>
+        <!-- A div with card class for the card  -->
+        <div class="col-4">
+            <div class="row">
+                <div class="card">
+                    <form id="card">
+                        <select id="selector_card" name="selector_card">
+                            <option class="card_selector"> Choose a card</option>
+                            {% for card in card_info %}
+                            <option value="{{card.name}}"> {{card.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
 
-      <!-- A div with card__details class to hold the details in the card  -->
-      <div class="card__details">
 
-        <!-- Span with tag class for the tag -->
 
-        <!-- <span class="tag" id="name"></span>
+                    <!-- A div with card__details class to hold the details in the card  -->
+                    <div class="card__details">
+
+                        <!-- Span with tag class for the tag -->
+
+                        <!-- <span class="tag" id="name"></span>
 
         <span class="tag" id="desc"></span> -->
 
-        <!-- A div with name class for the name of the card -->
-        <p class="card_name"></p>
+                        <!-- A div with name class for the name of the card -->
+                        <p id="card_name"></p>
 
-        <p class="card_desc"></p>
+                        <img id='card_image' src="" />
 
-        <button>Read more</button>
-        </form>
-      </div>
+                        <p id="card_desc"></p>
 
+                        <button>Read more</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
 
-    </div>
-  </div>
+            <div class="col-4">
+                <div class="row">
+                    <h3 id="reviewer"> Review feedback from:</h3>
 
-
-        <div class="col-4">
-            <div class="row">
-                <h3 id ="reviewer"> Review feedback from:</h3>
-
-                <form id="reviewer_feedback">
-                    <select id="reviewer-id" class="form-select" name="reviewer_id">
-                        <option value="">Choose a reviewer</option>
-                        {% for reviewer in dict_of_reviewers %}
-                        <option value="{{ reviewer }}">{{reviewer}}</option>
-                        {% endfor %}
-                    </select>
-                    <p><input type="hidden" value="{{project_name}}" name="project_name" required> </p>
-                    <textarea readonly id="review" rows="15" cols="53" name="review-feedback">
+                    <form id="reviewer_feedback">
+                        <select id="reviewer-id" class="form-select" name="reviewer_id">
+                            <option value="">Choose a reviewer</option>
+                            {% for reviewer in dict_of_reviewers %}
+                            <option value="{{ reviewer }}">{{reviewer}}</option>
+                            {% endfor %}
+                        </select>
+                        <p><input type="hidden" value="{{project_name}}" name="project_name" required> </p>
+                        <textarea readonly id="review" rows="15" cols="53" name="review-feedback">
           </textarea>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<script src="/static/js/get_reviewer_feedback.js"></script>
-<script src="/static/js/modal.js"></script>
-<script src="/static/js/project_page.js"></script>
-{% endblock %}
+    <script src="/static/js/get_reviewer_feedback.js"></script>
+    <script src="/static/js/modal.js"></script>
+    <script src="/static/js/project_page.js"></script>
+    {% endblock %}

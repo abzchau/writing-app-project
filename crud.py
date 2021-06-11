@@ -317,17 +317,21 @@ def get_all_cards(project_name):
 
     return card_list
 
-def get_single_card(project_name, card_name):
+def get_single_card(projectName, cardName):
 
-    card_name = card_name.lower()
-    project = get_project_by_name(project_name)
-    character_card = Character.query.filter(Character.project_id == project.project_id, Character.name == card_name).first()
-    image_card = Postcard.query.filter(Postcard.project_id == project.project_id, Postcard.name).first()
+    # card_name = cardName.lower()
+    project = get_project_by_name(projectName)
+    # character_card = Character.query.filter(Character.project_id == project.project_id, Character.name == card_name).first()
+    image_card = Postcard.query.filter(Postcard.project_id == project.project_id, Postcard.name == cardName).first()
 
-    if character_card == []:
-        return image_card
-    elif image_card == []:
-        return character_card
+    dict_of_card = {'card_name': image_card.name, 'image_url': image_card.postcard_url, 'desc': image_card.desc}
+
+    return dict_of_card
+
+    # if character_card == []:
+    #     return image_card
+    # elif image_card == []:
+    #     return character_card
 
 if __name__=='__main__':
     from server import app

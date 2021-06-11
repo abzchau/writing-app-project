@@ -18,3 +18,16 @@ function getReviewer(txtReviewer) {
 
 
 formFeedback.addEventListener('click', getReviewer);
+
+
+
+//This closes the modal
+
+let submitProject = document.getElementById('submit_project');
+
+function closeModal() {
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+submitProject.addEventListener('submit', closeModal)
