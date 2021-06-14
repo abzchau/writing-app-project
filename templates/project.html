@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/css/character_modal.css">
     <link rel="stylesheet" href="/static/css/photo.css">
     <link rel="stylesheet" href="/static/css/project.css">
+    <link rel="stylesheet" href='/static/css/storyarc_modal.css'>
 </head>
 
 <div class="container">
@@ -94,6 +95,49 @@
                     </div>
                 </div>
 
+                <form class="storyarc">
+                    <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+                    <input type="text" class="form-control"  placeholder="Build an Arc" name="storyarc" id="storyarc">
+                    <input type="button" class="btn btn-primary" value="Create a Story Arc" id="myArcBtn"></button>
+                    <div id="modalArc" class="modalArc">
+                        <div class="modal-content-arc">
+                            <span class="close-arc">&times;</span>
+                            <p id="storyarc">Story Arc</p>
+                            <form id="modalArc">
+                                <p>Plot Point Value is a value between -100 and 100. A value of -100 means the protagonist or plot point has reached the lowest place possible.</p>
+                                <label for="name_arc">Name:</label>
+                                <input type="text" id="name_arc" name="name_arc">
+                                <label for="plot1">Plot Point 1:</label>
+                                <input type="text" id="plot_point1" name="plot_point1">
+                                <label for="plot1_val">Plot Point 1 Value:</label>
+                                <input type="number" id="plot_point1_value" name="plot_point1_value">
+                                <label for="plot2">Plot Point 2:</label>
+                                <input type="text" id="plot_point2" name="plot_point2">
+                                <label for="plot2_val">Plot Point 2 Value:</label>
+                                <input type="number" id="plot_point2_value" name="plot_point2_value">
+                                <label for="plot3">Plot Point 3:</label>
+                                <input type="text" id="plot_point3" name="plot_point3">
+                                <label for="plot3_val">Plot Point 3 Value:</label>
+                                <input type="number" id="plot_point3_value" name="plot_point3_value">
+                                <label for="plot4">Plot Point 4:</label>
+                                <input type="text" id="plot_point4" name="plot_point4">
+                                <label for="plot4_val">Plot Point 4 Value:</label>
+                                <input type="number" id="plot_point4_value" name="plot_point4_value">
+                                <label for="plot5">Plot Point 5:</label>
+                                <input type="text" id="plot_point5" name="plot_point5">
+                                <label for="plot5_val">Plot Point 5 Value:</label>
+                                <input type="number" id="plot_point5_value" name="plot_point5_value">
+                                <label for="plot6">Plot Point 6:</label>
+                                <input type="text" id="plot_point6" name="plot_point6">
+                                <label for="plot6_val">Plot Point 6 Value:</label>
+                                <input type="number" id="plot_point6_value" name="plot_point6_value">
+                                <div class="modal body"></div>
+                            </form>
+                            <button id="mySubmitArcBtn" class="btn btn-primary"> Save </button>
+                        </div>
+                    </div>
+
+
                 <div>
                     <form action="/project_page" method="POST">
                         <p><input type="hidden" value="{{project_name}}" name="project_name" required></p>
@@ -107,6 +151,8 @@
 <script src="/static/js/character_modal.js"></script>
 <script src="/static/js/get_photo.js"></script>
 <script src="/static/js/photo_modal.js"></script>
+<script src="/static/js/storyarc_modal.js"></script>
+<script src="/static/js/storyarc.js"></script>
 
 
 {% endblock %}

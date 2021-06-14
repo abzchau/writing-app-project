@@ -263,6 +263,7 @@ def post_project():
 
 @app.route('/create_character', methods=["POST"])
 def create_character():
+    """Create a character card on the project page for it to appear on the project specific page"""
 
     project_name = request.form.get("project_name")
 
@@ -281,7 +282,7 @@ def create_character():
 
 @app.route('/api/create_index', methods=["POST"])
 def create_index():
-    """Create a index on the project page for it to appear on the project specific page"""
+    """Create a index card on the project page for it to appear on the project specific page"""
 
 
     name = request.form.get("name")
@@ -291,6 +292,32 @@ def create_index():
 
     index = crud.create_index(name, desc, final_photo, project_name)
     return get_text_for_project_page(project_name)
+
+
+@app.route('/api/create_storyarc', methods=["POST"])
+def create_storyarc():
+    """"Create a storyarc card on the project page for it to appear on the project specific page"""
+
+    projectName = request.form.get("projectName")
+    storyarc_name = request.form.get("storyarc_name")
+    plot_point1 = request.form.get("plot_point1")
+    plot_point1_value = request.form.get("plot_point1_value")
+    plot_point2 = request.form.get("plot_point2")
+    plot_point2_value = request.form.get("plot_point2_value")
+    plot_point3 = request.form.get("plot_point3")
+    plot_point3_value = request.form.get("plot_point3_value")
+    plot_point4 = request.form.get("plot_point4")
+    plot_point4_value = request.form.get("plot_point4_value")
+    plot_point5 = request.form.get("plot_point5")
+    plot_point5_value = request.form.get("plot_point5_value")
+    plot_point6 = request.form.get("plot_point6")
+    plot_point6_value = request.form.get("plot_point6_value")
+
+    print(storyarc_name, plot_point1, plot_point1_value, plot_point2, plot_point2_value, plot_point3, plot_point3_value, plot_point4, plot_point4_value, plot_point5, plot_point5_value, plot_point6, plot_point6_value)
+
+    storyarc = crud.create_storyarc(projectName, storyarc_name, plot_point1, plot_point1_value, plot_point2, plot_point2_value, plot_point3, plot_point3_value, plot_point4, plot_point4_value, plot_point5, plot_point5_value, plot_point6, plot_point6_value)
+
+    return get_text_for_project_page(projectName )
 
 #Project-Specific Page Where You Can Edit A Project, Submit A Project And View Feedback From Other Users About Your Project
 
@@ -348,6 +375,9 @@ def get_cards(projectName, card_type, cardName):
     print('heidi', get_card)
 
     return get_card
+
+# @app.route('/api/project/storyarc/<projectName>/<card_type>/<cardName>')
+# def
 
 
 

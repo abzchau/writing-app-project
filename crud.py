@@ -1,7 +1,7 @@
 """CRUD operations for the writing app"""
 
 from datetime import datetime
-from model import db, User, Group, Project, Submission, Feedback, Character, Index, connect_to_db
+from model import db, User, Group, Project, Submission, Feedback, Character, Index, Storyarc, connect_to_db
 
 def create_user(first_name, last_name, email, password, favorite_writer="", favorite_animal=""):
     """Create and return a new user"""
@@ -292,6 +292,14 @@ def create_index(name, desc, final_photo, projectName):
     project = get_project_by_name(projectName)
     index = Index(project_id=project.project_id, name= name, desc=desc, index_url=final_photo)
     db.session.add(index)
+    db.session.commit()
+
+def create_storyarc(projectName, storyarc_name, plot_point1, plot_point1_value, plot_point2, plot_point2_value, plot_point3, plot_point3_value, plot_point4, plot_point4_value, plot_point5, plot_point5_value, plot_point6, plot_point6_value):
+    """Creates a Story Arc Card"""
+
+    project = get_project_by_name(projectName)
+    storyarc = Storyarc(project_id=project.project_id, storyarc_name= storyarc_name, plot_point1=plot_point1, plot_point1_value=plot_point1_value, plot_point2=plot_point2, plot_point2_value=plot_point2_value, plot_point3=plot_point3, plot_point3_value=plot_point3_value, plot_point4=plot_point4, plot_point4_value=plot_point4_value, plot_point5=plot_point5, plot_point5_value=plot_point5_value, plot_point6=plot_point6, plot_point6_value=plot_point6_value)
+    db.session.add(storyarc)
     db.session.commit()
 
 

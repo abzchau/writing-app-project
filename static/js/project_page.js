@@ -3,6 +3,7 @@
 //       $('#text').autosize();
 //   });
 
+//Sends Card Info To the Backend And Gets Back Info To Manipulate the Card Elements On the Project Page
 let cardSelector = document.querySelector("#selector_card");
 
 function handleCardResponse(resCardResponse) {
@@ -43,3 +44,6 @@ function addCardInfo(cardRes) {
 }
 
     cardSelector.addEventListener('click', addCardInfo);
+
+//Chart.js Playground
+

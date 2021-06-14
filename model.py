@@ -67,7 +67,7 @@ class Project(db.Model):
     submission = db.relationship('Submission', back_populates='projects')
     character = db.relationship('Character', back_populates='projects')
     index = db.relationship('Index', back_populates='projects')
-    storyarc = db.relationship('StoryArc', back_populates='projects')
+    storyarc = db.relationship('Storyarc', back_populates='projects')
 
 
     def __repr__(self):
@@ -152,7 +152,7 @@ class Index(db.Model):
         return f'<Index index_id={self.index_id} project_id={self.index_id} index_url={self.index_url}>'
 
 
-class StoryArc(db.Model):
+class Storyarc(db.Model):
     """Story Arc"""
 
     __tablename__="storyarc"
@@ -176,7 +176,7 @@ class StoryArc(db.Model):
     projects = db.relationship('Project', back_populates='storyarc')
 
     def __repr__(self):
-        return f'<StoryArc storyarc_id={self.storyarc} project_id={self.project_id}>'
+        return f'<Storyarc storyarc_id={self.storyarc_id} project_id={self.project_id} storyarc_name={self.storyarc_name}>'
 
 
 
