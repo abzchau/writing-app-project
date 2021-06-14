@@ -17,7 +17,7 @@ function handleCardResponse(resCardResponse) {
         document.querySelector('#card_desc').innerHTML = resCardResponse.desc;
         document.querySelector('#card_role').innerHTML = resCardResponse.role;
     } else {
-        document.querySelector('#card_name').innerHTML = resCardResponse.storyarc_name;
+        document.querySelector('#card_name').innerHTML = resCardResponse.card_name;
     }
 }
 

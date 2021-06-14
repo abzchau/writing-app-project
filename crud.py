@@ -294,11 +294,11 @@ def create_index(name, desc, final_photo, projectName):
     db.session.add(index)
     db.session.commit()
 
-def create_storyarc(projectName, storyarc_name, plot_point1, plot_point1_value, plot_point2, plot_point2_value, plot_point3, plot_point3_value, plot_point4, plot_point4_value, plot_point5, plot_point5_value, plot_point6, plot_point6_value):
+def create_storyarc(projectName, name, plot_point1, plot_point1_value, plot_point2, plot_point2_value, plot_point3, plot_point3_value, plot_point4, plot_point4_value, plot_point5, plot_point5_value, plot_point6, plot_point6_value):
     """Creates a Story Arc Card"""
 
     project = get_project_by_name(projectName)
-    storyarc = Storyarc(project_id=project.project_id, storyarc_name= storyarc_name, plot_point1=plot_point1, plot_point1_value=plot_point1_value, plot_point2=plot_point2, plot_point2_value=plot_point2_value, plot_point3=plot_point3, plot_point3_value=plot_point3_value, plot_point4=plot_point4, plot_point4_value=plot_point4_value, plot_point5=plot_point5, plot_point5_value=plot_point5_value, plot_point6=plot_point6, plot_point6_value=plot_point6_value)
+    storyarc = Storyarc(project_id=project.project_id, name= name, plot_point1=plot_point1, plot_point1_value=plot_point1_value, plot_point2=plot_point2, plot_point2_value=plot_point2_value, plot_point3=plot_point3, plot_point3_value=plot_point3_value, plot_point4=plot_point4, plot_point4_value=plot_point4_value, plot_point5=plot_point5, plot_point5_value=plot_point5_value, plot_point6=plot_point6, plot_point6_value=plot_point6_value)
     db.session.add(storyarc)
     db.session.commit()
 
@@ -310,6 +310,7 @@ def get_all_cards(project_name):
     project = get_project_by_name(project_name)
     characters = Character.query.filter(Character.project_id == project.project_id).all()
     indexes = Index.query.filter(Index.project_id == project.project_id).all()
+    storyarc = Storyarc.query.filter(Storyarc.project_id == project.project_id).all()
 
     for character in characters:
         if characters == []:
@@ -322,6 +323,12 @@ def get_all_cards(project_name):
             pass
         else:
             card_list.append(index)
+
+    for arc in storyarc:
+        if storyarc == []:
+            pass
+        else:
+            card_list.append(arc)
 
     return card_list
 
@@ -337,6 +344,12 @@ def get_single_card(projectName, card_type, cardName):
     if card_type == "character":
         character_card = Character.query.filter(Character.project_id == project.project_id, Character.name == cardName).first()
         dict_of_card = {'card_type': card_type, 'card_name': character_card.name, 'role': character_card.role, 'desc': character_card.desc}
+        return dict_of_card
+
+
+    if card_type == "storyarc":
+        storyarc_card = Storyarc.query.filter(Storyarc.project_id == project.project_id, Storyarc.name == cardName).first()
+        dict_of_card = {'card_type': card_type, 'card_name': storyarc_card.name}
         return dict_of_card
     
 

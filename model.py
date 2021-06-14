@@ -159,7 +159,8 @@ class Storyarc(db.Model):
 
     storyarc_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
-    storyarc_name = db.Column(db.String)
+    name = db.Column(db.String)
+    card_type = db.Column(db.String, default="storyarc")
     plot_point1 = db.Column(db.String)
     plot_point1_value = db.Column(db.Integer)
     plot_point2 = db.Column(db.String)
@@ -176,7 +177,7 @@ class Storyarc(db.Model):
     projects = db.relationship('Project', back_populates='storyarc')
 
     def __repr__(self):
-        return f'<Storyarc storyarc_id={self.storyarc_id} project_id={self.project_id} storyarc_name={self.storyarc_name}>'
+        return f'<Storyarc storyarc_id={self.storyarc_id} project_id={self.project_id} name={self.name}>'
 
 
 
