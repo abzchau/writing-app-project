@@ -277,11 +277,11 @@ def get_reviewer_feedback(project_name):
     else:
         return ""    
 
-def create_character(project_name, name, role, desc, age, physical_appearance, motivation, fondest_memory, song):
+def create_character(project_name, name, role, desc):
     """"Creates a Character"""
 
     project = get_project_by_name(project_name)
-    character = Character(project_id=project.project_id, role=role, age=age, name=name, physical_appearance=physical_appearance, motivation=motivation, fondest_memory=fondest_memory, song=song, desc=desc)
+    character = Character(project_id=project.project_id, role=role, name=name, desc=desc)
 
     db.session.add(character)
     db.session.commit()

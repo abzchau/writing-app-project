@@ -40,7 +40,7 @@ class Group(db.Model):
     __tablename__= 'groups'
 
     group_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    group_name = db.Column(db.String, unique=True)
+    group_name = db.Column(db.String, unique=True, nullable=False)
     
     users = db.relationship('User', secondary=user_group_association, back_populates="groups")
     projects = db.relationship('Project', back_populates='group')
@@ -55,7 +55,7 @@ class Project(db.Model):
     __tablename__= 'projects'
 
     project_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    project_name = db.Column(db.String, unique=True)
+    project_name = db.Column(db.String, unique=True, nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.group_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     genre = db.Column(db.String, nullable=True)
@@ -118,20 +118,20 @@ class Character(db.Model):
 
     character_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
-    name = db.Column(db.String)
+    name = db.Column(db.String, unique=True)
     role = db.Column(db.String)
     desc = db.Column(db.String)
     card_type = db.Column(db.String, default="character")
-    age = db.Column(db.Integer)
-    physical_appearance = db.Column(db.String)
-    motivation = db.Column(db.String)
-    fondest_memory = db.Column(db.String)
-    song = db.Column(db.String) 
+    # age = db.Column(db.Integer)
+    # physical_appearance = db.Column(db.String)
+    # motivation = db.Column(db.String)
+    # fondest_memory = db.Column(db.String)
+    # song = db.Column(db.String) 
 
     projects = db.relationship('Project', back_populates='character')
 
     def __repr__(self):
-        return f'<Character character_id={self.character_id} project_id={self.project_id} name={self.name} role={self.role} age={self.age} desc={self.desc}>'
+        return f'<Character character_id={self.character_id} project_id={self.project_id} name={self.name} role={self.role} desc={self.desc}>'
 
 
 class Index(db.Model):
@@ -142,7 +142,7 @@ class Index(db.Model):
     index_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
     index_url = db.Column(db.String)
-    name = db.Column(db.String)
+    name = db.Column(db.String, unique=True, nullable=False)
     desc = db.Column(db.String)
     card_type = db.Column(db.String, default="index")
 
@@ -159,20 +159,20 @@ class Storyarc(db.Model):
 
     storyarc_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
-    name = db.Column(db.String)
+    name = db.Column(db.String, unique=True, nullable=False)
     card_type = db.Column(db.String, default="storyarc")
-    plot_point1 = db.Column(db.String)
-    plot_point1_value = db.Column(db.Integer)
-    plot_point2 = db.Column(db.String)
-    plot_point2_value = db.Column(db.Integer)
-    plot_point3 = db.Column(db.String)
-    plot_point3_value = db.Column(db.Integer)
-    plot_point4 = db.Column(db.String)
-    plot_point4_value = db.Column(db.Integer)
-    plot_point5 = db.Column(db.String)
-    plot_point5_value = db.Column(db.Integer)
-    plot_point6 = db.Column(db.String)
-    plot_point6_value = db.Column(db.Integer)
+    plot_point1 = db.Column(db.String, nullable=False)
+    plot_point1_value = db.Column(db.Integer, nullable=False)
+    plot_point2 = db.Column(db.String, nullable=False)
+    plot_point2_value = db.Column(db.Integer, nullable=False)
+    plot_point3 = db.Column(db.String, nullable=False)
+    plot_point3_value = db.Column(db.Integer, nullable=False)
+    plot_point4 = db.Column(db.String, nullable=False)
+    plot_point4_value = db.Column(db.Integer, nullable=False)
+    plot_point5 = db.Column(db.String, nullable=False)
+    plot_point5_value = db.Column(db.Integer, nullable=False)
+    plot_point6 = db.Column(db.String, nullable=False)
+    plot_point6_value = db.Column(db.Integer, nullable=False)
 
     projects = db.relationship('Project', back_populates='storyarc')
 
