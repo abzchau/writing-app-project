@@ -349,7 +349,7 @@ def get_single_card(projectName, card_type, cardName):
 
     if card_type == "storyarc":
         storyarc_card = Storyarc.query.filter(Storyarc.project_id == project.project_id, Storyarc.name == cardName).first()
-        dict_of_card = {'card_type': card_type, 'card_name': storyarc_card.name}
+        dict_of_card = {'card_type': card_type, 'card_name': storyarc_card.name, 'plot_point1': storyarc_card.plot_point1, 'plot_point1_value': storyarc_card.plot_point1_value, 'plot_point2': storyarc_card.plot_point2, 'plot_point2_value': storyarc_card.plot_point2_value, 'plot_point3': storyarc_card.plot_point3, 'plot_point3_value': storyarc_card.plot_point3_value, 'plot_point4': storyarc_card.plot_point4, 'plot_point4_value': storyarc_card.plot_point4_value, 'plot_point5': storyarc_card.plot_point5, 'plot_point5_value': storyarc_card.plot_point5_value, 'plot_point6': storyarc_card.plot_point6, 'plot_point6_value': storyarc_card.plot_point6_value}
         return dict_of_card
     
 
