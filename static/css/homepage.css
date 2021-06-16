@@ -1,22 +1,28 @@
-body {
+/* body {
   padding: 0;
   margin: 0;
   background: #f2f6e9;
-}
+} */
+
 .navbar {
-  background:#e7e7e7;
+  background: black;
+  background: rgba(6, 77, 80, 0.65); 
+  padding : 8px 16px;
 }
 .nav-link,
 .navbar-brand {
   color: #fff;
   cursor: pointer;
+  font-family: IBM Plex Serif;
 }
 .nav-link {
   margin-right: 1em !important;
 }
-.nav-link:hover {
+/* .nav-link:hover {
   color: #000;
-}
+} */
+
+/* Moves navbar to the right */
 .navbar-collapse {
   justify-content: flex-end;
 }
@@ -25,11 +31,14 @@ body {
   background-image: url('/static/css/pexels-flickr-156321.jpg');
   background-size: cover;
   background-position: center;
-  position: relative;
+  /* position: relative; */
+  /* opacity: 0.95; */
+  background-position: 0% 42%;
 }
 
 .title {
-  font-family: Book Antiqua;
+  font-family: Quando;
+  font-weight: 700;
 }
 
 /* .overlay {
@@ -55,24 +64,30 @@ body {
   color: #fff;
   font-size: 1.3rem;
   line-height: 1.5;
+  font-family: IBM Plex Serif;  
 }
 
 
 .features {
   margin: 4em auto;
-  padding: 1em;
   position: relative;
+  font-family: IBM Plex Serif;  
 }
+
 .feature-title {
   color: #333;
   font-size: 1.3rem;
-  font-weight: 700;
+  /* font-weight: 700; */
   margin-bottom: 20px;
   text-transform: uppercase;
+  font-family: IBM Plex Serif;  
+  padding: 1em;
 }
-.features img {
+/* .features img {
   -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   margin-bottom: 16px;
-}
+} */
+
+

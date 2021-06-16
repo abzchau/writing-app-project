@@ -34,7 +34,7 @@ function getPhotos(images) {
     let num = 1
     images.map(image => {
         cardTag = `<div class="card">
-                <img src=${image.src.tiny} id="myimage${num}" />
+                <img class="img-fluid" src=${image.src.tiny} id="myimage${num}" />
                 </div>`;
         num += 1
         container.innerHTML += cardTag;

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/css/photo.css">
     <link rel="stylesheet" href="/static/css/project.css">
     <link rel="stylesheet" href='/static/css/storyarc_modal.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">  
 </head>
 
 <div class="container">
@@ -72,7 +73,7 @@
 
             <form class="example">
                 <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-                <input type="text" class="form-control"  placeholder="Search" name="search" id="search">
+                <input type="text" class="form-control"  placeholder="Search for an image" name="search" id="search">
                 <input type="button" class="btn btn-primary" value="Create Index" id="mySearchBtn"></button>
                 <div id="modalSearch" class="modalSearch">
                     <div class="modal-content-photo">
@@ -97,7 +98,8 @@
 
                 <form class="storyarc">
                     <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-                    <input type="text" class="form-control"  placeholder="Build an Arc" name="storyarc" id="storyarc">
+                    <!-- <input type="text" class="form-control"  placeholder="Build an Arc" name="storyarc" id="storyarc"> -->
+                    <i class="fas fa-chart-line"></i>
                     <input type="button" class="btn btn-primary" value="Create a Story Arc" id="myArcBtn"></button>
                     <div id="modalArc" class="modalArc">
                         <div class="modal-content-arc">
