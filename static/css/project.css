@@ -4,19 +4,77 @@
     padding: 50px;
 }
 
-.column {
+/* .column {
     float: left;
     width: 50%;
     
-  }
+  } */
 
-  .create {
+  /* .create {
     padding: 5px;
     height: 10;
-}
+} */
 
 /* img {
   display: block;
   max-width: 100%;
   height: auto;
 } */
+
+
+.col-sm-6 {
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  position: absolute; 
+  right: 150px;
+  width: 400px;
+  top: 120px;
+  height: 120px;
+}
+
+
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+
+/* Control the left side */
+.left {
+  left: 0;
+  background-color:cornflowerblue;
+  background-image: url('/static/css/pexels-flickr-156321.jpg');
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+
+}
+
+.modalChar {
+  background-color: tomato;
+  font-family: Quando;
+  color: black;
+}
+
+
+.modalSearch {
+  background-color: tomato;
+  font-family: Quando;
+  color: black;
+}
+
+.modalArc {
+  background-color: tomato;
+  font-family: Quando;
+  color: black;
+}

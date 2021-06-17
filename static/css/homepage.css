@@ -14,6 +14,7 @@
   color: #fff;
   cursor: pointer;
   font-family: IBM Plex Serif;
+  font-size: 22px;
 }
 .nav-link {
   margin-right: 1em !important;
@@ -91,3 +92,12 @@
 } */
 
 
+.footer {
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(6, 77, 80, 0.65); 
+  color: white;
+  text-align: center;
+}
