@@ -9,14 +9,14 @@ let cardSelector = document.querySelector("#selector_card");
 function handleCardResponse(resCardResponse) {
     console.log(resCardResponse);
     if (resCardResponse.card_type === "index") {
-        document.querySelector('#card_name').innerHTML = resCardResponse.card_name;
+        document.querySelector('#card_name').innerHTML = "Name:" + " " + resCardResponse.card_name;
         document.getElementById("card_image").src = resCardResponse.image_url;
-        document.getElementById("card_desc").innerHTML = resCardResponse.desc;
+        document.getElementById("card_desc").innerHTML = "Description:" + " " + resCardResponse.desc;
     } else if (resCardResponse.card_type === "character") {
-        document.querySelector('#card_name').innerHTML = resCardResponse.card_name;
-        document.querySelector('#card_desc').innerHTML = resCardResponse.desc;
-        document.querySelector('#card_role').innerHTML = resCardResponse.role;
-    } else {
+        document.querySelector('#card_name').innerHTML = "Name:" + " " +  resCardResponse.card_name;
+        document.querySelector('#card_desc').innerHTML = "Description:" + " " + resCardResponse.desc;
+        document.querySelector('#card_role').innerHTML = "Role:" + " " + resCardResponse.role;
+    } else if (resCardResponse.card_type === "storyarc") {
         // document.querySelector('#card_name').innerHTML = resCardResponse.card_name;
         $('.card__details').append('<canvas id="myChartCard"></canvas>');
         myChart(resCardResponse)

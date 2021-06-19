@@ -7,11 +7,11 @@
 
 #text {
     width:800px;
-    height: 500px;
+    height: 710px;
     /* overflow:hidden; */
     /* background-color:#FFF; */
     color:#222;
-    font-family:Arial;
+    font-family: mega montserrat bold;
     font-weight:normal;
     font-size:18px;
     overflow-y: scroll;
@@ -43,16 +43,116 @@
     background-color: rgb(161, 161, 56)
 }
 
-#reviewer {
-    font-size: 22px;
-    padding: 50px;
-    top: 50px;
+
+.form-selector {
+    background-color: #0563af;
+    color: white;
+    padding: 6px;
+    width: 250px;
+    border: none;
+    font-size: 16px;
+    font-family: Quando;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    border-radius: 15px;
 }
 
-.form-select {
-    overflow-y: scroll;
+.form-selector1 {
+    background-color: green;
+    color: white;
+    padding: 6px;
+    width: 250px;
+    border: none;
+    font-size: 16px;
+    font-family: Quando;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    border-radius: 15px;
 }
+
+
 
 #project_name {
-    font-size: 22px;
+    font-size: 28px;
+    font-family: mega montserrat bold;
+    margin-bottom: 0.4125rem;
 }
+
+#review {
+
+    background-color: #fff;
+    background: linear-gradient(#f8f8f8, #fff);
+    /* box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4); */
+    border-radius: 6px;
+    width: 450px;
+    height: 410px;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.card_class {
+    width: 450px;
+    height: 410px;
+    background-color: #fff;
+    background: linear-gradient(#f8f8f8, #fff);
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+
+    
+}
+
+#card_name {
+    margin: 1.5rem;
+    font-size: 20px;
+    font-family: Quando;
+}
+
+#card_image {
+    margin: 1.5rem;
+    position: relative; 
+    top: -45px;
+    font-family: Quando;
+}
+
+#card_role {
+    margin: 1.5rem;
+    position: relative; 
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-family: Quando;
+}
+
+#card_desc {
+    margin: 1.5rem;
+    position: relative; 
+    top: 4px;
+    font-size: 20px;
+    font-family: Quando;
+}
+
+
+
+.card_image_class {
+
+    font-family: Quando;
+}
+
+.card_role_class {
+
+    font-size: 12px;
+    font-family: Quando;
+}
+
+.card_desc_class {
+    font-size: 12px;
+    font-family: Quando;
+}
+
+

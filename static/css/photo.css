@@ -35,3 +35,12 @@
     text-decoration: none;
     cursor: pointer;
   } 
+
+
+img {
+  border:solid 1px; margin:10px;
+
+}
+.selected{
+   box-shadow:0px 12px 22px 1px #333;
+}

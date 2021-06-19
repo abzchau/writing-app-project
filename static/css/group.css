@@ -1,6 +1,6 @@
 .container {
     margin: 50px auto;
-    font-family: Arial;
+    font-family: Quando;
     padding: 50px;
 }
 
@@ -26,6 +26,63 @@
 }
 
 .col-sm-6 {
-  padding: 40px;
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  position: absolute; 
+  right: 150px;
+  width: 400px;
+  top: 120px;
+  height: 120px;
+}
 
+
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+
+/* Control the left side */
+.left {
+  left: 0;
+
+  background-image: url('/static/css/murakami.png');
+  background-repeat: repeat-y;
+  background-position-x: -25em;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+
+}
+
+
+
+.btn-success {
+  background-color: darkblue;
+  border-color: white;
+
+}
+
+.btn-primary {
+  border-color: white;
+}
+
+
+.btn-warning {
+  background-color: rgb(218, 28, 154);
+  border-color: white;
+}
+
+.go_to_meeting {
+  margin-top: 116px;
 }

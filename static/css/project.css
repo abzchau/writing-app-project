@@ -51,7 +51,7 @@
 .left {
   left: 0;
   background-color:cornflowerblue;
-  background-image: url('/static/css/pexels-flickr-156321.jpg');
+  background-image: url('/static/css/lessing.png');
 }
 
 /* Control the right side */
@@ -77,4 +77,48 @@
   background-color: tomato;
   font-family: Quando;
   color: black;
+}
+
+/* Create A World Buttons */
+.btn-primary {
+  background-color: tomato;
+  border-color: orange;
+}
+
+.btn-info {
+  background-color: darkblue;
+  color: white;
+}
+
+
+.btn-default {
+  background-color: teal;
+  color: white;
+  border-color: white;
+}
+
+.btn-warning {
+  background-color: yellow;
+  color: white;
+  border-color: white;
+}
+
+/* Edit Project Button */
+.btn-success {
+  background-color: teal;
+  color: white;
+  border-color: white;
+  top: 200px;
+}
+
+
+.divided {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  flex-grow: 100;
+  border-bottom: 17px solid white;
+  margin: 3px
 }

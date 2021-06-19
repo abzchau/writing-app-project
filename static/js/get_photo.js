@@ -41,6 +41,11 @@ function getPhotos(images) {
     });
     let imagesElements = document.querySelectorAll(".card img");
 
+    $('img').click(function(){
+        $('.selected').removeClass('selected'); // removes the previous selected class
+        $(this).addClass('selected'); // adds the class to the clicked image
+     });
+
     for (let image of imagesElements) {
         image.onclick = function() {
             window.selected = image.src;

@@ -49,41 +49,36 @@
         <!-- A div with card class for the card  -->
         <div class="col-4">
             <div class="row">
-                <div class="card">
+                <div class="card_class">
                     <form id="card">
-                        <select id="selector_card" name="selector_card">
-                            <option class="card_selector"> Choose a card</option>
-                            {% for card in card_info %}
-                            <option id ="{{ card.card_type }}" value="{{card.name}}"> {{card.name}}</option>
-                            <!-- <input type="hidden" id="card_type" value="{{ card.card_type }}" name="card_type" required> -->
-                            {% endfor %}
-                            
-                        </select>
-                        
-                    </form>
+                <select id="selector_card" class="form-selector" name="selector_card">
+                    <option class="card_selector" value=""> Choose a card to display:</option>
+                    {% for card in card_info %}
+                    <option id="{{ card.card_type }}" value="{{card.name}}"> {{card.name}}</option>
+                    <!-- <input type="hidden" id="card_type" value="{{ card.card_type }}" name="card_type" required> -->
+                    {% endfor %}
+                </select>
 
+                    </form>
 
 
                     <!-- A div with card__details class to hold the details in the card  -->
                     <div class="card__details">
-                        <p id="card_name"></p>
-                        <img id='card_image' src="" />
-                        <p id="card_role"></p>
-                        <p id="card_desc"></p>
-                        <canvas id="myChartCard"></canvas>
-
+                        <p class="chart"><canvas id="myChartCard"></canvas></p>
+                        <h5 class="card_name_class"><p id="card_name"></p></h5>
+                        <h7 class="card_image_class"><p id="card_desc"></p></h7>
+                        <h7 class="card_role_class"><p id="card_role"></p></h7>
+                        <p class="card_image_class"><img id='card_image' src="" /></p>
                         </form>
                     </div>
                 </div>
             </div>
-        
+
 
             <div class="col-4">
                 <div class="row">
-                    <h3 id="reviewer"> Review feedback from:</h3>
-
                     <form id="reviewer_feedback">
-                        <select id="reviewer-id" class="form-select" name="reviewer_id">
+                        <select id="reviewer-id" class="form-selector1" name="reviewer_id">
                             <option value="">Choose a reviewer</option>
                             {% for reviewer in dict_of_reviewers %}
                             <option value="{{ reviewer }}">{{reviewer}}</option>

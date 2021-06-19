@@ -15,14 +15,14 @@
         <div class="split left">
             <div class="col-sm-6">
 
-                <i class="fas fa-pencil-alt fa-2x"></i>
+                <!-- <i class="fas fa-pencil-alt fa-2x"></i> -->
                 <h2 id="project_name">{{project_name}}</h2>
                 <h4>{{genre}}</h4>
 
                 <h4 class="create">Linked to Group: </h4>
                 <ul class="list-group">
                     <li class="list-inline-item">
-                        <a href="/group/{{ group_name }}">
+                        <a href="/group/{{ group_name }}" style="font-size: 18px;font-weight: bold;">
                             {{ group_name }}
                         </a>
                     </li>
@@ -37,7 +37,7 @@
                     <p><input type="text" class="form-control" placeholder="group name" name="group_name" required></p>
                     <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
                     <div>
-                        <button type="submit" class="btn btn-primary">Add a group to the project</button>
+                        <button type="submit" class="btn btn-info btn-md">Add a group to the project</button>
                     </div>
                 </form>
             </div>
@@ -45,7 +45,7 @@
 
         <div class="split right">
             <div class="col-sm-6">
-                <i class="fas fa-book fa-2x"></i>
+                <!-- <i class="fas fa-book fa-2x"></i> -->
                 <h2>Create A World</h2>
                 <i class="far fa-user-circle fa-2x"></i>
                 <form action="/create_character" method="POST">
@@ -79,91 +79,96 @@
                     <button id="myCharBtn" class="btn btn-primary"> Create Character</button>
                     <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
                 </form>
-            
 
-
-            <form class="example">
-                <i class="far fa-images fa-2x"></i>
-                <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-                <input type="text" class="form-control" placeholder="Search for an image" name="search" id="search">
-                <input type="button" class="btn btn-primary" value="Create Index" id="mySearchBtn"></button>
-                <div id="modalSearch" class="modalSearch">
-                    <div class="modal-content-photo">
-                        <span class="close-photo">&times;</span>
-                        <p id="index">Index Card</p>
-                        <form id="modalChar">
-                            <label for="name_photo">Name:</label>
-                            <input type="text" id="name_photo" name="name_photo">
-                            <label for="desc_photo">Description:</label>
-                            <input type="text" id="desc_photo" name="desc_photo">
-                            <p>Select a photo</p>
-                            <div class="modal body"></div>
-                            <div class="container-image">
-                                <div class="card">
-                                    <img src="" />
-                                </div>
-                            </div>
-                        </form>
-                        <button id="mySubmitPhotoBtn" class="btn btn-primary"> Save </button>
-                    </div>
-                </div>
-
-                <form class="storyarc">
+                <span class="divider"></span>
+                <p class="divided">
+                <form class="example">
+                    <i class="far fa-images fa-2x"></i>
                     <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
-                    <!-- <input type="text" class="form-control"  placeholder="Build an Arc" name="storyarc" id="storyarc"> -->
-                    <i class="fas fa-chart-line fa-2x"></i>
-                    <input type="button" class="btn btn-primary" value="Create a Story Arc" id="myArcBtn"></button>
-                    <div id="modalArc" class="modalArc">
-                        <div class="modal-content-arc">
-                            <span class="close-arc">&times;</span>
-                            <p id="storyarc">Story Arc</p>
-                            <form id="modalArc">
-                                <p>Plot Point Name is the point where your story pivots. Think when Harry Potter finds out he is a wizard.</p>
-                                <p>Plot Point Value is a value between -100 and 100. A value of -100 means the
-                                    protagonist or plot point has reached the lowest place possible. Think when Odysseus enters Hades. </p>
-                                <label for="name_arc">Name:</label>
-                                <input type="text" id="name_arc" name="name_arc">
-                                <label for="plot1">Plot Point 1:</label>
-                                <input type="text" id="plot_point1" name="plot_point1">
-                                <label for="plot1_val">Plot Point 1 Value:</label>
-                                <input type="number" id="plot_point1_value" name="plot_point1_value">
-                                <label for="plot2">Plot Point 2:</label>
-                                <input type="text" id="plot_point2" name="plot_point2">
-                                <label for="plot2_val">Plot Point 2 Value:</label>
-                                <input type="number" id="plot_point2_value" name="plot_point2_value">
-                                <label for="plot3">Plot Point 3:</label>
-                                <input type="text" id="plot_point3" name="plot_point3">
-                                <label for="plot3_val">Plot Point 3 Value:</label>
-                                <input type="number" id="plot_point3_value" name="plot_point3_value">
-                                <label for="plot4">Plot Point 4:</label>
-                                <input type="text" id="plot_point4" name="plot_point4">
-                                <label for="plot4_val">Plot Point 4 Value:</label>
-                                <input type="number" id="plot_point4_value" name="plot_point4_value">
-                                <label for="plot5">Plot Point 5:</label>
-                                <input type="text" id="plot_point5" name="plot_point5">
-                                <label for="plot5_val">Plot Point 5 Value:</label>
-                                <input type="number" id="plot_point5_value" name="plot_point5_value">
-                                <label for="plot6">Plot Point 6:</label>
-                                <input type="text" id="plot_point6" name="plot_point6">
-                                <label for="plot6_val">Plot Point 6 Value:</label>
-                                <input type="number" id="plot_point6_value" name="plot_point6_value">
+                    <input type="text" class="form-control" placeholder="Search for an image" name="search" id="search">
+                    <input type="button" class="btn btn-primary" value="Create Index" id="mySearchBtn"></button>
+                    <div id="modalSearch" class="modalSearch">
+                        <div class="modal-content-photo">
+                            <span class="close-photo">&times;</span>
+                            <p id="index">Index Card</p>
+                            <form id="modalChar">
+                                <label for="name_photo">Name:</label>
+                                <input type="text" id="name_photo" name="name_photo">
+                                <label for="desc_photo">Description:</label>
+                                <input type="text" id="desc_photo" name="desc_photo">
+                                <p>Select a photo:</p>
                                 <div class="modal body"></div>
+                                <div class="container-image">
+                                    <div class="card">
+                                        <img src="" />
+                                    </div>
+                                </div>
                             </form>
-                            <button id="mySubmitArcBtn" class="btn btn-primary"> Save </button>
+                            <button id="mySubmitPhotoBtn" class="btn btn-primary btn-md"> Save </button>
                         </div>
                     </div>
 
+                    <span class="divider"></span>
 
-                    <div>
-                        <form action="/project_page" method="POST">
-                            <p><input type="hidden" value="{{project_name}}" name="project_name" required></p>
-                            <input type="submit" class="btn btn-primary" value="Edit Project" />
-                        </form>
-                    </div>
-                </div>
+                    <form class="storyarc">
+                        <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
+                        <!-- <input type="text" class="form-control"  placeholder="Build an Arc" name="storyarc" id="storyarc"> -->
+                        <i class="fas fa-chart-line fa-2x"></i>
+                        <input type="button" class="btn btn-primary" value="Create a Story Arc" id="myArcBtn"></button>
+                        <div id="modalArc" class="modalArc">
+                            <div class="modal-content-arc">
+                                <span class="close-arc">&times;</span>
+                                <p id="storyarc">Story Arc</p>
+                                <form id="modalArc">
+                                    <p>Plot Point Name is the point where your story pivots. Think when Harry Potter
+                                        finds out he is a wizard.</p>
+                                    <p>Plot Point Value is a value between -100 and 100. A value of -100 means the
+                                        protagonist or plot point has reached the lowest place possible. Think when
+                                        Odysseus enters Hades. </p>
+                                    <label for="name_arc">Name:</label>
+                                    <input type="text" id="name_arc" name="name_arc">
+                                    <label for="plot1">Plot Point 1:</label>
+                                    <input type="text" id="plot_point1" name="plot_point1">
+                                    <label for="plot1_val">Plot Point 1 Value:</label>
+                                    <input type="number" id="plot_point1_value" name="plot_point1_value">
+                                    <label for="plot2">Plot Point 2:</label>
+                                    <input type="text" id="plot_point2" name="plot_point2">
+                                    <label for="plot2_val">Plot Point 2 Value:</label>
+                                    <input type="number" id="plot_point2_value" name="plot_point2_value">
+                                    <label for="plot3">Plot Point 3:</label>
+                                    <input type="text" id="plot_point3" name="plot_point3">
+                                    <label for="plot3_val">Plot Point 3 Value:</label>
+                                    <input type="number" id="plot_point3_value" name="plot_point3_value">
+                                    <label for="plot4">Plot Point 4:</label>
+                                    <input type="text" id="plot_point4" name="plot_point4">
+                                    <label for="plot4_val">Plot Point 4 Value:</label>
+                                    <input type="number" id="plot_point4_value" name="plot_point4_value">
+                                    <label for="plot5">Plot Point 5:</label>
+                                    <input type="text" id="plot_point5" name="plot_point5">
+                                    <label for="plot5_val">Plot Point 5 Value:</label>
+                                    <input type="number" id="plot_point5_value" name="plot_point5_value">
+                                    <label for="plot6">Plot Point 6:</label>
+                                    <input type="text" id="plot_point6" name="plot_point6">
+                                    <label for="plot6_val">Plot Point 6 Value:</label>
+                                    <input type="number" id="plot_point6_value" name="plot_point6_value">
+                                    <div class="modal body"></div>
+                                </form>
+                                <button id="mySubmitArcBtn" class="btn btn-primary active"> Save </button>
+                            </div>
+                        </div>
+
+                        <span class="divider"></span>
+                        <div>
+                            <form action="/project_page" method="POST">
+                                <p><input type="hidden" value="{{project_name}}" name="project_name" required></p>
+                                <input type="submit" class="btn btn-success btn-lg" value="Edit Project" />
+                            </form>
+                        </div>
+            </div>
         </div>
     </div>
 </div>
+</p>
 
 <script src="/static/js/character_modal.js"></script>
 <script src="/static/js/get_photo.js"></script>
