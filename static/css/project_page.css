@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: thistle;
+    background-image: url('/static/css/pattern_confetti.jpg');
 }
 
 
@@ -84,8 +84,9 @@ body {
 
 #project_name {
     font-size: 28px;
-    font-family: mega montserrat bold;
+    font-family: Quando, Arial;
     margin-bottom: 0.4125rem;
+    font-weight: bold;
 }
 
 #review {

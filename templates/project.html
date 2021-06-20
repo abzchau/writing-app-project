@@ -50,7 +50,7 @@
               {% endfor %}
             <div class="col-sm-6">
                 <!-- <i class="fas fa-book fa-2x"></i> -->
-                <h2>Create A World</h2>
+                <h2>Create A Fictional World</h2>
                 <i class="far fa-user-circle fa-2x"></i>
                 <form action="/create_character" method="POST">
                     <div id="modalChar" class="modalChar">
@@ -75,7 +75,7 @@
                             <input type="text" id="song" name="song"> -->
                                 <label for="desc">Description:</label>
                                 <input type="text" id="desc" name="desc">
-                                <input type="submit" value="Create Character" />
+                                <input id="myCharSubmitButton" type="submit" value="Create Character" />
                                 <p><input type="hidden" value="{{ project_name }}" name="project_name" required></p>
                             </form>
                         </div>
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <button id="mySubmitPhotoBtn" class="btn btn-primary btn-md"> Save </button>
+                            <button id="mySubmitPhotoBtn" class="btn btn-primary btn-md"> Create Image Card </button>
                         </div>
                     </div>
 
@@ -183,6 +183,7 @@ crossorigin="anonymous"></script>
 <script src="/static/js/photo_modal.js"></script>
 <script src="/static/js/storyarc_modal.js"></script>
 <script src="/static/js/storyarc.js"></script>
-<script src="static/js/project.js"></script>
+<script src="/static/js/project.js"></script>
+<script src="/static/js/character.js"></script>
 
 {% endblock %}

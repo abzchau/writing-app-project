@@ -24,7 +24,7 @@ function handleCardResponse(resCardResponse) {
 }
 
 function addCardInfo(cardRes) {
-    $('#myChartCard').remove();
+
     console.log('is this happening...')
     let cardName = document.querySelector("#selector_card").value;
     let projectName = document.querySelector('#project_name').innerHTML;
@@ -51,6 +51,7 @@ function clearData() {
     document.getElementById('card_desc').innerHTML = '';
     document.getElementById('card_name').innerHTML = '';
     document.getElementById('card_role').innerHTML = '';
+    $('#myChartCard').remove();
     addCardInfo()
 }
 

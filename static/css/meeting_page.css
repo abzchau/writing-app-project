@@ -1,38 +1,15 @@
-/* * {
-    outline:none;
-      border:none;
-      margin:0px;
-      padding:0px;
-      font-family:Courier, monospace;
-  } */
-  /* body {
-      background:#333 url(https://static.tumblr.com/maopbtg/a5emgtoju/inflicted.png) repeat;        
-  } */
-  /* #get-text {
-      color:#FFF;
-      font-size:12px;
-  } */
-  /* #margin {
-      margin-left:12px;
-      margin-bottom:20px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      -o-user-select: none;
-      user-select: none; 
-  } */
+body {
+    background-image: url('/static/css/gold_pattern.jpg');
+}
 
   #text {
       width:800px;
-      height: 500px;
-      /* overflow:hidden; */
-      /* background-color:#FFF; */
+      height: 700px;
       color:#222;
-      font-family:Arial;
+      font-family: Quando, Arial;
       font-weight:normal;
       font-size:18px;
       overflow-y: scroll;
-      /* resize:none; */
       line-height:40px;
       padding-left:100px;
       padding-right:100px;
@@ -51,19 +28,30 @@
 
   .container {
     margin: 10px auto;
-    font-family: Arial;
+    font-family: Quando, Arial;
     padding: 20px;
 }
+
+#group_name {
+    padding: 10px;
+    height: 10;
+    font-size: 28px;
+    font-weight: bold;
+    overflow-y: scroll;
+}
+
 
 h3 {
     padding: 10px;
     height: 10;
-    font-size: 22px;
+    font-size: 20px;
+    font-weight: bold;
     overflow-y: scroll;
 }
 
 .title {
     font-size: 16px;
+    font-family: Quando, Arial;
 }
 
 .feedback {
