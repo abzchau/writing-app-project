@@ -63,12 +63,45 @@
     left: 0;
     background-image: url('/static/css/zadie.jpg');
     background-position-x: -40em;
+    /* max-width:100%;
+    height:auto; */
   }
-  
+
+
   /* Control the right side */
   .right {
     right: 0;
   
+  }
+
+  .btn-primary {
+    background-color: darkblue;
+    border-color: white;
+  }
+
+
+  .list-group {
+    color: darkblue;
+    font-size: 24px;
+  }
+
+
+  .btn-success {
+    background-color: rgb(25, 117, 153);
+    color: white;
+    border-color: white;
+    top: 200px;
+  }
+
+
+  .alert-flash {
+    padding: 18px;
+    background-color: rgb(44, 225, 231);
+    position: relative;
+    left: -20px; 
+    top: -95px;
+    color: black;
+    font-family: Quando;
   }
 
 

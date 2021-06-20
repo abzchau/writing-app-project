@@ -62,7 +62,10 @@ def get_group_id_by_name(group_name):
     """Get a group id by group name"""
 
     group = Group.query.filter_by(group_name=group_name).first()
-    return group.group_id
+    if group == None:
+        return None
+    else:
+        return group.group_id
 
 
 def get_group_name_by_project_name(project_name):

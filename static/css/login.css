@@ -45,3 +45,12 @@ body {
 #welcome {
   margin-top: 10px;
 }
+
+.alert-flash {
+  padding: 18px;
+  background-color: rgb(44, 225, 231);
+  color: white;
+  position: relative;
+  left: -10px; 
+  top: -85px;
+}

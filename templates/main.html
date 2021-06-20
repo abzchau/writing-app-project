@@ -9,12 +9,11 @@
 
 </head>
 
-<div class="container">
   <div class="row">
     <div class="split left">
       <div class="col-sm-6">
         <i class="fas fa-users fa-2x"></i>
-        <h2>Groups</h2>
+        <h2 style="color: darkblue;">Groups</h2>
         <ul class="list-group">
           {% for group in lst_of_groups_by_user_id %}
           <li class="list-inline-item">
@@ -28,7 +27,7 @@
 
         <form action="/main" method="POST">
           <label for="group_name">
-            <h4 class="create">Create a new group:</h4>
+            <h4 class="create" style="color: darkblue;">Create a new group:</h4>
           </label>
           <p><input type="text" class="form-control" placeholder="Enter Group Name" name="group_name" required></p>
           <div>
@@ -40,6 +39,10 @@
 
 
     <div class="split right">
+      <div class="container">
+        {% for message in get_flashed_messages() %}
+      <div id="flash" class="alert-flash">{{ message }}</div>
+      {% endfor %}
       <div class="col-sm-6">
         <i class="fas fa-user-edit fa-2x"></i>
         <h2>Projects</h2>
@@ -70,5 +73,11 @@
     </div>
   </div>
 </div>
+
+<script
+src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
+<script src="/static/js/main.js"></script>
 
 {% endblock %}

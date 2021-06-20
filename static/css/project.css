@@ -1,6 +1,6 @@
 .container {
     margin: 50px auto;
-    font-family: Arial;
+    font-family: Quando, Arial;
     padding: 50px;
 }
 
@@ -51,7 +51,8 @@
 .left {
   left: 0;
   background-color:cornflowerblue;
-  background-image: url('/static/css/lessing.png');
+  background-image: url('/static/css/toni1.png');
+  background-position-x: -70em;
 }
 
 /* Control the right side */
@@ -121,4 +122,13 @@
   flex-grow: 100;
   border-bottom: 17px solid white;
   margin: 3px
+}
+
+.alert-flash {
+  padding: 18px;
+  background-color: rgb(44, 225, 231);
+  color: white;
+  position: relative;
+  left: -10px; 
+  top: -85px;
 }

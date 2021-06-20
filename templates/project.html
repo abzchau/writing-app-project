@@ -15,7 +15,7 @@
         <div class="split left">
             <div class="col-sm-6">
 
-                <!-- <i class="fas fa-pencil-alt fa-2x"></i> -->
+
                 <h2 id="project_name">{{project_name}}</h2>
                 <h4>{{genre}}</h4>
 
@@ -44,6 +44,10 @@
         </div>
 
         <div class="split right">
+            <div class="container">
+                {% for message in get_flashed_messages() %}
+              <div id="flash" class="alert-flash">{{ message }}</div>
+              {% endfor %}
             <div class="col-sm-6">
                 <!-- <i class="fas fa-book fa-2x"></i> -->
                 <h2>Create A World</h2>
@@ -170,11 +174,15 @@
 </div>
 </p>
 
+<script
+src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
 <script src="/static/js/character_modal.js"></script>
 <script src="/static/js/get_photo.js"></script>
 <script src="/static/js/photo_modal.js"></script>
 <script src="/static/js/storyarc_modal.js"></script>
 <script src="/static/js/storyarc.js"></script>
-
+<script src="static/js/project.js"></script>
 
 {% endblock %}

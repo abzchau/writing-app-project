@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <h3 id="project_name">{{project_name}}</h3>
+            <h3 id="project_name">{{project_name}}</h3><i class="fas fa-pencil-alt fa-2x"></i>
 
             <form action="/project_page" method="POST">
 
@@ -51,25 +51,33 @@
             <div class="row">
                 <div class="card_class">
                     <form id="card">
-                <select id="selector_card" class="form-selector" name="selector_card">
-                    <option class="card_selector" value=""> Choose a card to display:</option>
-                    {% for card in card_info %}
-                    <option id="{{ card.card_type }}" value="{{card.name}}"> {{card.name}}</option>
-                    <!-- <input type="hidden" id="card_type" value="{{ card.card_type }}" name="card_type" required> -->
-                    {% endfor %}
-                </select>
+                        <select id="selector_card" class="form-selector" name="selector_card">
+                            <option class="card_selector" value=""> Choose a card to display:</option>
+                            {% for card in card_info %}
+                            <option id="{{ card.card_type }}" value="{{card.name}}"> {{card.name}}</option>
+                            <!-- <input type="hidden" id="card_type" value="{{ card.card_type }}" name="card_type" required> -->
+                            {% endfor %}
+                        </select>
 
                     </form>
 
 
                     <!-- A div with card__details class to hold the details in the card  -->
-                    <div class="card__details">
-                        <p class="chart"><canvas id="myChartCard"></canvas></p>
-                        <h5 class="card_name_class"><p id="card_name"></p></h5>
-                        <h7 class="card_image_class"><p id="card_desc"></p></h7>
-                        <h7 class="card_role_class"><p id="card_role"></p></h7>
-                        <p class="card_image_class"><img id='card_image' src="" /></p>
-                        </form>
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="card__details">
+                            <p class="chart"><canvas id="myChartCard"></canvas></p>
+                            <h5 class="card_name_class">
+                                <p id="card_name"></p>
+                            </h5>
+                            <h7 class="card_image_class">
+                                <p id="card_desc"></p>
+                            </h7>
+                            <h7 class="card_role_class">
+                                <p id="card_role"></p>
+                            </h7>
+                            <p class="card_image_class"><img id='card_image' src="" /></p>
+
+                        </div>
                     </div>
                 </div>
             </div>

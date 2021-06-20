@@ -7,8 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 
+
 <main class="form-signin">
     <form action="/login" method="POST">
+      {% for message in get_flashed_messages() %}
+      <div class="alert-flash">{{ message }}</div>
+      {% endfor %}
       <h1 id="welcome" class="h3 mb-3 fw-normal">Welcome back!</h1>
       <h2 class="h3 mb-3 fw-normal">Please sign in:</h2>
   
@@ -25,4 +29,5 @@
     </form>
   </main>
 
-{% endblock %}
+  {% endblock %}
+

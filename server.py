@@ -43,7 +43,7 @@ def login():
         else:
             session["user_email"] = user.email
             session["user_id"] = user.user_id
-            flash(f"Welcome back, {user.email}!")
+            flash(f"Whoop, welcome back, {user.email}! From here you can: create or invite members to a Group, and create or edit a writing project.")
             return redirect(url_for("view_main"))
 
   
@@ -112,8 +112,8 @@ def post_main():
             user_id = session["user_id"]
             user = crud.get_user_by_id(user_id)
             crud.create_association(group, user)
-            flash('Group Created')
-            return redirect(f"/group/{group_name}")
+            flash('Group Created! You can click on the Group name to edit it.')
+            return view_main()
     
     if "project_name" in request.form:
         if crud.does_project_name_exist(request.form.get("project_name")):
@@ -124,8 +124,8 @@ def post_main():
             project_name = request.form.get("project_name")
             genre = request.form.get("genre")
             project = crud.create_project(project_name, user_id, genre)
-            flash('Project Created')
-            return redirect(f"/project/{project_name}")
+            flash('Project Created. You can click on the Writing Project name to edit it.')
+            return view_main()
 
 
 #Group Page Where User Can Add Members And View Meeting Page 
@@ -257,7 +257,11 @@ def post_project():
     project = crud.get_project_by_name(project_name)
     group_name = request.form.get("group_name")
     group_id = crud.get_group_id_by_name(group_name)
-    crud.add_group_to_project(group_id, project.project_id)
+
+    if group_id == None:
+        flash("A Group with that name does not exist. Please try again, or create the Group.")
+    else:
+        crud.add_group_to_project(group_id, project.project_id)
     return render_template('/project.html', project_name=project_name, genre=project.genre, group_name=group_name)
 
 

@@ -86,3 +86,15 @@
 .go_to_meeting {
   margin-top: 116px;
 }
+
+
+.alert-flash {
+  padding: 18px;
+  background-color: rgb(44, 225, 231);
+  position: relative;
+  left: -20px; 
+  top: -95px;
+  color: black;
+  font-family: Quando;
+}
+
