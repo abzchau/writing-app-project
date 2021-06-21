@@ -1,0 +1,86 @@
+.container {
+    margin: 50px auto;
+    font-family: Arial;
+    padding: 50px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    
+  }
+
+
+  /* .list-inline-item{
+    padding: 5px;
+    font-weight: bold;
+  } */
+  
+  /* Clear floats after the columns */ 
+ /* .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  } */
+
+  /* @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+    }
+  } */
+
+  .col-sm-6 {
+    padding-top: 20px;
+    padding-right: 30px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    position: absolute; 
+    right: 150px;
+    width: 400px;
+    top: 120px;
+    height: 120px;
+  }
+  
+  
+  
+  .split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  
+  /* Control the left side */
+  .left {
+    left: 0;
+    /* background-image: url('/static/css/nabokov.jpg');
+    background-repeat: repeat-y;
+    background-position-x: -15em;
+    background-position: center; */
+    /* max-width:100%;
+    height:auto; */
+  }
+
+
+  /* Control the right side */
+  .right {
+    right: 0;
+  
+  }
+
+
+  .alert-flash {
+    padding: 18px;
+    background-color: rgb(44, 225, 231);
+    position: relative;
+    left: -20px; 
+    top: -95px;
+    color: black;
+    font-family: Quando;
+  }
+
+

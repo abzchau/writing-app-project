@@ -70,9 +70,9 @@ def signup():
         return render_template('/login.html')
 
 
-@app.route('/about')
-def about_the_app():
-    return "About the app"
+# @app.route('/about')
+# def about_the_app():
+#     return "About the app"
 
 
 @app.route('/logout')
@@ -379,10 +379,6 @@ def get_cards(projectName, card_type, cardName):
     print('heidi', get_card)
 
     return get_card
-
-# @app.route('/api/project/storyarc/<projectName>/<card_type>/<cardName>')
-# def
-
 
 
 """"Flask method which runs the app"""
