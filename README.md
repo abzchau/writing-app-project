@@ -46,6 +46,8 @@ The Writing Place was built for writers with the following core features:
 * Writers can associate a writing project with a group, continue to iterate on their work, and when it’s time for the group to meet, they can specify the feedback they want so that members can provide precise and actionable feedback on their work.
 * Writers can continue to iterate on the writing project by reviewing feedback and creating character, storyarc, and image index cards so that they can track and improve their work.
 
+To view a demo, click [here](https://www.dropbox.com/s/ko61pjf1x0111tn/writing_app_final.mp4?dl=0). 
+
 
 ### Built With
 
